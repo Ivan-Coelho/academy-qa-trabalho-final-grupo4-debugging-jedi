@@ -140,3 +140,37 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
         })
     })
 })
+
+Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {    
+    cy.fixture("filmes/bodyFilme.json").then(function(arquivo){    
+                
+        cy.request({
+            method: 'POST',
+            url: '/movies',
+            headers: { Authorization: 'Bearer ' + tokenAdmin },
+            body: arquivo           
+        })
+    })    
+})
+
+Cypress.Commands.add('buscarFilme', function (titulo) {
+    let idFilme
+    return cy.request({
+        method: 'GET',
+        url: '/movies/search',
+        qs: { title: titulo }
+    }).then(function (response) {
+
+        return idFilme = response.body[0].id
+    })
+})
+
+Cypress.Commands.add('deletarFilme',function(idFilme, tokenAdmin){
+
+    cy.request({
+        method: 'DELETE',
+        url: 'movies/' + idFilme,
+        headers: { Authorization: 'Bearer ' + tokenAdmin }
+    })
+
+});
