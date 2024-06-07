@@ -24,7 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
 import { faker } from "@faker-js/faker"
 // validar as URL
 Cypress.Commands.add('criarUsuario', function () {
@@ -42,24 +41,21 @@ Cypress.Commands.add('criarUsuario', function () {
     })
 })
 
-
-Cypress.Commands.add('criarUsuarioAdmin', function () {
+Cypress.Commands.add('usuarioLogado', function () {
     let user = {
         name: faker.person.fullName(),
         email: faker.internet.email(),
         password: '123456'
     }
+    let tokenComum
     let usuario
-    let tokenAdmin
-    let emailAdmin
 
     cy.request({
         method: 'POST',
         url: '/users',
         body: user
-    }).then(function (response) {        
+    }).then(function (response) {
         usuario = response.body
-        emailAdmin = response.body.email
 
         cy.request({
             method: "POST",
@@ -69,9 +65,48 @@ Cypress.Commands.add('criarUsuarioAdmin', function () {
                 password: "123456"
             }
         }).then(function (response) {
-            
+            tokenComum = response.body.accessToken
+        }).then(function () {
+            return {
+                nome: user.name,
+                email: user.email,
+                id: usuario.id,
+                token: tokenComum
+            }
+        })
+
+
+    })
+})
+
+
+Cypress.Commands.add('criarUsuarioAdmin', function () {
+    let user = {
+        name: faker.person.fullName(),
+        email: faker.internet.email(),
+        password: '123456'
+    }
+    let usuario
+    let tokenAdmin
+
+    cy.request({
+        method: 'POST',
+        url: '/users',
+        body: user
+    }).then(function (response) {
+        usuario = response.body
+
+        cy.request({
+            method: "POST",
+            url: '/auth/login',
+            body: {
+                email: usuario.email,
+                password: "123456"
+            }
+        }).then(function (response) {
+
             tokenAdmin = response.body.accessToken
-            
+
 
             cy.request({
                 method: 'PATCH',
@@ -79,9 +114,10 @@ Cypress.Commands.add('criarUsuarioAdmin', function () {
                 headers: { Authorization: 'Bearer ' + tokenAdmin }
             }).then(function () {
                 return {
+                    nome: user.name,
                     id: usuario.id,
                     token: tokenAdmin,
-                    email:emailAdmin
+                    email: user.email
                 }
             })
 
@@ -105,15 +141,14 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
     }
     let usuario
     let tokenCritico
-    let emailCritico
+
 
     cy.request({
         method: 'POST',
         url: '/users',
         body: user
-    }).then(function (response) {        
+    }).then(function (response) {
         usuario = response.body
-        emailCritico = response.body.email
 
         cy.request({
             method: "POST",
@@ -122,9 +157,9 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
                 email: usuario.email,
                 password: "123456"
             }
-        }).then(function (response) {            
+        }).then(function (response) {
             tokenCritico = response.body.accessToken
-            
+
             cy.request({
                 method: 'PATCH',
                 url: '/users/apply',
@@ -133,7 +168,8 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
                 return {
                     id: usuario.id,
                     token: tokenCritico,
-                    email: emailCritico
+                    email: user.email,
+                    nome: user.name
                 }
             })
 
@@ -141,16 +177,18 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
     })
 })
 
-Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {    
-    cy.fixture("filmes/bodyFilme.json").then(function(arquivo){    
-                
+Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {
+    cy.fixture("filmes/bodyFilme.json").then(function (arquivo) {
         cy.request({
             method: 'POST',
             url: '/movies',
             headers: { Authorization: 'Bearer ' + tokenAdmin },
-            body: arquivo           
+            body: arquivo
+        }).then(function (response) {
+            let idFilme = response.body.id
+            return idFilme
         })
-    })    
+    })
 })
 
 Cypress.Commands.add('buscarFilme', function (titulo) {
@@ -165,7 +203,7 @@ Cypress.Commands.add('buscarFilme', function (titulo) {
     })
 })
 
-Cypress.Commands.add('deletarFilme',function(idFilme, tokenAdmin){
+Cypress.Commands.add('deletarFilme', function (idFilme, tokenAdmin) {
 
     cy.request({
         method: 'DELETE',
@@ -174,3 +212,25 @@ Cypress.Commands.add('deletarFilme',function(idFilme, tokenAdmin){
     })
 
 });
+
+Cypress.Commands.add('criarReview', function (idFilme, token) {
+    let comentario = faker.lorem.lines(1);
+    let nota = faker.number.int({ min: 1, max: 5 });
+
+    cy.request({
+        method: 'POST',
+        url: 'users/review',
+        body: {
+            movieId: idFilme,
+            score: nota,
+            reviewText: comentario
+        },
+        headers: { Authorization: 'Bearer ' + token },
+    }).then(function(){
+        return{
+            score: nota,
+            comentario: comentario
+        }
+    })
+
+})
