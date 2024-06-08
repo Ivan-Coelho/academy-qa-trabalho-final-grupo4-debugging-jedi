@@ -17,16 +17,58 @@ describe('Consulta de detalhes de filmes', function () {
                 idFilme = response
                 this.filme.id = idFilme
             })
+        });
 
+        afterEach(function () {
+            cy.deletarFilme(idFilme, userAdmin.token)
         });
 
         after(function () {
             cy.deletarUsuario(userAdmin.id, userAdmin.token)
         });
 
-        afterEach(function () {
-            cy.deletarFilme(idFilme, userAdmin.token)
+        it('Não deve ser possivel buscar um filme informando um id invalido', function () {
+
+            cy.request({
+                method: 'GET',
+                url: '/movies/' + 0.5,
+                headers: { Authorization: 'Bearer ' + userAdmin.token },
+                failOnStatusCode: false
+            }).then(function (response) {
+                expect(response.status).to.equal(400);
+                expect(response.body.message).to.equal("Validation failed (numeric string is expected)")
+                expect(response.body.error).to.equal("Bad Request")
+            });
         });
+
+        it('Não deve ser possivel buscar um filme informando um id do tipo string', function () {
+
+            cy.request({
+                method: 'GET',
+                url: '/movies/' + 'a',
+                headers: { Authorization: 'Bearer ' + userAdmin.token },
+                failOnStatusCode: false
+            }).then(function (response) {
+                expect(response.status).to.equal(400);
+                expect(response.body.message).to.equal("Validation failed (numeric string is expected)")
+                expect(response.body.error).to.equal("Bad Request")
+            });
+        });
+
+        it('Não deve ser possivel buscar um filme informando um caracter especial como id', function () {
+
+            cy.request({
+                method: 'GET',
+                url: '/movies/' + '§',
+                headers: { Authorization: 'Bearer ' + userAdmin.token },
+                failOnStatusCode: false
+            }).then(function (response) {
+                expect(response.status).to.equal(400);
+                expect(response.body.message).to.equal("Validation failed (numeric string is expected)")
+                expect(response.body.error).to.equal("Bad Request")
+            });
+        });
+
 
         it('Deve ser possível usuario não cadastrado localizar um filme pelo ID', function () {
 
