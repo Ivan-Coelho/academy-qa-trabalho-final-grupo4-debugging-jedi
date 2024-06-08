@@ -236,7 +236,7 @@ describe('Avaliação de filme', function () {
 
     });
 
-    describe.only('Avaliações de filme de maneira válida', function () {
+    describe('Avaliações de filme de maneira válida', function () {
 
         let userAdmin, userComum
         let idFilme
@@ -282,18 +282,40 @@ describe('Avaliação de filme', function () {
             }).then(function (response) {
                 expect(response.status).to.equal(201)
             });
-            //validando a review
-            cy.fixture('filmes/bodyReview2.json').as('review')
-            cy.request({
-                method: 'GET',
-                url: 'users/review/all',
-                headers: { Authorization: 'Bearer ' + userComum.token }
-            }).then(function (response) {
-                this.review[0].id = response.body[0].id
-                this.review[0].movieId = idFilme
-                expect(response.status).to.equal(200)
-                expect(response.body).to.deep.equal(this.review)
+
+            cy.buscaFilmeId(idFilme).then(function (response) {                                
+
+                expect(response.id).to.equal(idFilme)
+                
+                expect(response.criticScore).to.equal(0)
+                expect(response.audienceScore).to.equal(4)
+
+
+                expect(response.reviews).to.be.an('array')
+                expect(response.reviews[0].reviewText).to.equal("Gostei do filme")
+                expect(response.reviews[0].id).to.be.an('number')
+                expect(response.reviews[0].reviewType).to.equal(0)
+                expect(response.reviews[0].score).to.equal(4)
+                expect(response.reviews[0].updatedAt).to.be.an('string')
+
+                expect(response.reviews[0].user.id).to.equal(userComum.id)
+                expect(response.reviews[0].user.name).to.equal(userComum.nome)
+                expect(response.reviews[0].user.type).to.equal(0)
+
+
             })
+       
+            // cy.fixture('filmes/bodyReview2.json').as('review')
+            // cy.request({
+            //     method: 'GET',
+            //     url: 'users/review/all',
+            //     headers: { Authorization: 'Bearer ' + userComum.token }
+            // }).then(function (response) {
+            //     this.review[0].id = response.body[0].id
+            //     this.review[0].movieId = idFilme
+            //     expect(response.status).to.equal(200)
+            //     expect(response.body).to.deep.equal(this.review)
+            // })
         });
         // Isso é um BUG??
         it('Deve ser possível um usuário fazer uma avaliação sem informar um comentário', function () {
