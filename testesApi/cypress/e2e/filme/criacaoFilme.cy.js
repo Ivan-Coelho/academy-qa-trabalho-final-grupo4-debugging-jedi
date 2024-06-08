@@ -1,28 +1,28 @@
 
 describe("Criação de filme", function () {
     let dadosAdmin
+    let dadosComum
     let dadosFilme
     let idFilme
     let dadosFilme1
     let dadosFilme2
     let idFilme1
     let idFilme2
-    before(function () {
+    
+    describe("Cadastro de filme como usuario adminstrador", function () {
+      before(function () {
         cy.criarUsuarioAdmin().then(function (userAdmin) {
                 dadosAdmin = userAdmin     
         });
     });
 
     after(function(){
-        cy.deletarFilme(idFilme, dadosAdmin.token);
-        cy.deletarFilme(idFilme1, dadosAdmin.token);
-        cy.deletarFilme(idFilme2, dadosAdmin.token);
-        cy.deletarUsuario(dadosAdmin.id, dadosAdmin.token);
-       
-    })
-
-
-    describe("Cadastro de filme como usuario adminstrador", function () {
+      cy.deletarFilme(idFilme, dadosAdmin.token);
+      cy.deletarFilme(idFilme1, dadosAdmin.token);
+      cy.deletarFilme(idFilme2, dadosAdmin.token);
+      cy.deletarUsuario(dadosAdmin.id, dadosAdmin.token);
+     
+  })
         it("Usuário administrador cadastra um filme com dados válidos", function () {
         cy.fixture("filmes/bodyFilme.json").then(function(filme){
             cy.request({
@@ -300,6 +300,62 @@ describe("Criação de filme", function () {
           });
         });
       });
+    describe("Cadastro de filme sem permissoes", function () {
+      let dadosCritico
+
+      before(function () {
+        cy.criarUsuarioCritico().then(function (response) {
+          dadosCritico = response
+        });
+      });
+   
+        it("Usuário não administrador tenta cadastrar um filme", function () {
+          cy.request({
+            method: "POST",
+            url: "movies",
+            body: {
+            title: "Caneta Azul",
+            genre: "Musical",
+            description:
+              "A Incrível Jornada da Caneta Azul narra as aventuras de uma caneta mágica",
+            durationInMinutes: 432,
+            releaseYear: 2023,
+          },
+            headers: { Authorization: 'Bearer ' + dadosCritico.token },
+     
+            failOnStatusCode: false,
+          }).then(function(response){
+            expect(response.status).to.equal(403);
+            expect(response.body.message).to.include("Forbidden");
+            
+                
+            })
+        });
+
+        it("Usuário não autenticado tenta cadastrar um filme", function () {
+          cy.request({
+            method: "POST",
+            url: "movies",
+            body: {
+            title: "Caneta Azul",
+            genre: "Musical",
+            description:
+              "A Incrível Jornada da Caneta Azul narra as aventuras de uma caneta mágica",
+            durationInMinutes: 432,
+            releaseYear: 2023,
+          },
+           
+     
+            failOnStatusCode: false,
+          }).then(function(response){
+            expect(response.status).to.equal(401);
+            expect(response.body.error).to.include("Unauthorized");
+            expect(response.body.message).to.include("Access denied.");
+            
+                
+            })
+        });
+    });
 });
-
-
+    
+   

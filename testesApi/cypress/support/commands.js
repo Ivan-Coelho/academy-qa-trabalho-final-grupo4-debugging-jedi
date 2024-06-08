@@ -40,6 +40,7 @@ Cypress.Commands.add('criarUsuario', function () {
     }).then(function (response) {
         return response
     })
+    
 })
 
 
