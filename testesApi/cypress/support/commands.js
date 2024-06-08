@@ -39,6 +39,7 @@ Cypress.Commands.add('criarUsuario', function () {
     }).then(function (response) {
         return response
     })
+    
 })
 
 Cypress.Commands.add('usuarioLogado', function () {
