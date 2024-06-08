@@ -3,6 +3,10 @@ describe("Criação de filme", function () {
     let dadosAdmin
     let dadosFilme
     let idFilme
+    let dadosFilme1
+    let dadosFilme2
+    let idFilme1
+    let idFilme2
     before(function () {
         cy.criarUsuarioAdmin().then(function (userAdmin) {
                 dadosAdmin = userAdmin     
@@ -11,6 +15,8 @@ describe("Criação de filme", function () {
 
     after(function(){
         cy.deletarFilme(idFilme, dadosAdmin.token);
+        cy.deletarFilme(idFilme1, dadosAdmin.token);
+        cy.deletarFilme(idFilme2, dadosAdmin.token);
         cy.deletarUsuario(dadosAdmin.id, dadosAdmin.token);
        
     })
@@ -245,7 +251,55 @@ describe("Criação de filme", function () {
                 
             })
         })
-    });
+    
+  
+        it("Cadastrar o mesmo filme com novas informações", function () {
+                  
+          cy.cadastrarFilme(dadosAdmin.token)
+        .then(function (filme1) {
+          dadosFilme1 = filme1.body
+          idFilme1 = filme1.body.id
+          
+          expect(filme1.status).to.equal(201);
+        });
+
+          const novasInformacoesFilme = {
+          title: "Star Wars: O Império Contra-Ataca",
+          genre: "Épico, Aventura, Ficção científica",
+          description: "Regravação de As forças imperais comandadas por Darth Vader lançam um ataque contra os membros da resistência, que são obrigados a fugir. Enquanto isso, Luke Skywalker tenta encontrar o Mestre Yoda, que poderá ensiná-lo a dominar a Força e torná-lo um cavaleiro Jedi.",
+          durationInMinutes: 124,
+          releaseYear: 2000
+          }
+
+          cy.cadastrarFilme(dadosAdmin.token, novasInformacoesFilme)
+          .then(function (filme2) {
+          dadosFilme2 = filme2.body
+          idFilme2 = filme2.body.id
+          expect(filme2.status).to.equal(201);
+          expect(idFilme2).to.not.equal(idFilme1);
+          expect(dadosFilme2).to.not.equal(dadosFilme1)
+          });
+        });
+        it("Cadastrar o mesmo filme com novas informações", function () {
+                  
+          cy.cadastrarFilme(dadosAdmin.token)
+          .then(function (filme1) {
+          dadosFilme1 = filme1.body
+          idFilme1 = filme1.body.id
+    
+          expect(filme1.status).to.equal(201);
+        });
+
+          cy.cadastrarFilme(dadosAdmin.token)
+          .then(function (filme2) {
+          dadosFilme2 = filme2.body
+          idFilme2 = filme2.body.id
+          expect(filme2.status).to.equal(201);
+          expect(idFilme2).to.not.equal(idFilme1);
+          expect(dadosFilme2).to.not.equal(dadosFilme1)
+          });
+        });
+      });
 });
 
 
