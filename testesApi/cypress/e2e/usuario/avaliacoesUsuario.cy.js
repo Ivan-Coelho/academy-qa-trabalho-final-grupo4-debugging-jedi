@@ -113,16 +113,16 @@ describe('Avaliação de filme', function () {
                 expect(response.status).to.equal(400)
                 expect(response.body).to.deep.equal({
                     message: [
-                      "reviewText must be shorter than or equal to 500 characters"
+                        "reviewText must be shorter than or equal to 500 characters"
                     ],
                     error: "Bad Request",
                     statusCode: 400
-                  });
+                });
             });
 
         });
 
-        it('Não deve ser possível fazer uma avaliação informando uma nota maior que 5', function(){
+        it('Não deve ser possível fazer uma avaliação informando uma nota maior que 5', function () {
             cy.request({
                 method: 'POST',
                 url: 'users/review',
@@ -144,7 +144,7 @@ describe('Avaliação de filme', function () {
 
         });
 
-        it('Não deve ser possível fazer uma avaliação informando uma nota menor que 1', function(){
+        it('Não deve ser possível fazer uma avaliação informando uma nota menor que 1', function () {
             cy.request({
                 method: 'POST',
                 url: 'users/review',
@@ -166,7 +166,7 @@ describe('Avaliação de filme', function () {
 
         });
 
-        it('Não deve ser possível fazer uma avaliação informando uma nota negativa', function(){
+        it('Não deve ser possível fazer uma avaliação informando uma nota negativa', function () {
             cy.request({
                 method: 'POST',
                 url: 'users/review',
@@ -187,7 +187,7 @@ describe('Avaliação de filme', function () {
             })
         });
 
-        it('Não deve ser possível fazer uma avaliação informando uma nota não inteira', function(){
+        it('Não deve ser possível fazer uma avaliação informando uma nota não inteira', function () {
             cy.request({
                 method: 'POST',
                 url: 'users/review',
@@ -200,36 +200,272 @@ describe('Avaliação de filme', function () {
                 failOnStatusCode: false
             }).then(function (response) {
                 expect(response.status).to.equal(400)
-                
+
             })
 
         });
+        // não precisa desse teste
+        it('Não deve ser possível usuário avaliar o mesmo filme duas vezes', function () {
+            cy.criarReview(idFilme, userAdmin.token);
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 4.0,
+                    reviewText: "Gostei do filme"
+                },
+                headers: { Authorization: 'Bearer ' + userAdmin.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
 
-        // it('Não deve ser possível usuário avaliar o mesmo filme duas vezes', function(){});
+            cy.request({
+                method: 'GET',
+                url: '/movies/' + idFilme
+            }).then(function (response) {
+                expect(response.status).to.equal(200);
+                expect(response.body.reviews).to.be.an('array').to.have.lengthOf(1)
+            })
+
+
+        });
 
 
 
 
     });
 
-    // describe('Avaliações de filme de maneira válida', function(){
+    describe.only('Avaliações de filme de maneira válida', function () {
 
-    //     it('Deve ser possível um usuário logado fazer uma avaliação de filme', function(){});
+        let userAdmin, userComum
+        let idFilme
+        before(function () {
+            cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+                userAdmin = dadosAdmin
+            });
 
-    //     it('Deve ser possível um usuário fazer uma avaliação sem informar um comentário', function(){});
+            cy.usuarioLogado().then(function (dadosComum) {
+                userComum = dadosComum
+            })
+        });
 
-    //     it('Deve ser possível um usuário fazer uma atualização da avaliação de um filme já avaliado anteriormente', function(){});
+        beforeEach(function () {
+            cy.fixture('filmes/bodyReview.json').as('filme')
+            cy.cadastrarFilme(userAdmin.token).then(function (response) {
+                idFilme = response
+                this.filme.id = idFilme
+            });
+        });
 
-    //     it('Deve ser possível um usuário fazer uma avaliação com comentário de 500 caractees', function(){});
+        afterEach(function () {
+            cy.deletarFilme(idFilme, userAdmin.token)
+        });
 
-    //     it('Deve ser possível um usuário fazer uma avaliação com uma nota de uma estrela', function(){});
+        after(function () {
+            cy.deletarUsuario(userComum.id, userAdmin.token)
+            cy.deletarUsuario(userAdmin.id, userAdmin.token)
 
-    //     it('Deve ser possível um usuário fazer uma avaliação com uma nota de cinco estrela', function(){});
+        });
 
-    //     it('Avaliação de filme por um usuário crítico deve impactar a nota critica', function(){});
+        it('Deve ser possível um usuário logado fazer uma avaliação de filme', function () {
+
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 4.0,
+                    reviewText: "Gostei do filme"
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+            //validando a review
+            cy.fixture('filmes/bodyReview2.json').as('review')
+            cy.request({
+                method: 'GET',
+                url: 'users/review/all',
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                this.review[0].id = response.body[0].id
+                this.review[0].movieId = idFilme
+                expect(response.status).to.equal(200)
+                expect(response.body).to.deep.equal(this.review)
+            })
+        });
+        // Isso é um BUG??
+        it('Deve ser possível um usuário fazer uma avaliação sem informar um comentário', function () {
+
+            cy.fixture('filmes/bodyReview2.json').as('review')
+
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 4.0,
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+
+            cy.request('GET', 'users/review/all'). then(function (response) {
+                expect(response.status).to.equal(200)
+                expect(response.body).to.deep.equal(this.review)
+            })
+
+        });
+
+        it('Deve ser possível atualizar a avaliação de um filme e não deve existir duas avaliações do mesmo usuario', function () {
+                       
+            cy.criarReview(idFilme, userComum.token)
+
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 4.0,
+                    reviewText: "Gostei do filme"
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+
+            cy.buscaFilmeId(idFilme).then(function (response) {
+                expect(response.reviews).to.be.an('array').to.have.lengthOf(1)                
+
+                expect(response.id).to.equal(idFilme)
+
+                expect(response.reviews[0].reviewText).to.equal("Gostei do filme")
+                expect(response.reviews[0].id).to.be.an('number')
+                expect(response.reviews[0].reviewType).to.equal(0)
+                expect(response.reviews[0].score).to.equal(4)
+                expect(response.reviews[0].updatedAt).to.be.an('string')
+
+                expect(response.reviews[0].user.id).to.equal(userComum.id)
+                expect(response.reviews[0].user.name).to.equal(userComum.nome)
+                expect(response.reviews[0].user.type).to.equal(0)
+            })
+        });
+
+        it('Deve ser possível um usuário fazer uma avaliação com comentário de 500 caractees', function () {
+
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 4.0,
+                    reviewText: 'Star Wars é uma obra-prima cinematográfica que solidificou a saga como um fenômeno cultural. Lançado em 1980, o filme aprofunda a narrativa e os personagens, mostrando a luta desesperada da Aliança Rebelde contra o Império Galáctico. A revelação chocante de Darth Vader como pai de Luke Skywalker e o treinamento de Luke com Yoda são momentos icônicos. As cenas no planeta Hoth e na Cidade das Nuvens são visualmente deslumbrantes, e o desfecho sombrio deixa todos ansiosos pelo próximo capítulo. Bom'
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+
+            cy.fixture('filmes/bodyReview2.json').as('review')
+            cy.request({
+                method: 'GET',
+                url: 'users/review/all',
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                this.review[0].reviewText = 'Star Wars é uma obra-prima cinematográfica que solidificou a saga como um fenômeno cultural. Lançado em 1980, o filme aprofunda a narrativa e os personagens, mostrando a luta desesperada da Aliança Rebelde contra o Império Galáctico. A revelação chocante de Darth Vader como pai de Luke Skywalker e o treinamento de Luke com Yoda são momentos icônicos. As cenas no planeta Hoth e na Cidade das Nuvens são visualmente deslumbrantes, e o desfecho sombrio deixa todos ansiosos pelo próximo capítulo. Bom'
+                this.review[0].id = response.body[0].id
+                this.review[0].movieId = idFilme
+
+                expect(response.status).to.equal(200)
+                expect(response.body).to.deep.equal(this.review)
+            })
+        });
+
+        it('Deve ser possível um usuário fazer uma avaliação com uma nota de uma estrela', function () {
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 1,
+                    reviewText: 'Gostei do filme'
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+
+            cy.fixture('filmes/bodyReview2.json').as('review')
+            cy.request({
+                method: 'GET',
+                url: 'users/review/all',
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                this.review[0].score = 1
+                this.review[0].id = response.body[0].id
+                this.review[0].movieId = idFilme
+
+                expect(response.status).to.equal(200)
+                expect(response.body).to.deep.equal(this.review)
+            })
+
+        });
+
+        it('Deve ser possível um usuário fazer uma avaliação com uma nota de cinco estrela', function () {
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 5,
+                    reviewText: 'Gostei do filme'
+                },
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+
+            cy.fixture('filmes/bodyReview2.json').as('review')
+            cy.request({
+                method: 'GET',
+                url: 'users/review/all',
+                headers: { Authorization: 'Bearer ' + userComum.token }
+            }).then(function (response) {
+                this.review[0].score = 5
+                this.review[0].id = response.body[0].id
+                this.review[0].movieId = idFilme
+
+                expect(response.status).to.equal(200)
+                expect(response.body).to.deep.equal(this.review)
+            })
+        });
+
+        it('Avaliação de filme por um usuário crítico deve impactar a nota critica', function () {
+
+            cy.criarUsuarioCritico().then(function (dadosCritico) {
+                let userCritico = dadosCritico
+
+                cy.request({
+                    method: 'POST',
+                    url: 'users/review',
+                    body: {
+                        movieId: idFilme,
+                        score: 5,
+                        reviewText: 'Gostei do filme'
+                    },
+                    headers: { Authorization: 'Bearer ' + userCritico.token }
+                }).then(function (response) {
+                    expect(response.status).to.equal(201)
+                });
+            });
+            cy.buscaFilmeId(idFilme).then(function (response) {
+                expect(response.criticScore).to.equal(5)
+                expect(response.audienceScore).to.equal(0)
+            })
+        });
 
 
-
-
-    // });
+    });
 });

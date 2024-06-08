@@ -204,15 +204,17 @@ describe('Consulta de detalhes de filmes', function () {
                 cy.deletarUsuario(userComum.id, userAdmin.token);
             });
         })
-        // posso validar só o array?
+        // posso validar só o array? acho que não precisa desse teste
         it('Ao buscar um filme por id todas as avaliações devem ser listadas', function () {
 
-            let userComum = []
+            //let userComum = []
 
             for (let i = 0; i < 5; i++) {
                 cy.usuarioLogado().then(function (dadosComum) {
-                    userComum.push(dadosComum.token)
-                    cy.criarReview(idFilme, userComum[i])
+                    //userComum.push(dadosComum.token)
+                    //cy.criarReview(idFilme, userComum[i])
+                    cy.criarReview(idFilme, dadosComum.token)
+                    cy.inativarConta(dadosComum.token)
                 })
             }
 
@@ -403,7 +405,7 @@ describe('Consulta de detalhes de filmes', function () {
                 })
             });
         })
-        // apagar os usuários vai dar trabalho
+
         it('A nota de audiência deve ser a média das notas de avaliações dos usuários do tipo comum', function () {
             let userComum = []
             let nota = []
@@ -418,6 +420,8 @@ describe('Consulta de detalhes de filmes', function () {
                         nota.push(parseInt(response.score))
                         sNota = sNota + nota[i]
                         cy.wrap(sNota).as('somaNota')
+
+                        cy.inativarConta(dadosComum.token)
                     })
                 })
             }
@@ -438,7 +442,6 @@ describe('Consulta de detalhes de filmes', function () {
             })
         })
 
-        //apagar os usuários vai dar trabalho
         it('A nota crítica deve ser a média das notas de avaliações dos usuários do tipo crítico', function () {
             let userCritico = []
             let nota = []
@@ -454,6 +457,7 @@ describe('Consulta de detalhes de filmes', function () {
                         sNota = sNota + nota[i]
                         cy.wrap(sNota).as('somaNota')
 
+                        cy.inativarConta(dadoCritico.token)
                     });
                 });
             }

@@ -232,5 +232,22 @@ Cypress.Commands.add('criarReview', function (idFilme, token) {
             comentario: comentario
         }
     })
-
 })
+
+Cypress.Commands.add('inativarConta', function(token){
+    cy.request({
+        method: 'PATCH', 
+        url: 'users/inactivate',
+        headers: { Authorization: 'Bearer ' + token }
+    })
+});
+
+Cypress.Commands.add('buscaFilmeId', function(idFilme){
+    cy.request({
+        method: 'GET',
+        url: '/movies/' + idFilme
+    }).then(function (response) {
+        return response.body
+
+    });
+});
