@@ -56,7 +56,6 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema,
 Quando atualizar um filme inserindo 101 caracteres no título,
 Então o sistema deve informar uma mensagem de alerta informando que o limite de caracteres é 100.
 
-#TODO: TRANSFORMAR EM ESQUEMA DO CENÁRIO
 Cenário: Deve ser possível atualizar um filme com gênero de 1 caracter
 Dado que um usuário administrador autenticado acessou o Backend do sistema,
 Quando atualizar um filme inserindo apenas 1 caracter no gênero,
