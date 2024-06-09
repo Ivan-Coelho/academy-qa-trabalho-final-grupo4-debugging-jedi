@@ -3,11 +3,18 @@
 import { faker } from "@faker-js/faker";
 
 describe("Pesquisar Filme", () => {
+  // autenticar como adm
+  // criar um objeto filme (completo)
+  // criar o filme
+  // buscar o filme pelo Id e guardar em uma variável
+
   it("Deve ser possível pesquisar um filme pelo título completo", () => {
     cy.buscarFilme()
   });
 
-  it("Deve ser possível pesquisar um filme com título parcial", () => {});
+  it("Deve ser possível pesquisar um filme com título parcial", () => {
+    cy.buscarFilme()
+  });
 
   it("Deve ser possível pesquisar um filme com erro de digitação", () => {});
 
@@ -26,8 +33,6 @@ describe("Pesquisar Filme", () => {
   it("Deve ser possível pesquisar um filme com espaços extras no título", () => {});
 
   it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {});
-
-  it("Deve ser possível visualizar uma imagem de capa do filme encontrado", () => {});
 
   it("Deve ser possível visualizar a descrição contida no súmario do filme encontrado", () => {});
 
