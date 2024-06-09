@@ -7,7 +7,6 @@ Dado que o usuário inseriu o título completo do filme na caixa de pesquisa,
 Quando acionar o no botão de buscar,
 Então o sistema deve retornar o filme correspondente ao título completo.
 
-
 Cenário: Deve ser possível pesquisar um filme com título parcial
 Dado que o usuário inseriu parte do título do filme na caixa de pesquisa,
 Quando acionar o no botão de buscar,

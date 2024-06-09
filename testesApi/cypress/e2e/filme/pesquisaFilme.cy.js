@@ -3,7 +3,9 @@
 import { faker } from "@faker-js/faker";
 
 describe("Pesquisar Filme", () => {
-  it("Deve ser possível pesquisar um filme pelo título completo", () => {});
+  it("Deve ser possível pesquisar um filme pelo título completo", () => {
+    cy.buscarFilme()
+  });
 
   it("Deve ser possível pesquisar um filme com título parcial", () => {});
 
