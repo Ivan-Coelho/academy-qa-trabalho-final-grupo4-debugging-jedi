@@ -27,10 +27,10 @@ Dado que o usuário inseriu o título do filme com letras minúsculas,
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
-# Cenário: Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas
-# Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
+Cenário: Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas
+Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
 # Cenário: Não deve ser possível pesquisar um filme com título inexistente
 # Dado que o usuário inseriu um título que não corresponde a nenhum filme no banco de dados,

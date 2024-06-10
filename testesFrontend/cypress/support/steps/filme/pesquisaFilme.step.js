@@ -67,3 +67,15 @@ When('acionar o recurso de buscar', function () {
 Then('o sistema deve retornar os resultados corretos, independentemente da formatação do texto', function () {
     
 })
+
+Given ('que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar os resultados corretos, independentemente da formatação do texto.', function () {
+    
+})
