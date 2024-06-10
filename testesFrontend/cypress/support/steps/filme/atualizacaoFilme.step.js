@@ -1,6 +1,6 @@
 import { Given, When, Then, Before, After} from '@badeball/cypress-cucumber-preprocessor';
 
-//Importar Page Objects para desenvolver os testes
+//Importar Page Objects para desenvolver os testes.
 import { faker } from '@faker-js/faker';
 
 
@@ -124,6 +124,7 @@ Then('o sistema deve informar que o filme foi atualizado com sucesso.', function
 })
 
 Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
     
 })
 
