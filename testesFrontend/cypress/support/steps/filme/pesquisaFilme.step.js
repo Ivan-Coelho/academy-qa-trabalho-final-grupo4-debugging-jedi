@@ -79,3 +79,15 @@ When('acionar o recurso de buscar', function () {
 Then('o sistema deve retornar os resultados corretos, independentemente da formatação do texto.', function () {
     
 })
+
+Given ('que o usuário inseriu um título que não corresponde a nenhum filme no banco de dados', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve informar que não foram encontrados resultados para a pesquisa', function () {
+    
+})

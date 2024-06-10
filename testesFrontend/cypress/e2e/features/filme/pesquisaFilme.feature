@@ -32,10 +32,10 @@ Dado que o usuário inseriu o título do filme com diferentes combinações de m
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
-# Cenário: Não deve ser possível pesquisar um filme com título inexistente
-# Dado que o usuário inseriu um título que não corresponde a nenhum filme no banco de dados,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve informar que não foram encontrados resultados para a pesquisa.
+Cenário: Não deve ser possível pesquisar um filme com título inexistente
+Dado que o usuário inseriu um título que não corresponde a nenhum filme no banco de dados,
+Quando acionar o recurso de buscar,
+Então o sistema deve informar que não foram encontrados resultados para a pesquisa.
 
 # Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
 # Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
