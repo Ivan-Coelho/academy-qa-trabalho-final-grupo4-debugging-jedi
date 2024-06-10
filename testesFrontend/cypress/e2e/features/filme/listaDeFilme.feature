@@ -22,10 +22,10 @@ Dado que um usuário administrador acessou a funcionalidade de listagem de filme
 Quando ele visualizar a lista de filmes
 Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
 
-# Cenário: Deve ser possível visualizar o título de um filme ao listar filmes
-# Dado que um usuário acessou a página inicial
-# Quando ele selecionar a opção filmes
-# Então o card de um filme deverá conter o título do mesmo
+Cenário: Deve ser possível visualizar o título de um filme ao listar filmes
+Dado que um usuário acessou a página inicial
+Quando ele selecionar a opção filmes
+Então o card de um filme deverá conter o título do mesmo
 
 # Cenário: Deve ser possível visualizar a descrição de um filme listado
 # Dado que um usuário acessou a página inicial
