@@ -52,10 +52,10 @@ Dado que o usuário inseriu um título com espaços extras antes ou depois do te
 Quando acionar o recurso de buscar,
 Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
 
-# Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
-# Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
+Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
+Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
 
 # Cenário: Deve ser possível visualizar uma imagem de capa do filme encontrado 
 # Dado que o usuário inseriu um título na caixa de pesquisa,
