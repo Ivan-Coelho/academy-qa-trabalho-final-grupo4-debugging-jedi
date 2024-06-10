@@ -57,10 +57,10 @@ Dado que o usuário inseriu um título com caracteres especiais na caixa de pesq
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
 
-# Cenário: Deve ser possível visualizar uma imagem de capa do filme encontrado 
-# Dado que o usuário inseriu um título na caixa de pesquisa,
-# Quando selecionar o a opção de pesquisar,
-# Então o sistema deverá retornar o filme correspondente e uma imagem de capa que o represente.
+Cenário: Deve ser possível visualizar uma imagem de capa do filme encontrado 
+Dado que o usuário inseriu um título na caixa de pesquisa,
+Quando selecionar o recurso de pesquisar,
+Então o sistema deverá retornar o filme correspondente e uma imagem de capa que o represente.
 
 # Cenário: Deve ser possível visualizar a descrição contida no súmario do filme encontrado
 # Dado que o usuário encontrou um filme pesquisado,
