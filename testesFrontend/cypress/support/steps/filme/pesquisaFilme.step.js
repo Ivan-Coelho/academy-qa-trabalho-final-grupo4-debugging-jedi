@@ -199,3 +199,16 @@ When('acionar o recurso de buscar', function () {
 Then('o sistema deve retornar o filme correspondente ao título inserido', function () {
     
 })
+
+
+Given ('que um usuário crítico inseriu um título de filme na caixa de pesquisa', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar o filme correspondente ao título inserido', function () {
+    
+})

@@ -82,10 +82,10 @@ Dado que um usuário comum inseriu um título de filme na caixa de pesquisa,
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar o filme correspondente ao título inserido.
 
-# Cenário: Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes
-# Dado que um usuário crítico inseriu um título de filme na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido.
+Cenário: Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes
+Dado que um usuário crítico inseriu um título de filme na caixa de pesquisa,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar o filme correspondente ao título inserido.
 
 # Cenário: Deve ser possível um usuário administrador realizar uma pesquisa no catálogo de filmes
 # Dado que um usuário administrador inseriu um título de filme na caixa de pesquisa,
