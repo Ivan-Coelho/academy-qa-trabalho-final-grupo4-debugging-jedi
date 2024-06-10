@@ -43,10 +43,10 @@ Given ('que um usuário não autenticado tenta atualizar um filme', function () 
     
 })
 
-When('', function () {
+When('acessar a funcionalidade de atualização de filme', function () {
     
 })
 
-Then('', function () {
+Then('o sistema deve impedir o acesso e exibir uma mensagem de erro.', function () {
     
 })
