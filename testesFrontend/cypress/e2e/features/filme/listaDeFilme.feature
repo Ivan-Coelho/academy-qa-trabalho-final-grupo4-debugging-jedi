@@ -17,10 +17,10 @@ Dado que um usuário crítico acessou a funcionalidade de listagem de filmes
 Quando ele visualizar a lista de filmes
 Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados 
 
-# Cenário: Deve ser possível um usuário administrador consultar a lista de filmes
-# Dado que um usuário administrador acessou a funcionalidade de listagem de filmes
-# Quando ele visualizar a lista de filmes
-# Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
+Cenário: Deve ser possível um usuário administrador consultar a lista de filmes
+Dado que um usuário administrador acessou a funcionalidade de listagem de filmes
+Quando ele visualizar a lista de filmes
+Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
 
 # Cenário: Deve ser possível visualizar o título de um filme ao listar filmes
 # Dado que um usuário acessou a página inicial
