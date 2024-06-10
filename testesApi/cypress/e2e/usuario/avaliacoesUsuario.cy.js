@@ -10,9 +10,6 @@ describe('Avaliação de filme', function () {
             cy.criarUsuarioAdmin().then(function (dadosAdmin) {
                 userAdmin = dadosAdmin
             });
-        });
-
-        beforeEach(function () {
             cy.fixture('filmes/bodyReview.json').as('filme')
             cy.cadastrarFilme(userAdmin.token).then(function (response) {
                 idFilme = response.body.id
@@ -20,12 +17,8 @@ describe('Avaliação de filme', function () {
             })
 
         });
-
-        afterEach(function () {
-            cy.deletarFilme(idFilme, userAdmin.token)
-        });
-
         after(function () {
+            cy.deletarFilme(idFilme, userAdmin.token)
             cy.deletarUsuario(userAdmin.id, userAdmin.token)
         });
 
