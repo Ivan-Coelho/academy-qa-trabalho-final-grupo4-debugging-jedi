@@ -88,3 +88,15 @@ When('ele selecionar a opção filmes', function () {
 Then('o card de um filme deverá conter a sua nota geral', function () {
     
 })
+
+Given ('que um usuário acessou a página inicial', function () {
+    
+})
+
+When('ele selecionar a opção filmes', function () {
+    
+})
+
+Then('os filmes cadastrados deverão ser listados conforme sua ordem de cadastro', function () {
+    
+})

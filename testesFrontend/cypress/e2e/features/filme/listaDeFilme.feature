@@ -37,10 +37,10 @@ Dado que um usuário acessou a página inicial
 Quando ele selecionar a opção filmes
 Então o card de um filme deverá conter a sua nota geral
 
-# Cenário: Deve ser possível vizualizar filmes listados por ordem de cadastro
-# Dado que um usuário acessou a página inicial
-# Quando ele selecionar a opção filmes
-# Então os filmes cadastrados deverão ser listados conforme sua ordem de cadastro
+Cenário: Deve ser possível vizualizar filmes listados por ordem de cadastro
+Dado que um usuário acessou a página inicial
+Quando ele selecionar a opção filmes
+Então os filmes cadastrados deverão ser listados conforme sua ordem de cadastro
 
 # Cenário: Deve ser possível vizualizar filmes listados por nota (mais avaliados para menos avaliados)
 # Dado que um usuário acessou a página inicial
