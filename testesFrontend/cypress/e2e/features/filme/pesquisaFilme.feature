@@ -18,14 +18,14 @@ Quando acionar o recurso de buscar,
 Então o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido.
 
 Cenário: Deve ser possível pesquisar um filme com letras maiúsculas
-Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
+Dado que o usuário inseriu o título do filme com letras maiúsculas,
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
-# Cenário: Deve ser possível pesquisar um filme com letras minúsculas
-# Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
+Cenário: Deve ser possível pesquisar um filme com letras minúsculas
+Dado que o usuário inseriu o título do filme com letras minúsculas,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
 # Cenário: Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas
 # Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
