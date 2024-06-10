@@ -37,10 +37,10 @@ Dado que o usuário inseriu um título que não corresponde a nenhum filme no ba
 Quando acionar o recurso de buscar,
 Então o sistema deve informar que não foram encontrados resultados para a pesquisa.
 
-# Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
-# Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
+Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
+Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
 
 # Cenário: Deve ser possível pesquisar com um título muito curto 
 # Dado que o usuário inseriu um título muito curto (como uma única letra) na caixa de pesquisa,
