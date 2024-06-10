@@ -24,16 +24,16 @@ describe("Pesquisar Filme", () => {
   });
 
   it("Deve ser possível pesquisar um filme pelo título completo", () => {
-    cy.buscarFilme(filme.title).then((response) => {
-      expect(response).to.equal(filme.id);
+    cy.buscarFilmeResponseCompleto(filme.title).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
     });
   });
 
   it("Deve ser possível pesquisar um filme com título parcial", () => {
     const tituloSplit = filme.title.split(" ");
     const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}`;
-    cy.buscarFilme(tituloParcial).then((response) => {
-      expect(response).to.equal(filme.id);
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
     });
   });
 
@@ -46,22 +46,22 @@ describe("Pesquisar Filme", () => {
   // });
 
   it("Deve ser possível pesquisar um filme com letras maiúsculas", () => {
-    cy.buscarFilme(filme.title.toUpperCase()).then((response) => {
-      expect(response).to.equal(filme.id);
+    cy.buscarFilmeResponseCompleto(filme.title.toUpperCase()).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
     });
   });
 
   it("Deve ser possível pesquisar um filme com letras minúsculas", () => {
-    cy.buscarFilme(filme.title.toLowerCase()).then((response) => {
-      expect(response).to.equal(filme.id);
+    cy.buscarFilmeResponseCompleto(filme.title.toLowerCase()).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
     });
   });
 
   it("Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas", () => {
     const tituloSplit = filme.title.split(" ");
     const tituloParcial = `${tituloSplit[0].toUpperCase()} ${tituloSplit[1].toLowerCase()} ${tituloSplit[2].toUpperCase()} ${tituloSplit[3].toLowerCase()}`;
-    cy.buscarFilme(tituloParcial).then((response) => {
-      expect(response).to.equal(filme.id);
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
     });
   });
 
