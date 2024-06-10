@@ -1,11 +1,10 @@
 import { Given, When, Then, Before, After} from '@badeball/cypress-cucumber-preprocessor';
-import FilmesPage from '../pages/filmes.page';
-import RegistroPage from '../pages/registro.page';
+
+//Importar Page Objects para desenvolver os testes
 import { faker } from '@faker-js/faker';
 
 
-Given('que acessei o site', function () {
-    cy.visit('')
+Given('que acessei o site Raro Filmes', function () {
 });
 
 Given ('que o usuário inseriu o título completo do filme na caixa de pesquisa', function () {
