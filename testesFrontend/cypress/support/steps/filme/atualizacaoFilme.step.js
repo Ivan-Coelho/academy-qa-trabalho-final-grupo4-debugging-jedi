@@ -26,3 +26,27 @@ Then('o sistema deverá permitir que o administrador atualize as informações d
 Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
     
 })
+
+When ('selecionar a opção de atualizar um filme ', function () {
+    
+})
+
+When('fornecer apenas algumas novas informações', function () {
+    
+})
+
+Then('o sistema deve permitir que o administrador atualize parcialmente as informações do filme, mantendo as informações não fornecidas inalteradas', function () {
+    
+})
+
+Given ('que um usuário não autenticado tenta atualizar um filme', function () {
+    
+})
+
+When('', function () {
+    
+})
+
+Then('', function () {
+    
+})

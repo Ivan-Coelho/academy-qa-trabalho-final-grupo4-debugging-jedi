@@ -8,16 +8,16 @@ Quando selecionar a opção de atualizar um filme
 E fornecer todas as informações necessárias
 Então o sistema deverá permitir que o administrador atualize as informações do filme
 
-# Cenário: Deve ser possível atualizar parcialmente as informações de um filme
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando selecionar a opção de atualizar um filme 
-# E fornecer apenas algumas novas informações
-# Então o sistema deve permitir que o administrador atualize parcialmente as informações do filme, mantendo as informações não fornecidas inalteradas. 
+Cenário: Deve ser possível atualizar parcialmente as informações de um filme
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando selecionar a opção de atualizar um filme 
+E fornecer apenas algumas novas informações
+Então o sistema deve permitir que o administrador atualize parcialmente as informações do filme, mantendo as informações não fornecidas inalteradas. 
 
-# Cenário: Não deve ser possível um usuário não logado realizar a atualização de um filme
-# Dado que um usuário não autenticado tenta atualizar um filme
-# Quando acessar a funcionalidade de atualização de filme
-# Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
+Cenário: Não deve ser possível um usuário não logado realizar a atualização de um filme
+Dado que um usuário não autenticado tenta atualizar um filme
+Quando acessar a funcionalidade de atualização de filme
+Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
 
 # Cenário: Não deve ser possível um usuário comum realizar a atualização de um filme
 # Dado que um usuário comum tenta atualizar um filme
