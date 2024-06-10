@@ -53,14 +53,14 @@ Funcionalidade: Criação de filme
             Dado que o usuário está autenticado como administrador
         
         Cenario: Cadastrar o mesmo filme com novas informações
-            Quando o usuário cadastra um filme com título "Avatar" e ano de lançamento "2009"
-            E o usuário cadastra um filme com título "Avatar" e ano de lançamento "2022"
+            Quando o usuário cadastra um filme com informações validas
+            E o usuário cadastra o mesmo filme com novas informaçoes
             Entao o sistema cadastra o filme com as novas informações
             E o sistema mantém o registro anterior do filme
 
         Cenario: Cadastrar o mesmo filme sem novas informações
-            Quando o usuário cadastra um filme com título "Avatar" e ano de lançamento "2009"
-            E o usuário tenta cadastrar novamente o mesmo filme com título "Avatar" e ano de lançamento "2009"
+            Quando o usuário cadastra um filme com informações validas
+            E o usuário tenta cadastrar novamente o mesmo filme
             Entao o sistema cadastra o filme sem criar um novo registro
             E o sistema mantém o registro existente do filme
 

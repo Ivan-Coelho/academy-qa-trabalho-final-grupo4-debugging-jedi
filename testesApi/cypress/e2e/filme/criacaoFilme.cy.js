@@ -277,23 +277,25 @@ describe("Criação de filme", function () {
           });
         });
         
-        it("Cadastrar o mesmo filme com novas informações", function () {
+        it("Cadastrar o mesmo filme sem novas informações", function () {
                   
           cy.cadastrarFilme(dadosAdmin.token)
+          failOnStatusCode: false
           .then(function (filme1) {
           dadosFilme1 = filme1.body
           idFilme1 = filme1.body.id
     
           expect(filme1.status).to.equal(201);
         });
-
+        
           cy.cadastrarFilme(dadosAdmin.token)
           .then(function (filme2) {
           dadosFilme2 = filme2.body
           idFilme2 = filme2.body.id
+          
           expect(filme2.status).to.equal(201);
-          expect(idFilme2).to.not.equal(idFilme1);
-          expect(dadosFilme2).to.not.equal(dadosFilme1)
+          expect(idFilme2).to.equal(idFilme1);
+          expect(dadosFilme2).to.equal(dadosFilme1)
           });
         });
       });
