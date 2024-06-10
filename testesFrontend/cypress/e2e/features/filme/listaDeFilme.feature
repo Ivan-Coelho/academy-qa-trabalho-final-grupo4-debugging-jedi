@@ -47,7 +47,7 @@ Dado que um usuário acessou a página inicial
 Quando ele selecionar a opção filmes
 Então deverá haver uma opção de visualizar filmes mais bem avaliados
 
-# Cenário: Deve ser possível realizar a paginação para explorar os filmes cadastrados
-# Dado que um usuário acessou a lista de filmes
-# Quando houver mais de 5 filmes cadastrados
-# Então deverá existir a opção de paginação para explorar os filmes da lista
+Cenário: Deve ser possível realizar a paginação para explorar os filmes cadastrados
+Dado que um usuário acessou a lista de filmes
+Quando houver mais de 5 filmes cadastrados
+Então deverá existir a opção de paginação para explorar os filmes da lista

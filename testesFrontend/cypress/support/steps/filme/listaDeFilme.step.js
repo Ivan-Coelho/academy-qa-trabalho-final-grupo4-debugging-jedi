@@ -112,3 +112,15 @@ When('ele selecionar a opção filmes', function () {
 Then('deverá haver uma opção de visualizar filmes mais bem avaliados', function () {
     
 })
+
+Given ('que um usuário acessou a lista de filmes', function () {
+    
+})
+
+When('houver mais de 5 filmes cadastrados', function () {
+    
+})
+
+Then('deverá existir a opção de paginação para explorar os filmes da lista', function () {
+    
+})
