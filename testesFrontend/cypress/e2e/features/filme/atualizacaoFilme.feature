@@ -29,10 +29,10 @@ Dado que um usuário crítico tenta atualizar um filme
 Quando acessar a funcionalidade de atualização de filme
 Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
 
-# Cenário: Não deve ser possível atualizar um filme com ano no futuro
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme fornecendo um ano de lançamento no futuro
-# Então o sistema deve rejeitar a atualização e exibir uma mensagem de erro informando que as informações fornecidas são inválidas.
+Cenário: Não deve ser possível atualizar um filme com ano no futuro
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme fornecendo um ano de lançamento no futuro
+Então o sistema deve rejeitar a atualização e exibir uma mensagem de erro informando que as informações fornecidas são inválidas.
 
 # Cenário: Não deve ser possível atualizar um filme não cadastrado
 # Dado que um usuário administrador autenticado acessou o Backend do sistema
