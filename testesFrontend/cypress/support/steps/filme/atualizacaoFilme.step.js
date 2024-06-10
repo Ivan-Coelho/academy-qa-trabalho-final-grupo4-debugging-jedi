@@ -98,3 +98,16 @@ When('atualizar um filme cujo Id não está presente no catálogo', function () 
 Then('o sistema deve informar que o filme não existe e impedir a atualização.', function () {
     
 })
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme inserindo apenas 1 caracter no título', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
+

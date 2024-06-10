@@ -39,10 +39,10 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme cujo Id não está presente no catálogo
 Então o sistema deve informar que o filme não existe e impedir a atualização.
 
-# Cenário: Deve ser possível atualizar um filme com título de 1 caracter
-# Dado que um usuário administrador autenticado acessou o Backend do sistema,
-# Quando atualizar um filme inserindo apenas 1 caracter no título
-# Então o sistema deve informar que o filme foi atualizado com sucesso.
+Cenário: Deve ser possível atualizar um filme com título de 1 caracter
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme inserindo apenas 1 caracter no título
+Então o sistema deve informar que o filme foi atualizado com sucesso.
 
 # Cenário: Deve ser possível atualizar um filme com título de 100 caracteres
 # Dado que um usuário administrador autenticado acessou o Backend do sistema
