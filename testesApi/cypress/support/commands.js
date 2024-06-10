@@ -39,7 +39,6 @@ Cypress.Commands.add('criarUsuario', function () {
     }).then(function (response) {
         return response
     })
-    
 })
 
 Cypress.Commands.add('usuarioLogado', function () {
@@ -182,12 +181,11 @@ Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {
     cy.fixture("filmes/bodyFilme.json").then(function (arquivo) {
         cy.request({
             method: 'POST',
-            url: '/movies',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
             headers: { Authorization: 'Bearer ' + tokenAdmin },
             body: arquivo
-        }).then(function (response) {
-            let idFilme = response.body.id
-            return idFilme
+        }).then(function (response) {            
+            return response
         })
     })
 })
@@ -211,7 +209,6 @@ Cypress.Commands.add('deletarFilme', function (idFilme, tokenAdmin) {
         url: 'movies/' + idFilme,
         headers: { Authorization: 'Bearer ' + tokenAdmin }
     })
-
 });
 
 Cypress.Commands.add('criarReview', function (idFilme, token) {
@@ -233,5 +230,22 @@ Cypress.Commands.add('criarReview', function (idFilme, token) {
             comentario: comentario
         }
     })
-
 })
+
+Cypress.Commands.add('inativarConta', function(token){
+    cy.request({
+        method: 'PATCH', 
+        url: 'users/inactivate',
+        headers: { Authorization: 'Bearer ' + token }
+    })
+});
+
+Cypress.Commands.add('buscaFilmeId', function(idFilme){
+    cy.request({
+        method: 'GET',
+        url: '/movies/' + idFilme
+    }).then(function (response) {
+        return response.body
+
+    });
+});
