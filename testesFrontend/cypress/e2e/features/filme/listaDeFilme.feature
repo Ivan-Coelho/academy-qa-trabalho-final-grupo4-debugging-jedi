@@ -4,7 +4,7 @@ Funcionalidade: Listagem de filmes
 
 Cenário: Deve ser possível um usuário não logado consultar a lista de filmes
 Dado que um usuário não logado acessou a funcionalidade de listagem de filmes,
-Quando ele visualizar a lista de filmes,
+Quando ele visualizar a lista de filmes
 Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
 
 Cenário: Deve ser possível um usuário comum consultar a lista de filmes
