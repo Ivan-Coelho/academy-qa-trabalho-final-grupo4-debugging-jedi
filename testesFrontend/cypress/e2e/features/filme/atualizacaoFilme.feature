@@ -84,10 +84,10 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme com descrição de mais de 500 caracteres
 Então o sistema deve informar que o filme foi atualizado com sucesso.
 
-# Cenário: Deve ser possível atualizar um filme com ano de lançamento 1895
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme com ano de lançamento 1895
-# Então o sistema deve informar que o filme foi atualizado com sucesso.
+Cenário: Deve ser possível atualizar um filme com ano de lançamento 1895
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme com ano de lançamento 1895
+Então o sistema deve informar que o filme foi atualizado com sucesso.
 
 # Cenário: Deve ser possível atualizar um filme com ano de lançamento 2024
 # Dado que um usuário administrador autenticado acessou o Backend do sistema
