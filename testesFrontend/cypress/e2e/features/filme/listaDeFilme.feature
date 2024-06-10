@@ -42,10 +42,10 @@ Dado que um usuário acessou a página inicial
 Quando ele selecionar a opção filmes
 Então os filmes cadastrados deverão ser listados conforme sua ordem de cadastro
 
-# Cenário: Deve ser possível vizualizar filmes listados por nota (mais avaliados para menos avaliados)
-# Dado que um usuário acessou a página inicial
-# Quando ele selecionar a opção filmes
-# Então deverá haver uma opção de visualizar filmes mais bem avaliados
+Cenário: Deve ser possível vizualizar filmes listados por nota (mais avaliados para menos avaliados)
+Dado que um usuário acessou a página inicial
+Quando ele selecionar a opção filmes
+Então deverá haver uma opção de visualizar filmes mais bem avaliados
 
 # Cenário: Deve ser possível realizar a paginação para explorar os filmes cadastrados
 # Dado que um usuário acessou a lista de filmes
