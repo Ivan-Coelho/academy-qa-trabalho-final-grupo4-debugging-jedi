@@ -64,10 +64,10 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme inserindo 100 caracteres no gênero
 Então o sistema deve informar que o filme foi atualizado com sucesso.
 
-# Cenário: Não deve ser possível atualizar um filme com gênero de 101 caracteres
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme inserindo 101 caracteres no gênero
-# Então o sistema deve informar uma mensagem de alerta informando que o limite de caracteres é 100.
+Cenário: Não deve ser possível atualizar um filme com gênero de mais de 100 caracteres
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme inserindo 101 caracteres no gênero
+Então o sistema deve informar uma mensagem de alerta informando que o limite de caracteres é 100.
 
 # Cenário: Deve ser possível atualizar um filme com descrição de 1 caracter
 # Dado que um usuário administrador autenticado acessou o Backend do sistema
