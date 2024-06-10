@@ -12,15 +12,15 @@ Dado que o usuário inseriu parte do título do filme na caixa de pesquisa,
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar todos os filmes que contêm o título parcial inserido.
 
-# Cenário: Deve ser possível pesquisar um filme com erro de digitação
-# Dado que o usuário inseriu um título com um pequeno erro de digitação,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido.
+Cenário: Deve ser possível pesquisar um filme com erro de digitação
+Dado que o usuário inseriu um título com um pequeno erro de digitação,
+Quando acionar o recurso de buscar,
+Então o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido.
 
-# Cenário: Deve ser possível pesquisar um filme com letras maiúsculas
-# Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
+Cenário: Deve ser possível pesquisar um filme com letras maiúsculas
+Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar os resultados corretos, independentemente da formatação do texto.
 
 # Cenário: Deve ser possível pesquisar um filme com letras minúsculas
 # Dado que o usuário inseriu o título do filme com diferentes combinações de maiúsculas e minúsculas,
