@@ -19,10 +19,10 @@ Dado que um usuário não autenticado tenta atualizar um filme
 Quando acessar a funcionalidade de atualização de filme
 Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
 
-# Cenário: Não deve ser possível um usuário comum realizar a atualização de um filme
-# Dado que um usuário comum tenta atualizar um filme
-# Quando acessar a funcionalidade de atualização de filme
-# Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
+Cenário: Não deve ser possível um usuário comum realizar a atualização de um filme
+Dado que um usuário comum tenta atualizar um filme
+Quando acessar a funcionalidade de atualização de filme
+Então o sistema deve impedir o acesso e exibir uma mensagem de erro.
 
 # Cenário: Não deve ser possível um usuário crítico realizar a atualização de um filme
 # Dado que um usuário crítico tenta atualizar um filme
