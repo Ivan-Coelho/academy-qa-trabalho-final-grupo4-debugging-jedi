@@ -72,10 +72,10 @@ Dado que o usuário encontrou um filme pesquisado,
 Quando selecionar o filme encontrado,
 Então o sistema deverá retornar as informações referente a nota de avaliação do filme retornado.
 
-# Cenário: Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes
-# Dado que um usuário não logado inseriu um título de filme na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido.
+Cenário: Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes
+Dado que um usuário não logado inseriu um título de filme na caixa de pesquisa,
+Quando acionar o recurso de buscar,
+Então o sistema deve retornar o filme correspondente ao título inserido.
 
 # Cenário: Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes
 # Dado que um usuário comum inseriu um título de filme na caixa de pesquisa,
