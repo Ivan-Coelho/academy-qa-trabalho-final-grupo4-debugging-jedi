@@ -1,14 +1,10 @@
 
 describe("Criação de filme", function () {
     let dadosAdmin
-    let dadosComum
-    let dadosFilme
-    let idFilme
-    let dadosFilme1
-    let dadosFilme2
-    let idFilme1
-    let idFilme2
+    let dadosFilme, dadosFilme1, dadosFilme2
+    let idFilme, idFilme1 , idFilme2
     
+      
     describe("Cadastro de filme como usuario adminstrador", function () {
       before(function () {
         cy.criarUsuarioAdmin().then(function (userAdmin) {
@@ -255,10 +251,10 @@ describe("Criação de filme", function () {
   
         it("Cadastrar o mesmo filme com novas informações", function () {
                   
-          cy.cadastrarFilme(dadosAdmin.token)
+        cy.cadastrarFilme(dadosAdmin.token)
         .then(function (filme1) {
           dadosFilme1 = filme1.body
-          idFilme1 = filme1.body.id
+          idFilme1 = filme1
           
           expect(filme1.status).to.equal(201);
         });
@@ -280,6 +276,7 @@ describe("Criação de filme", function () {
           expect(dadosFilme2).to.not.equal(dadosFilme1)
           });
         });
+        
         it("Cadastrar o mesmo filme com novas informações", function () {
                   
           cy.cadastrarFilme(dadosAdmin.token)
