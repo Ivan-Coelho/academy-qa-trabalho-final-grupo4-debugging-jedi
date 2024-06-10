@@ -230,3 +230,28 @@ When('atualizar um filme com ano de lançamento 2024', function () {
 Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
     
 })
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme com ano de lançamento 1894', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme com ano de lançamento no futuro', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
+

@@ -94,15 +94,15 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme com ano de lançamento 2024
 Então o sistema deve informar que o filme foi atualizado com sucesso.
 
-# Cenário: Não deve ser possível atualizar um filme com ano de lançamento 1894
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme com ano de lançamento 1894
-# Então o sistema deve informar que o filme foi atualizado com sucesso.
+Cenário: Não deve ser possível atualizar um filme com ano de lançamento 1894
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme com ano de lançamento 1894
+Então o sistema deve informar que o filme foi atualizado com sucesso.
 
-# Cenário: Não deve ser possível atualizar um filme com ano de lançamento no futuro
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme com ano de lançamento no futuro
-# Então o sistema deve informar que o filme foi atualizado com sucesso.
+Cenário: Não deve ser possível atualizar um filme com ano de lançamento no futuro
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme com ano de lançamento no futuro
+Então o sistema deve informar que o filme foi atualizado com sucesso.
 
 # Cenário: Deve ser possível atualizar um filme de 1 minuto de duração
 # Dado que um usuário administrador autenticado acessou o Backend do sistema
