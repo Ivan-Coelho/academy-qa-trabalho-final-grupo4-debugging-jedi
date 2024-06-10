@@ -34,10 +34,10 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme fornecendo um ano de lançamento no futuro
 Então o sistema deve rejeitar a atualização e exibir uma mensagem de erro informando que as informações fornecidas são inválidas.
 
-# Cenário: Não deve ser possível atualizar um filme não cadastrado
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme cujo Id não está presente no catálogo
-# Então o sistema deve informar que o filme não existe e impedir a atualização.
+Cenário: Não deve ser possível atualizar um filme não cadastrado
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme cujo Id não está presente no catálogo
+Então o sistema deve informar que o filme não existe e impedir a atualização.
 
 # Cenário: Deve ser possível atualizar um filme com título de 1 caracter
 # Dado que um usuário administrador autenticado acessou o Backend do sistema,
