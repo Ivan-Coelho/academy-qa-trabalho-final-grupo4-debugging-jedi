@@ -15,7 +15,7 @@ describe('Avaliação de filme', function () {
         beforeEach(function () {
             cy.fixture('filmes/bodyReview.json').as('filme')
             cy.cadastrarFilme(userAdmin.token).then(function (response) {
-                idFilme = response
+                idFilme = response.body.id
                 this.filme.id = idFilme
             })
 
@@ -253,7 +253,7 @@ describe('Avaliação de filme', function () {
         beforeEach(function () {
             cy.fixture('filmes/bodyReview.json').as('filme')
             cy.cadastrarFilme(userAdmin.token).then(function (response) {
-                idFilme = response
+                idFilme = response.body.id
                 this.filme.id = idFilme
             });
         });
