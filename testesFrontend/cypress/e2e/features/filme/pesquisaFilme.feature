@@ -47,10 +47,10 @@ Dado que o usuário inseriu um título muito curto (como uma única letra) na ca
 Quando acionar o recurso de buscar,
 Então o sistema deve retornar todos os filmes que contêm a letra inserida no título.
 
-# Cenário: Deve ser possível pesquisar um filme com espaços extras no título
-# Dado que o usuário inseriu um título com espaços extras antes ou depois do texto,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
+Cenário: Deve ser possível pesquisar um filme com espaços extras no título
+Dado que o usuário inseriu um título com espaços extras antes ou depois do texto,
+Quando acionar o recurso de buscar,
+Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
 
 # Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
 # Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
