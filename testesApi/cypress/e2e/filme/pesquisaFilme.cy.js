@@ -74,7 +74,15 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-  it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {});
+  it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {
+    const tituloNovo = `${filme.title}%`
+    cy.buscarFilmeResponseCompleto(tituloNovo).then((response) => {
+      console.log(response)
+      expect(response.status).to.equal(200)
+      expect(response.body).to.empty
+      
+    });
+  });
 
   it("Deve ser possível pesquisar com um título muito curto", () => {});
 
