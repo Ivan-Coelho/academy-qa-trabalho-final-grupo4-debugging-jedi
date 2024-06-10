@@ -119,7 +119,7 @@ Dado que um usuário administrador autenticado acessou o Backend do sistema
 Quando atualizar um filme com menos de 1 minuto de duração
 Então o sistema deve informar que o filme foi atualizado com sucesso.
 
-# Cenário: Não deve ser possível atualizar um filme com mais de 720 horas de duração
-# Dado que um usuário administrador autenticado acessou o Backend do sistema
-# Quando atualizar um filme com mais de 720 horas de duração
-# Então o sistema deve informar que o filme foi atualizado com sucesso.
+Cenário: Não deve ser possível atualizar um filme com mais de 720 horas de duração
+Dado que um usuário administrador autenticado acessou o Backend do sistema
+Quando atualizar um filme com mais de 720 horas de duração
+Então o sistema deve informar que o filme foi atualizado com sucesso.

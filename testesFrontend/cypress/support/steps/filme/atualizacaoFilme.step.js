@@ -291,3 +291,15 @@ Then('o sistema deve informar que o filme foi atualizado com sucesso.', function
     
 })
 
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme com mais de 720 horas de duração', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
