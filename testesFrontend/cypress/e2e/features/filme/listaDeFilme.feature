@@ -32,10 +32,10 @@ Dado que um usuário acessou a página inicial
 Quando ele selecionar a opção filmes
 Então o card de um filme deverá conter a descrição correspondente ao mesmo
 
-# Cenário: Deve ser possível visualizar a nota de um filme listado
-# Dado que um usuário acessou a página inicial
-# Quando ele selecionar a opção filmes
-# Então o card de um filme deverá conter a sua nota geral
+Cenário: Deve ser possível visualizar a nota de um filme listado
+Dado que um usuário acessou a página inicial
+Quando ele selecionar a opção filmes
+Então o card de um filme deverá conter a sua nota geral
 
 # Cenário: Deve ser possível vizualizar filmes listados por ordem de cadastro
 # Dado que um usuário acessou a página inicial

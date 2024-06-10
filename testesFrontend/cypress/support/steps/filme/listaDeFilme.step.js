@@ -76,3 +76,15 @@ When('ele selecionar a opção filmes', function () {
 Then('o card de um filme deverá conter a descrição correspondente ao mesmo', function () {
     
 })
+
+Given ('que um usuário acessou a página inicial', function () {
+    
+})
+
+When('ele selecionar a opção filmes', function () {
+    
+})
+
+Then('o card de um filme deverá conter a sua nota geral', function () {
+    
+})
