@@ -62,3 +62,15 @@ When('acessar a funcionalidade de atualização de filme', function () {
 Then('o sistema deve impedir o acesso e exibir uma mensagem de erro.', function () {
     
 })
+
+Given ('que um usuário crítico tenta atualizar um filme', function () {
+    
+})
+
+When('acessar a funcionalidade de atualização de filme', function () {
+    
+})
+
+Then('o sistema deve impedir o acesso e exibir uma mensagem de erro.', function () {
+    
+})
