@@ -104,3 +104,15 @@ Then('o sistema deve retornar o filme correspondente ao título inserido, inclui
     
 })
 
+Given ('que o usuário inseriu um título muito curto (como uma única letra) na caixa de pesquisa', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar todos os filmes que contêm a letra inserida no título', function () {
+    
+})
+
