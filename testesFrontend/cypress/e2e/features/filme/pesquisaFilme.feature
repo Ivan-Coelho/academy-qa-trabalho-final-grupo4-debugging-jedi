@@ -62,10 +62,10 @@ Dado que o usuário inseriu um título na caixa de pesquisa,
 Quando selecionar o recurso de pesquisar,
 Então o sistema deverá retornar o filme correspondente e uma imagem de capa que o represente.
 
-# Cenário: Deve ser possível visualizar a descrição contida no súmario do filme encontrado
-# Dado que o usuário encontrou um filme pesquisado,
-# Quando selecionar o filme encontrado,
-# Então o sistema deverá retornar as informações contidas na descrição do filme selecionado.
+Cenário: Deve ser possível visualizar a descrição contida no súmario do filme encontrado
+Dado que o usuário encontrou um filme pesquisado,
+Quando selecionar o filme encontrado,
+Então o sistema deverá retornar as informações contidas na descrição do filme selecionado.
 
 # Cenário: Deve ser possível visualizar a nota do filme encontrado
 # Dado que o usuário encontrou um filme pesquisado,
