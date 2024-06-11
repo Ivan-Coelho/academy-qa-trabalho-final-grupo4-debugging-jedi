@@ -126,3 +126,15 @@ Then('o sistema deve ignorar os espaços extras e retornar o filme correspondent
     
 })
 
+Given ('que o usuário inseriu um título com caracteres especiais na caixa de pesquisa', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais', function () {
+    
+})
+
