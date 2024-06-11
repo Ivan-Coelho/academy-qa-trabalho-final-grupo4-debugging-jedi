@@ -227,6 +227,18 @@ Cypress.Commands.add('buscarFilme', function (titulo) {
     })
 })
 
+Cypress.Commands.add("buscarFilmeResponseCompleto", function (titulo) {
+    return cy
+      .request({
+        method: "GET",
+        url: "/movies/search",
+        qs: { title: titulo },
+      })
+      .then(function (response) {
+        return response;
+      });
+  });
+
 Cypress.Commands.add('deletarFilme', function (idFilme, tokenAdmin) {
 
     cy.request({
