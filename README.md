@@ -32,7 +32,7 @@ No final do dia, merge da sua branch com a develop (depois de ter feito seu últ
 
 ```bash
 git checkout develop
-git reset --hard sua-branch
+git merge sua-branch
 git push origin develop --force
 ```
 
