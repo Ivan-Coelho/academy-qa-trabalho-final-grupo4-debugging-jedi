@@ -8,7 +8,7 @@
   <h2>Rotina Diária</h2>
   <ul>
     <li>Verificar em qual branch está
-    
+    ```bash
     git checkout
     </li>
     <li>Se estiver em branch errada
