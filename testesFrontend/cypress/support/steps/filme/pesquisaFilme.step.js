@@ -18,3 +18,14 @@ Then('o sistema deve retornar o filme correspondente ao título completo', funct
     
 })
 
+Given ('que o usuário inseriu parte do título do filme na caixa de pesquisa', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar todos os filmes que contêm o título parcial inserido', function () {
+    
+})
