@@ -172,3 +172,15 @@ When('atualizar um filme inserindo 101 caracteres no gênero', function () {
 Then('o sistema deve informar uma mensagem de alerta informando que o limite de caracteres é 100.', function () {
     
 })
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme com descrição de 1 caracter', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
