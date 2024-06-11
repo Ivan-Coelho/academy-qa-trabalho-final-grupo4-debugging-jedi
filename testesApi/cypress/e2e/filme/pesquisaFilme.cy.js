@@ -44,5 +44,11 @@ describe("Pesquisar Filme", () => {
   //   });
   // });
 
+  it("Deve ser possível pesquisar um filme com letras maiúsculas", () => {
+    cy.buscarFilmeResponseCompleto(filme.title.toUpperCase()).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
+    });
+  });
+
 //Apagar no final
 })
