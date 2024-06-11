@@ -208,3 +208,16 @@ When('atualizar um filme com descrição de mais de 500 caracteres', function ()
 Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
     
 })
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme com ano de lançamento 1895', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
+
