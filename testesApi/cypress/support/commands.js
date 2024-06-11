@@ -79,6 +79,13 @@ Cypress.Commands.add('usuarioLogado', function () {
     })
 })
 
+Cypress.Commands.add('criarUsuario', function () {
+    let user = {
+        name: faker.person.fullName(),
+        email: faker.internet.email(),
+        password: '123456'
+    }
+})
 
 Cypress.Commands.add('criarUsuarioAdmin', function () {
     let user = {
