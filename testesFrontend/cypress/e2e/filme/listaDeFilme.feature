@@ -17,6 +17,18 @@ Dado que um usuário admin acessou página inicial
 Quando ele requisitar a opção filmes
 Então deve ser possivél visualizar as informações sumarizadas de filmes
 
+Cenário: Deve ser possível vizualizar filmes listados por nota (mais avaliados para menos avaliados)
+Dado que um usuário acessou a página inicial
+Quando ele requisitar a opção filmes
+Então deverá haver uma opção de visualizar filmes mais bem avaliados
+
+Cenário: Deve ser possível realizar a paginação para explorar os filmes cadastrados
+Dado que um usuário acessou a página inicial
+Quando ele requisitar a opção filmes
+Então deverá existir a opção de paginação para explorar os filmes da lista
+
+
+
 # Dado que um usuário não logado acessou a funcionalidade de listagem de filmes
 # Quando ele visualizar a lista de filmes
 # Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
