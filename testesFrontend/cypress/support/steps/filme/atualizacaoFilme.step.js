@@ -76,3 +76,15 @@ Then('o sistema deve impedir o acesso e exibir uma mensagem de erro.', function 
 })
 
 
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme fornecendo um ano de lançamento no futuro', function () {
+    
+})
+
+Then('o sistema deve rejeitar a atualização e exibir uma mensagem de erro informando que as informações fornecidas são inválidas.', function () {
+    
+})
+
