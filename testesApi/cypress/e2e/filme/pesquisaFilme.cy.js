@@ -26,4 +26,16 @@ describe("Pesquisar Filme", () => {
     cy.buscarFilmeResponseCompleto(filme.title).then((response) => {
       expect(response.body[0].id).to.equal(filme.id);
     });
-  });})
+  });
+
+  it("Deve ser possível pesquisar um filme com título parcial", () => {
+    const tituloSplit = filme.title.split(" ");
+    const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}`;
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
+    });
+  });
+
+
+//Apagar no final
+})
