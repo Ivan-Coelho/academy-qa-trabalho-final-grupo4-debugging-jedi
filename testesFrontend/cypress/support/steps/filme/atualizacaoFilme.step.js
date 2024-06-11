@@ -137,3 +137,14 @@ Then('o sistema deve informar uma mensagem de alerta informando que o limite de 
     
 })
 
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When('atualizar um filme inserindo apenas 1 caracter no gênero', function () {
+    
+})
+
+Then('o sistema deve informar que o filme foi atualizado com sucesso.', function () {
+    
+})
