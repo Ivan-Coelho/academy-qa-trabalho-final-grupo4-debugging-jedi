@@ -12,8 +12,8 @@ Dado que um usuário comum acessou página inicial
 Quando ele requisitar a opção filmes
 Então deve ser possivél visualizar as informações sumarizadas de filmes
 
-Cenário: Deve ser possível um usuário crítico consultar a lista de filmes
-Dado que um usuário crítico acessou página inicial
+Cenário: Deve ser possível um usuário admin consultar a lista de filmes
+Dado que um usuário admin acessou página inicial
 Quando ele requisitar a opção filmes
 Então deve ser possivél visualizar as informações sumarizadas de filmes
 

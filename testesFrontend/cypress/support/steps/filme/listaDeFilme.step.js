@@ -14,6 +14,7 @@ Given('que um usuário não logado acessou a página inicial', function () {
     });
 
 When('ele requisitar a opção filmes', function () {
+    cy.visit('')
     cy.get('.navbar-content > :nth-child(3)').click()
 })
 
@@ -33,9 +34,14 @@ Given('que um usuário comum acessou página inicial', function () {
     });
     });
 
-    Given('que um usuário crítico acessou página inicial', function () {
-       
-        });
+    Given('que um usuário admin acessou página inicial', function () {
+        cy.criarUsuarioAdmin().then(function(dadosAdmin){        
+                let userAdmin = dadosAdmin 
+                cy.wrap(userAdmin).as('userAdmin');
+               
+            });
+        })
+        
 
 // Given('que um usuário não logado acessou a funcionalidade de listagem de filmes', function () {
 //     cy.get('.navbar-content > :nth-child(3)').click()
