@@ -12,10 +12,10 @@ Dado que um usuário comum acessou página inicial
 Quando ele requisitar a opção filmes
 Então deve ser possivél visualizar as informações sumarizadas de filmes
 
-# Cenário: Deve ser possível um usuário comum consultar a lista de filmes
-# Dado que um usuário comum acessou a funcionalidade de listagem de filmes
-# Quando ele visualizar a lista de filmes
-# Então o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados
+Cenário: Deve ser possível um usuário crítico consultar a lista de filmes
+Dado que um usuário crítico acessou página inicial
+Quando ele requisitar a opção filmes
+Então deve ser possivél visualizar as informações sumarizadas de filmes
 
 # Dado que um usuário não logado acessou a funcionalidade de listagem de filmes
 # Quando ele visualizar a lista de filmes

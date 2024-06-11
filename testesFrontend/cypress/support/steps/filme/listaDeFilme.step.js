@@ -33,6 +33,10 @@ Given('que um usuário comum acessou página inicial', function () {
     });
     });
 
+    Given('que um usuário crítico acessou página inicial', function () {
+       
+        });
+
 // Given('que um usuário não logado acessou a funcionalidade de listagem de filmes', function () {
 //     cy.get('.navbar-content > :nth-child(3)').click()
 // });
