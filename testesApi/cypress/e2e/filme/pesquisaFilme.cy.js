@@ -83,6 +83,21 @@ describe("Pesquisar Filme", () => {
     });
   });
 
+  it("Deve ser possível pesquisar com um título muito curto", () => {});
 
-//Apagar no final
-})
+  it("Deve ser possível pesquisar um filme com espaços extras no título", () => {});
+
+  it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {});
+
+  it("Deve ser possível visualizar a descrição contida no súmario do filme encontrado", () => {});
+
+  it("Deve ser possível visualizar a nota do filme encontrado", () => {});
+
+  it("Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes", () => {});
+
+  it("Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes", () => {});
+
+  it("Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes", () => {});
+
+  it("Deve ser possível um usuário administrador realizar uma pesquisa no catálogo de filmes", () => {});
+});
