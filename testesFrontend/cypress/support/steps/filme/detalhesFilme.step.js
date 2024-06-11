@@ -26,11 +26,26 @@ Before({tags: '@cadastroFilmeReview'}, function(){
     
     cy.criarUsuarioAdmin().then(function(dadosAdmin){        
         cy.cadastrarFilme(dadosAdmin.token).then(function(response){
-            cy.criarReview(response.body.id, dadosAdmin.token)
-            let userAdmin = dadosAdmin
+            cy.usuarioLogado().then(function(dadosComum1){
+                cy.usuarioLogado().then(function(dadosComum2){
+                    cy.criarReview(response.body.id, dadosComum1.token).then(function(review1){
+                        let nota1 = review1.score
+
+                        cy.criarReview(response.body.id, dadosComum2.token).then(function(){});
+                    })
+                        
+
+                })
+                
+                
+
             
             cy.wrap(userAdmin).as('userAdmin');
             cy.wrap(response).as('idFilme');
+
+
+            })
+            
         });
     })
 });
