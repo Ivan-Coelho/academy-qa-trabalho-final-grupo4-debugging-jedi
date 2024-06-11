@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 
 describe("Atualizar filme", () => {
-  it("Deve ser possível atualizar um filme com sucesso", () => {});
+  it("Deve ser possível um usuario admin atualizar um filme com sucesso", () => {});
 
-  it("Deve ser possível atualizar parcialmente as informações de um filme", () => {});
+  it("Deve ser possível um usuario admin atualizar parcialmente as informações de um filme", () => {});
 
   it("Não deve ser possível um usuário não logado realizar a atualização de um filme", () => {});
 
