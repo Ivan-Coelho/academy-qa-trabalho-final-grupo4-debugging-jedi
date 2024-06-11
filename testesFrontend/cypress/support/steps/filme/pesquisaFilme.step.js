@@ -41,3 +41,16 @@ When('acionar o recurso de buscar', function () {
 Then('o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido', function () {
     
 })
+
+Given ('que o usuário inseriu o título do filme com letras maiúsculas', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar os resultados corretos, independentemente da formatação do texto.', function () {
+    
+})
+
