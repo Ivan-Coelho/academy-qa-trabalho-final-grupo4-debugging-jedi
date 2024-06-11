@@ -29,3 +29,15 @@ When('acionar o recurso de buscar', function () {
 Then('o sistema deve retornar todos os filmes que contêm o título parcial inserido', function () {
     
 })
+
+Given ('que o usuário inseriu um título com um pequeno erro de digitação', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido', function () {
+    
+})
