@@ -52,3 +52,15 @@ When('ele visualizar a lista de filmes', function () {
 Then('o sistema deve exibir as informações sumarizadas de todos os filmes cadastrados', function () {
     
 })
+
+Given ('que um usuário acessou a página inicial', function () {
+    
+})
+
+When('ele selecionar a opção filmes', function () {
+    
+})
+
+Then('o card de um filme deverá conter o título do mesmo', function () {
+    
+})
