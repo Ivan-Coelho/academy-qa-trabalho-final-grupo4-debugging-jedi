@@ -81,7 +81,6 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-  it("Deve ser possível pesquisar com um título muito curto", () => {});
 
   it("Deve ser possível pesquisar um filme com espaços extras no título", () => {});
 
