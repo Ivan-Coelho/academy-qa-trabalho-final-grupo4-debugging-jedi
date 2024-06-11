@@ -114,3 +114,15 @@ Then('o sistema deve retornar todos os filmes que contêm a letra inserida no t�
     
 })
 
+Given ('que o usuário inseriu um título com espaços extras antes ou depois do texto', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto', function () {
+    
+})
+
