@@ -22,3 +22,19 @@ When('fornecer todas as informações necessárias', function () {
 Then('o sistema deverá permitir que o administrador atualize as informações do filme', function () {
     
 })
+
+Given ('que um usuário administrador autenticado acessou o Backend do sistema', function () {
+    
+})
+
+When ('selecionar a opção de atualizar um filme ', function () {
+    
+})
+
+When('fornecer apenas algumas novas informações', function () {
+    
+})
+
+Then('o sistema deve permitir que o administrador atualize parcialmente as informações do filme, mantendo as informações não fornecidas inalteradas', function () {
+    
+})
