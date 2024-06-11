@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
 # Rotina de Versionamento
 
 ## Rotina Diária
@@ -62,3 +65,7 @@ git checkout sua-branch
 <span style="color:blue">Trazer arquivo de commands da develop para sua branch sem alterar demais arquivos</span>
 
 git checkout develop -- C:/Users/Usuario/Desktop/teste-versionamento/commands.json
+
+</body>
+
+</html>
