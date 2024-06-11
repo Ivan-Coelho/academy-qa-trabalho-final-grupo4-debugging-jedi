@@ -74,16 +74,20 @@ Then('usuário conseguirá ver a página de detalhes do filme', function(){
     cy.contains(paginaDetalhes.anoLancamento, 1980);
     cy.contains(paginaDetalhes.duracaoFilme, '2h 4m');
     cy.contains(paginaDetalhes.generoFilme, 'Épico, Aventura, Ficção científica');
+    cy.contains(paginaDetalhes.posterFilme);
 });
 
 Then('não encontrará nenhum filme', function(){
-    cy.get(paginaDetalhes.nomeFilme).should('not.be.visible')
-    cy.get(paginaDetalhes.descricaoFilme).should('not.be.visible')
-    cy.get(paginaDetalhes.anoLancamento).should('not.be.visible')
+    cy.get(paginaDetalhes.nomeFilme).should('not.be.visible');
+    cy.get(paginaDetalhes.descricaoFilme).should('not.be.visible');
+    cy.get(paginaDetalhes.anoLancamento).should('not.be.visible');
     cy.contains(paginaDetalhes.duracaoFilme, '0h 0m');
-    cy.get(paginaDetalhes.generoFilme).should('not.be.visible')
+    cy.get(paginaDetalhes.generoFilme).should('not.be.visible');
 
 });
 
 
-Then('o usuário não conseguirá interagir com as funcionalidades', function(){}); 
+Then('o usuário não conseguirá interagir com as funcionalidades', function(){    
+    cy.get(paginaDetalhes.campoReview).should('not.exist');
+    
+}); 

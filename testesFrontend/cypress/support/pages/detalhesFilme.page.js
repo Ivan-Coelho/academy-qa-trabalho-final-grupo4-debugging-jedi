@@ -25,6 +25,7 @@ export default class DetalhesFilmePage{
     duracaoFilme = ':nth-child(5) > span'    
     generoFilme = ':nth-child(6) > span'
 
+    campoReview = '.rate-movie'
     textoAvalieFilme ='.movie-details-container > :nth-child(2)'
     inputReview = 'textarea'
     buttonLoginAva = '.rate-movie > a'
