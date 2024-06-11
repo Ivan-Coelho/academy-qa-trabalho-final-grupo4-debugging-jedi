@@ -115,7 +115,12 @@ describe("Consulta de avaliações do usuário", function(){
             let userCritico;
             cy.criarUsuarioCritico().then(function(response){
                 userCritico = response
-            });
+            
+            cy.listarReview(userCritico.token).then(function(response){
+                expect(response.status).to.equal(200);
+                expect(response.body).to.have.length.of.at.least(0);
+            })
+        });
 
         })
     }); 

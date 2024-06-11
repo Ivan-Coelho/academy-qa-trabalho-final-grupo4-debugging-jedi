@@ -250,11 +250,20 @@ Cypress.Commands.add('buscaFilmeId', function(idFilme){
     });
 });
 
-Cypress.Commands.add('listarUsuario', function(tokenAdmin){
+Cypress.Commands.add("listarUsuario", function(tokenAdmin){
     cy.request({
         method:"GET",
         url:"/users",
         headers: { Authorization: 'Bearer ' + tokenAdmin }
 
+    })
+})
+
+Cypress.Commands.add("listarReview", function (token) {
+    cy.request({
+        method: "GET",
+        url: "users/review/all",
+        headers: { Authorization: 'Bearer ' + token }
+   
     })
 })
