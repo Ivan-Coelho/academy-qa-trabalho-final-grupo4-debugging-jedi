@@ -7,6 +7,11 @@ Dado que um usuário não logado acessou a página inicial
 Quando ele requisitar a opção filmes
 Então deve ser possivél visualizar as informações sumarizadas de filmes
 
+Cenário: Deve ser possível um usuário comum consultar a lista de filmes
+Dado que um usuário comum acessou página inicial
+Quando ele requisitar a opção filmes
+Então deve ser possivél visualizar as informações sumarizadas de filmes
+
 # Cenário: Deve ser possível um usuário comum consultar a lista de filmes
 # Dado que um usuário comum acessou a funcionalidade de listagem de filmes
 # Quando ele visualizar a lista de filmes

@@ -1,11 +1,13 @@
 import { Given, When, Then, Before, After} from '@badeball/cypress-cucumber-preprocessor';
 
 //Importar aqui os Page Objects para desenvolver os testes
+import InicioPage from '../../pages/inicial.page'
+import LoginPage from'../../pages/login.page';
 import { faker } from '@faker-js/faker';
 
-// beforeEach(() => {
-//     cy.visit('')
-// });
+const paginaInicial = new InicioPage();
+const paginaLogin = new LoginPage();
+
 
 Given('que um usuário não logado acessou a página inicial', function () {
     cy.visit('')
@@ -18,6 +20,18 @@ When('ele requisitar a opção filmes', function () {
 Then('deve ser possivél visualizar as informações sumarizadas de filmes', function () {
     cy.get('.featured-movies > .section-header').contains('Filmes em destaque').should('be.visible')
 })
+
+Given('que um usuário comum acessou página inicial', function () {
+    cy.usuarioLogado().then(function(response){
+        let email = response.email
+        
+        cy.visit('/login')
+        paginaLogin.typeEmail(email)
+        paginaLogin.typeSenha('123456')
+        paginaLogin.clickButtonLogin()        
+
+    });
+    });
 
 // Given('que um usuário não logado acessou a funcionalidade de listagem de filmes', function () {
 //     cy.get('.navbar-content > :nth-child(3)').click()
