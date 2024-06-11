@@ -138,3 +138,15 @@ Then('o sistema deve retornar o filme correspondente ao título inserido, inclui
     
 })
 
+Given ('que o usuário inseriu um título na caixa de pesquisa', function () {
+    
+})
+
+When('selecionar o recurso de pesquisar', function () {
+    
+})
+
+Then('o sistema deverá retornar o filme correspondente e uma imagem de capa que o represente', function () {
+    
+})
+
