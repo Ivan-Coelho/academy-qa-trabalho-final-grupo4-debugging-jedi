@@ -2,13 +2,10 @@ export default class InicialPage{
     linkPaginaRegistro = '[href="/register"]';
     linkPaginaLogin = '[href="/login"]';
     linkInicio = '.logo'
-    linkPerfilPage = 'a[href="/profile"]';
+    linkPerfilPage = ('a[href="/profile"]');
 
     inputFilmes = '[placeholder="Buscar filmes"]';
-    buttonPesquisarFilme = '.search-button';
-
-    filmeBuscado = ".movie-card-footer"
-
+    buttonPesquisarFilme = ('.search-button');
 
     clickPaginaRegistro(){
         cy.get(this.linkPaginaRegistro).click();
@@ -23,15 +20,11 @@ export default class InicialPage{
     }
 
     typeFilme(filme){
-        cy.get(this.inputFilmes).clear().type(filme);
+        cy.get(this.inputFilmes).type(filme);
     }
 
     clickPesquisaFilme(){
         cy.get(this.buttonPesquisarFilme).click();
-    }
-
-    clickFilme(){
-        cy.get(this.filmeBuscado).eq(0).click();
     }
 
 }
