@@ -90,3 +90,14 @@ Then('o sistema deve informar que não foram encontrados resultados para a pesqu
     
 })
 
+Given ('que o usuário inseriu um título com caracteres especiais na caixa de pesquisa', function () {
+    
+})
+
+When('acionar o recurso de buscar', function () {
+    
+})
+
+Then('o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais', function () {
+    
+})
