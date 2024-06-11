@@ -22,4 +22,8 @@ describe("Pesquisar Filme", () => {
       });
     });
   });
-})
+  it("Deve ser possível pesquisar um filme pelo título completo", () => {
+    cy.buscarFilmeResponseCompleto(filme.title).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
+    });
+  });})
