@@ -88,20 +88,20 @@ describe("Consulta de avaliações do usuário", function () {
       });
     });
 
-    // it.only("A consulta de avaliações do filme usuário deve visualizar avaliaçoes marcadas conforme seu perfil usado na avaliação", function () {
-        
-    //     cy.request({
-    //     method: "GET",
-    //     url: "users/review/all",
-    //     headers: { Authorization: "Bearer " + userAdmin.token },
-    //   }).then(function (response) {
-    //     expect(response.status).to.equal(200);
-    //     expect(response.body).to.have.length.of.at.least(1);
-    //     expect(response.body[0].reviewType).to.be.equal(1);
-        
-    //   });
-      
-    // });
+    it.only("A consulta de avaliações do filme usuário deve visualizar avaliaçoes marcadas conforme seu perfil usado na avaliação", function () {
+      cy.criarReview(idFilme, userAdmin.token).then(function (response) {
+        dadosReview1 = response;
+        cy.request({
+          method: "GET",
+          url: "users/review/all",
+          headers: { Authorization: "Bearer " + userAdmin.token },
+        }).then(function (response) {
+          expect(response.status).to.equal(200);
+          expect(response.body).to.have.length.of.at.least(1);
+          expect(response.body[0].reviewType).to.be.equal(1);
+        });
+      });
+    });
 
     it("Consulta de Avaliações por Usuário sem avaliação registrada", function () {
       let userCritico;
