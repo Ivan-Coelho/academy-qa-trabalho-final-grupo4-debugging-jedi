@@ -38,3 +38,19 @@ When('fornecer apenas algumas novas informações', function () {
 Then('o sistema deve permitir que o administrador atualize parcialmente as informações do filme, mantendo as informações não fornecidas inalteradas', function () {
     
 })
+
+Given ('que um usuário não autenticado tenta atualizar um filme', function () {
+    
+})
+
+When('acessar a funcionalidade de atualização de filme', function () {
+    
+})
+
+Then('o sistema deve impedir o acesso e exibir uma mensagem de erro.', function () {
+    
+})
+
+
+
+
