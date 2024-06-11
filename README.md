@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<body>
 # Rotina de Versionamento
 
 ## Rotina Diária
