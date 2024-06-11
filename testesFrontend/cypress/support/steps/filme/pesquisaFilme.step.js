@@ -162,3 +162,15 @@ Then('o sistema deverá retornar as informações contidas na descrição do fil
     
 })
 
+Given ('que o usuário encontrou um filme pesquisado', function () {
+    
+})
+
+When('selecionar o filme encontrado', function () {
+    
+})
+
+Then('o sistema deverá retornar as informações referente a nota de avaliação do filme retornado', function () {
+    
+})
+
