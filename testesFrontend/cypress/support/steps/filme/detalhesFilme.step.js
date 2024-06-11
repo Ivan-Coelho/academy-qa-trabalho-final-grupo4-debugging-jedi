@@ -22,6 +22,19 @@ Before({tags: '@cadastroFilme'}, function(){
     })
 });
 
+Before({tags: '@cadastroFilmeReview'}, function(){
+    
+    cy.criarUsuarioAdmin().then(function(dadosAdmin){        
+        cy.cadastrarFilme(dadosAdmin.token).then(function(response){
+            cy.criarReview(response.body.id, dadosAdmin.token)
+            let userAdmin = dadosAdmin
+            
+            cy.wrap(userAdmin).as('userAdmin');
+            cy.wrap(response).as('idFilme');
+        });
+    })
+});
+
 
 After({tags: '@deletar'}, function(){
     cy.get('@userAdmin').then(function(userAdmin){
@@ -74,7 +87,7 @@ Then('usuário conseguirá ver a página de detalhes do filme', function(){
     cy.contains(paginaDetalhes.anoLancamento, 1980);
     cy.contains(paginaDetalhes.duracaoFilme, '2h 4m');
     cy.contains(paginaDetalhes.generoFilme, 'Épico, Aventura, Ficção científica');
-    cy.contains(paginaDetalhes.posterFilme);
+    cy.get(paginaDetalhes.posterFilme).should('exist');
 });
 
 Then('não encontrará nenhum filme', function(){
@@ -89,5 +102,18 @@ Then('não encontrará nenhum filme', function(){
 
 Then('o usuário não conseguirá interagir com as funcionalidades', function(){    
     cy.get(paginaDetalhes.campoReview).should('not.exist');
-    
+        
 }); 
+
+Then('o usuário conseguirá visualizar um totalizador das avaliações', function(){    
+    cy.get(paginaDetalhes.totalizadorAudiencia).should('exist')
+    cy.contains(paginaDetalhes.textoAudiencia, 'Avaliação da audiência')
+    cy.contains(paginaDetalhes.numeroAudiencia, 'Nenhuma avaliação')
+    cy.get(paginaDetalhes.totalizadorCritico).should('exist')
+    cy.contains(paginaDetalhes.textoCritica, 'Avaliação da crítica')
+    cy.contains(paginaDetalhes.numeroCritica, 'Nenhuma avaliação')        
+}); 
+
+Then('o usuário conseguirá visualizar um totalizador com a média das avaliações de audiência', function(){
+    
+})
