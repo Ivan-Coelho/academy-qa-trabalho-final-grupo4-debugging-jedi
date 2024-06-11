@@ -56,6 +56,14 @@ describe("Pesquisar Filme", () => {
     });
   });
 
+  it("Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas", () => {
+    const tituloSplit = filme.title.split(" ");
+    const tituloParcial = `${tituloSplit[0].toUpperCase()} ${tituloSplit[1].toLowerCase()} ${tituloSplit[2].toUpperCase()} ${tituloSplit[3].toLowerCase()}`;
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
+    });
+  });
+
 
 
 
