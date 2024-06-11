@@ -9,10 +9,16 @@ export default class DetalhesFilmePage{
     numeroCritica = '.movie-score-info > :nth-child(2) > :nth-child(3)'
 
     estrelaAudiencia1 = '.movie-score-info > :nth-child(1) > div > :nth-child(1)'
-    estrelaAudiencia2 ='.movie-score-info > :nth-child(1) > div > :nth-child(2)'
+    estrelaAudiencia2 = '.movie-score-info > :nth-child(1) > div > :nth-child(2)'
+    estrelaAudiencia3 = '.movie-score-info > :nth-child(1) > div > :nth-child(3)'
+    estrelaAudiencia4 = '.movie-score-info > :nth-child(1) > div > :nth-child(4)'
+    estrelaAudiencia5 = '.movie-score-info > :nth-child(1) > div > :nth-child(5)'
 
     estrelaCritica1 = '.movie-score-info > :nth-child(2) > div > :nth-child(1)'
     estrelaCritica2 = '.movie-score-info > :nth-child(2) > div > :nth-child(2)'
+    estrelaCritica3 = '.movie-score-info > :nth-child(1) > div > :nth-child(5)'
+    estrelaCritica4 = '.movie-score-info > :nth-child(1) > div > :nth-child(5)'
+    estrelaCritica5 = '.movie-score-info > :nth-child(1) > div > :nth-child(5)'
 
     descricaoFilme = '.movie-detail-description'
     anoLancamento = ':nth-child(4) > span'
