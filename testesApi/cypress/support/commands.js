@@ -197,6 +197,24 @@ Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {
     })
 })
 
+Cypress.Commands.add("cadastrarFilmeComBody", function (tokenAdmin, body) {
+    cy.request({
+      method: "POST",
+      url: "/movies",
+      headers: { Authorization: "Bearer " + tokenAdmin },
+      body: body,
+    }).then(function (response) {
+      return {
+        id: response.body.id,
+        title: response.body.title,
+        genre: response.body.genre,
+        description: response.body.description,
+        durationInMinutes: response.body.durationInMinutes,
+        releaseYear: response.body.releaseYear,
+      };
+    });
+  });
+
 Cypress.Commands.add('buscarFilme', function (titulo) {
     let idFilme
     return cy.request({
