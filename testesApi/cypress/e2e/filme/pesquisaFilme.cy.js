@@ -64,7 +64,14 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-
+  it("Não deve ser possível pesquisar um filme com título inexistente", () => {
+    const tituloNovo = faker.lorem.words(10)
+    cy.buscarFilmeResponseCompleto(tituloNovo).then((response) => {
+      expect(response.status).to.equal(200)
+      expect(response.body).to.empty
+      
+    });
+  });
 
 
 //Apagar no final
