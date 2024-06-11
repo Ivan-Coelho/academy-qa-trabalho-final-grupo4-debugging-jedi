@@ -249,3 +249,12 @@ Cypress.Commands.add('buscaFilmeId', function(idFilme){
 
     });
 });
+
+Cypress.Commands.add('listarUsuario', function(tokenAdmin){
+    cy.request({
+        method:"GET",
+        url:"/users",
+        headers: { Authorization: 'Bearer ' + tokenAdmin }
+
+    })
+})
