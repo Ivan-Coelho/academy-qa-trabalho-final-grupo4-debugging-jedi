@@ -3,6 +3,7 @@
 ## Rotina Diária
 
 #verificar em qual branch está
+
 git checkout
 
 #se estiver em branch errada
