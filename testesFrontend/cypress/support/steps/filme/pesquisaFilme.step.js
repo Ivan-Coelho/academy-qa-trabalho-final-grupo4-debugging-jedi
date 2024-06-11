@@ -150,3 +150,15 @@ Then('o sistema deverá retornar o filme correspondente e uma imagem de capa que
     
 })
 
+Given ('que o usuário encontrou um filme pesquisado', function () {
+    
+})
+
+When('selecionar o filme encontrado', function () {
+    
+})
+
+Then('o sistema deverá retornar as informações contidas na descrição do filme selecionado', function () {
+    
+})
+
