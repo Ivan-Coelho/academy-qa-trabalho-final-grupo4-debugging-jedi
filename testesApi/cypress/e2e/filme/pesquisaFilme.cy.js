@@ -130,7 +130,12 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-  it("Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes", () => {});
-
-  it("Deve ser possível um usuário administrador realizar uma pesquisa no catálogo de filmes", () => {});
+  it("Deve ser possível um usuário administrador realizar uma pesquisa no catálogo de filmes", () => {
+    cy.buscarFilmeResponseCompleto(filme.title, usuarioAdmin.token).then(
+      (response) => {
+        expect(response.body[0].id).to.equal(filme.id);
+      }
+    );
+  });
 });
+
