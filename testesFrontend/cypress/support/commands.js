@@ -24,7 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
 import { faker } from "@faker-js/faker";
 // validar as URL
 Cypress.Commands.add("criarUsuario", function () {
@@ -200,6 +199,18 @@ Cypress.Commands.add("cadastrarFilmeComBody", function (tokenAdmin, body) {
       durationInMinutes: response.body.durationInMinutes,
       releaseYear: response.body.releaseYear,
     };
+  });
+});
+
+Cypress.Commands.add("atualizarFilme", function (tokenAdmin, id, body) {
+  cy.request({
+    method: "PUT",
+    url: `/movies/${id}`,
+    headers: { Authorization: "Bearer " + tokenAdmin },
+    failOnStatusCode: false,
+    body: body,
+  }).then(function (response) {
+    return response;
   });
 });
 
