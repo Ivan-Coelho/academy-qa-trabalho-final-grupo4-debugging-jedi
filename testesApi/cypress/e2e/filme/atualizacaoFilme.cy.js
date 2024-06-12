@@ -71,5 +71,16 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it("Não deve ser possível atualizar um filme não cadastrado", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.genre = faker.lorem.words(5);
+    cy.atualizarFilme(usuarioAdmin.token, 0, filmeNovo).then((response) => {
+      expect(response.status).to.equal(404);
+      expect(response.body.error).to.equal("Not Found");
+      expect(response.body.message).to.equal("Movie not found");
+    });
+  });
+
+  
 
 })
