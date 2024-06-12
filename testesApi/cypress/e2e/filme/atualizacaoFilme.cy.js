@@ -234,4 +234,23 @@ describe("Atualizar filme", () => {
   });
 
 
-})
+  it("Não deve ser possível atualizar um filme com menos de 1 minuto de duração", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.durationInMinutes = 0;
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(400);
+      }
+    );
+  });
+
+  it("Deve ser possível atualizar um filme de 721 horas de duração", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.durationInMinutes = 721;
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  });
+});
