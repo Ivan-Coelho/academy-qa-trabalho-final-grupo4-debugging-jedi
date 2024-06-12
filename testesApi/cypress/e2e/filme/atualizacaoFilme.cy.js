@@ -61,7 +61,15 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it("Não deve ser possível atualizar um filme com ano no futuro", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.releaseYear = new Date().getFullYear() + 5;
+    cy.atualizarFilme(usuarioAdmin.token, filmeNovo.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(400);
+      }
+    );
+  });
 
-  
 
 })
