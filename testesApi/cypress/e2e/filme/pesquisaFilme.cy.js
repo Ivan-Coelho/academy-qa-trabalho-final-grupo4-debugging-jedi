@@ -37,13 +37,14 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-    // it("Deve ser possível pesquisar um filme com erro de digitação", () => {
-  //   const tituloSplit = filme.title.split(" ");
-  //   const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}S`;
-  //   cy.buscarFilme(tituloParcial).then((response) => {
-  //     expect(response).to.equal(filme.id);
-  //   });
-  // });
+  // OBSERVAR ESTE TESTE E EFETUAR AS CORREÇÕES NECESSÁRIAS
+    it("Deve ser possível pesquisar um filme com erro de digitação", () => {
+    const tituloSplit = filme.title.split(" ");
+    const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}S`;
+    cy.buscarFilme(tituloParcial).then((response) => {
+      expect(response).to.equal(filme.id);
+    });
+  });
 
   it("Deve ser possível pesquisar um filme com letras maiúsculas", () => {
     cy.buscarFilmeResponseCompleto(filme.title.toUpperCase()).then((response) => {
