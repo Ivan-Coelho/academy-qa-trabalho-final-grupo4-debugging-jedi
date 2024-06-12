@@ -22,7 +22,7 @@ describe("Pesquisar Filme", () => {
       });
     });
   });
-  
+
   it("Deve ser possível pesquisar um filme pelo título completo", () => {
     cy.buscarFilmeResponseCompleto(filme.title).then((response) => {
       expect(response.body[0].id).to.equal(filme.id);
@@ -85,7 +85,14 @@ describe("Pesquisar Filme", () => {
   });
 
 
-  it("Deve ser possível pesquisar um filme com espaços extras no título", () => {});
+  it("Não Deve ser possível pesquisar um filme com espaços extras no título", () => {
+    const tituloSplit = filme.title.split(" ");
+    const tituloParcial = `${tituloSplit[0].toUpperCase()}       ${tituloSplit[1].toLowerCase()}      ${tituloSplit[2].toUpperCase()}       ${tituloSplit[3].toLowerCase()}`;
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body).to.empty;
+    });
+  });
+
 
   it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {});
 
