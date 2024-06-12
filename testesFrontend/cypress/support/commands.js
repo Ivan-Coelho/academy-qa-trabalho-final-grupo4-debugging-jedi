@@ -149,7 +149,7 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
 
         cy.request({
             method: "POST",
-            url: '/auth/login',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
             body: {
                 email: usuario.email,
                 password: "123456"
