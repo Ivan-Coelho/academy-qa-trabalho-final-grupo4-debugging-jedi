@@ -181,5 +181,17 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it(`Deve ser possível atualizar um filme com ano de lançamento atual [${new Date().getFullYear()}]`, () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.releaseYear = new Date().getFullYear();
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  }); 
+  
+  
+
 
 })
