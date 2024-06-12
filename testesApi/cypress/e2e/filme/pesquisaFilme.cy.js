@@ -107,11 +107,18 @@ describe("Pesquisar Filme", () => {
     });
   });
 
+  it("Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes", () => {
+    cy.criarUsuario().then((response) => {
+      usuarioComum = { ...response };
+      cy.buscarFilmeResponseCompleto(filme.title, response.token).then(
+        (response) => {
+          expect(response.body[0].id).to.equal(filme.id);
+        }
+      );
+    });
+  });
+
   
-
-  it("Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes", () => {});
-
-  it("Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes", () => {});
 
   it("Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes", () => {});
 
