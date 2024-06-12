@@ -131,6 +131,14 @@ describe("Atualizar filme", () => {
     );
   });
 
-  
+  it("Não deve ser possível atualizar um filme com gênero de 101 caracteres", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.genre = faker.string.alpha(101);
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(400);
+      }
+    );
+  });
 
 })
