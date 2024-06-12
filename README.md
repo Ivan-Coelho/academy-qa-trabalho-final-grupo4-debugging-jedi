@@ -34,6 +34,8 @@ No final do dia, merge da sua branch com a develop (depois de ter feito seu últ
 git checkout develop
 git pull
 git pull sua-branch
+git commit -m "merge da sua branch"
+git push -u origin develop --force
 ```
 
 Branch main só será mergeada ao final do projeto
