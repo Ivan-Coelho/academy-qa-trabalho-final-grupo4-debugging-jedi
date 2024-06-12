@@ -1,11 +1,12 @@
+# language: pt
 Funcionalidade: Consulta de avaliações do usuário
     Como um usuário da aplicação 
     Desejo poder consultar as avaliações feitas por mim
     Para pode ter histórico de minhas avaliações
     
     Contexto: Consulta de Avaliações do Usuário Autenticado
-        Dado que o usuário está autenticado na aplicação
-        
+        Dado que o usuário está logado e autenticado na aplicação
+           
         Cenario: Consulta de Avaliações por Usuário 
             Quando o usuário acessa a seção de consulta de avaliações
             Entao todas as avaliações feitas pelo usuário são exibidas
@@ -20,7 +21,7 @@ Funcionalidade: Consulta de avaliações do usuário
             Quando o usuário acessa a seção de consulta de avaliações
             Entao todas as avaliações feitas pelo usuário são exibidas
             E os detalhes do filme avaliado são exibidos
-            E opcionalmente o ano de lançamento do filme também pode ser 
+           
         
         Cenario: A consulta de avaliações do filme usuário deve visualizar avaliaçoes marcadas conforme seu perfil usado na avaliação
             Quando o usuário acessa a seção de consulta de avaliações
@@ -33,10 +34,10 @@ Funcionalidade: Consulta de avaliações do usuário
             E que o usuário não possui avaliações registradas
             Entao e exibida uma lista de avaliçoes vazia
                  
-    Contexto: Consulta de Avaliações do Usuário não Autenticado
+    # Contexto: Consulta de Avaliações do Usuário não Autenticado
         Dado que o usuário não está autenticado na aplicação
         
         Cenario: Nao deve ser possivel que um usuário não autenticado acesse as avaliações
-            Quando o usuário tenta acessar a seção de consulta de avaliações
+            Quando o usuário acessa a seção de consulta de avaliações
             Entao o acesso é negado
             E uma mensagem de erro é exibida
