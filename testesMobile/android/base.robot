@@ -3,8 +3,8 @@
 Library    AppiumLibrary
 
 #Utils
-Resource    android/utils/config.robot
-Resource    android/utils/commons.robot
+Resource    utils/config.robot
+Resource    utils/commons.robot
 
 #Pages
-Resource    android/pages/registrarPage.robot
+Resource    page/Page.robot

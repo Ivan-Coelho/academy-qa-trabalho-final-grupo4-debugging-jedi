@@ -17,7 +17,7 @@ git checkout sua-branch
 Clonar a develop para sua branch
 
 ```bash
-git reset --hard develop
+git pull develop
 ```
 
 Faça seus codigos e seus devidos commits
@@ -32,8 +32,10 @@ No final do dia, merge da sua branch com a develop (depois de ter feito seu últ
 
 ```bash
 git checkout develop
-git merge sua-branch
-git push origin develop --force
+git pull
+git pull sua-branch
+git commit -m "merge da sua branch"
+git push -u origin develop --force
 ```
 
 Branch main só será mergeada ao final do projeto
