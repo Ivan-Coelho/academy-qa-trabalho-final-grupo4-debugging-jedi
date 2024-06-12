@@ -151,5 +151,17 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it(" Deve ser possível atualizar um filme com descrição de 500 caracteres", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.description = faker.string.alpha(500);
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  });
+
+  
+
 
 })
