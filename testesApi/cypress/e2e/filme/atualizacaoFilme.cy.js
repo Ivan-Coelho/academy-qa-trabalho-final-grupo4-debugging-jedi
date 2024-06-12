@@ -200,7 +200,7 @@ describe("Atualizar filme", () => {
       }
     );
   });
-  
+
   it(`Não deve ser possível atualizar um filme com ano de lançamento [${
     new Date().getFullYear() + 1
   }]`, () => {
@@ -212,5 +212,18 @@ describe("Atualizar filme", () => {
       }
     );
   });
+
+  it("Deve ser possível atualizar um filme de 1 minuto de duração", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.durationInMinutes = 1;
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  });
+
+
+  
 
 })
