@@ -60,7 +60,9 @@ Given("que um usuário acessou a página inicial", function () {
     cy.get('.top-rated-movies > .carousel-container > :nth-child(3)').click()
   });
 
- 
+  //REVISITAR E EXCLUIR OS CENÁRIO OCULTOS QUE NÃO FOREM SER USADOS
+
+  
 
 // Given('que um usuário não logado acessou a funcionalidade de listagem de filmes', function () {
 //     cy.get('.navbar-content > :nth-child(3)').click()
