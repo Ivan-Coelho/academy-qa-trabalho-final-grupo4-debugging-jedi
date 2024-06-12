@@ -27,7 +27,7 @@ Dado que um usuário acessou a página inicial
 Quando ele requisitar a opção filmes
 Então deverá existir a opção de paginação para explorar os filmes da lista
 
-
+# REVISITAR E EXCLUIR OS CENÁRIO OCULTOS QUE NÃO FOREM SER USADOS
 
 # Dado que um usuário não logado acessou a funcionalidade de listagem de filmes
 # Quando ele visualizar a lista de filmes
