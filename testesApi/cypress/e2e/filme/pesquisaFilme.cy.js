@@ -37,26 +37,28 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-  // OBSERVAR ESTE TESTE E EFETUAR AS CORREÇÕES NECESSÁRIAS
-  
-  //   it("Deve ser possível pesquisar um filme com erro de digitação", () => {
-  //   const tituloSplit = filme.title.split(" ");
-  //   const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}S`;
-  //   cy.buscarFilme(tituloParcial).then((response) => {
-  //     expect(response).to.equal(filme.id);
-  //   });
-  // });
-
-  it("Deve ser possível pesquisar um filme com letras maiúsculas", () => {
-    cy.buscarFilmeResponseCompleto(filme.title.toUpperCase()).then((response) => {
-      expect(response.body[0].id).to.equal(filme.id);
+  it("Não deve ser possível pesquisar um filme com erro de digitação", () => {
+    let filmeNomeIncorreto = `${filme.title} nome errado`;
+    cy.buscarFilmeResponseCompleto(filmeNomeIncorreto).then((response) => {
+      expect(response.status).to.equal(200);
+      expect(response.body).to.empty;
     });
   });
 
+  it("Deve ser possível pesquisar um filme com letras maiúsculas", () => {
+    cy.buscarFilmeResponseCompleto(filme.title.toUpperCase()).then(
+      (response) => {
+        expect(response.body[0].id).to.equal(filme.id);
+      }
+    );
+  });
+
   it("Deve ser possível pesquisar um filme com letras minúsculas", () => {
-    cy.buscarFilmeResponseCompleto(filme.title.toLowerCase()).then((response) => {
-      expect(response.body[0].id).to.equal(filme.id);
-    });
+    cy.buscarFilmeResponseCompleto(filme.title.toLowerCase()).then(
+      (response) => {
+        expect(response.body[0].id).to.equal(filme.id);
+      }
+    );
   });
 
   it("Deve ser possível pesquisar um filme com letras maiúsculas e minúsculas misturadas", () => {
@@ -68,24 +70,29 @@ describe("Pesquisar Filme", () => {
   });
 
   it("Não deve ser possível pesquisar um filme com título inexistente", () => {
-    const tituloNovo = faker.lorem.words(10)
+    const tituloNovo = faker.lorem.words(10);
     cy.buscarFilmeResponseCompleto(tituloNovo).then((response) => {
-      expect(response.status).to.equal(200)
-      expect(response.body).to.empty
-      
+      expect(response.status).to.equal(200);
+      expect(response.body).to.empty;
     });
   });
 
   it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {
-    const tituloNovo = `${filme.title}%`
+    const tituloNovo = `${filme.title}%`;
     cy.buscarFilmeResponseCompleto(tituloNovo).then((response) => {
-      console.log(response)
-      expect(response.status).to.equal(200)
-      expect(response.body).to.empty
-      
+      console.log(response);
+      expect(response.status).to.equal(200);
+      expect(response.body).to.empty;
     });
   });
 
+  it("Não Deve ser possível pesquisar um filme com espaços extras no título", () => {
+    const tituloSplit = filme.title.split(" ");
+    const tituloParcial = `${tituloSplit[0].toUpperCase()}       ${tituloSplit[1].toLowerCase()}      ${tituloSplit[2].toUpperCase()}       ${tituloSplit[3].toLowerCase()}`;
+    cy.buscarFilmeResponseCompleto(tituloParcial).then((response) => {
+      expect(response.body).to.empty;
+    });
+  });
 
   it("Não Deve ser possível pesquisar um filme com espaços extras no título", () => {
     const tituloSplit = filme.title.split(" ");
@@ -108,6 +115,11 @@ describe("Pesquisar Filme", () => {
       expect(response.body[0].id).to.equal(filme.id);
     });
   });
+  it("Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes", () => {
+    cy.buscarFilmeResponseCompleto(filme.title).then((response) => {
+      expect(response.body[0].id).to.equal(filme.id);
+    });
+  });
 
   it("Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes", () => {
     cy.criarUsuario().then((response) => {
@@ -120,7 +132,6 @@ describe("Pesquisar Filme", () => {
     });
   });
 
-  
   it("Deve ser possível um usuário crítico  realizar uma pesquisa no catálogo de filmes", () => {
     cy.criarUsuarioCritico().then((response) => {
       usuarioCritico = { ...response };
@@ -140,4 +151,3 @@ describe("Pesquisar Filme", () => {
     );
   });
 });
-
