@@ -189,8 +189,8 @@ describe("Atualizar filme", () => {
         expect(response.status).to.equal(204);
       }
     );
-  }); 
-  
+  });
+
   it("Não deve ser possível atualizar um filme com ano de lançamento 1894", () => {
     let filmeNovo = { ...filme };
     filmeNovo.releaseYear = 1894;
@@ -232,7 +232,6 @@ describe("Atualizar filme", () => {
       }
     );
   });
-
 
   it("Não deve ser possível atualizar um filme com menos de 1 minuto de duração", () => {
     let filmeNovo = { ...filme };
