@@ -280,3 +280,10 @@ Cypress.Commands.add("buscaFilmeId", function (idFilme, token = null) {
   });
 });
 
+Cypress.Commands.add("listarUsuario", function (tokenAdmin) {
+    cy.request({
+      method: "GET",
+      url: "/users",
+      headers: { Authorization: "Bearer " + tokenAdmin },
+    });
+  });
