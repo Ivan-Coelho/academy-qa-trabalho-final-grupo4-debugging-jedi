@@ -287,3 +287,11 @@ Cypress.Commands.add("listarUsuario", function (tokenAdmin) {
       headers: { Authorization: "Bearer " + tokenAdmin },
     });
   });
+
+  Cypress.Commands.add("listarReview", function (token) {
+    cy.request({
+      method: "GET",
+      url: "users/review/all",
+      headers: { Authorization: "Bearer " + token },
+    });
+  });
