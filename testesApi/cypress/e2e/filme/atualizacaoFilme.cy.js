@@ -101,6 +101,16 @@ describe("Atualizar filme", () => {
     );
   });
 
-  
+  it("Não deve ser possível atualizar um filme com título de 101 caracteres", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.title = faker.string.alpha(101);
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(400);
+      }
+    );
+  });
 
+
+  
 })
