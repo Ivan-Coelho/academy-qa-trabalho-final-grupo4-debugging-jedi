@@ -4,7 +4,7 @@ Funcionalidade: Criação de filme
     Desejo poder adicionar novos filmes ao catálogo
     Para que os usuários possam consultar informações e escrever avaliações destes filmes
 
-    Contexto: Cadastro de filme como usuario adminstrador
+    Contexto: Cadastro de filme usuario adminstrador
         Dado que o usuário está autenticado como administrador
 
         Esquema do Cenario: Usuário administrador cadastra um filme com dados válidos
@@ -53,13 +53,13 @@ Funcionalidade: Criação de filme
             Dado que o usuário está autenticado como administrador
         
         Cenario: Cadastrar o mesmo filme com novas informações
-            Quando o usuário cadastra um filme com informações validas
-            E o usuário cadastra o mesmo filme com novas informaçoes
+            Quando o usuário cadastra um filme com dados válidos
+            E o usuário cadastra um filme com novas informações
             Entao o sistema cadastra o filme com as novas informações
             E o sistema mantém o registro anterior do filme
 
         Cenario: Cadastrar o mesmo filme sem novas informações
-            Quando o usuário cadastra um filme com informações validas
+            Quando o usuário cadastra um filme com dados válidos
             E o usuário tenta cadastrar novamente o mesmo filme
             Entao o sistema cadastra o filme sem criar um novo registro
             E o sistema mantém o registro existente do filme
