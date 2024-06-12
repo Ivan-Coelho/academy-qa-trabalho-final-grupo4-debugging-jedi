@@ -35,4 +35,12 @@ export default class DetalhesFilmePage{
 
     textoAvaliacaoUsuarios = '.user-reviews-section > h2'
 
+    totalizadorAudiencia = '.movie-score-info > :nth-child(1)'
+    totalizadorCritico = '.movie-score-info > :nth-child(2)'
+
+    reviewUsuarios = '.user-review-card'
+    notaUsuario = 'star-container-reviewcard'
+    nomeUsuario = 'h3.user-reviecard-info'
+    comentarioUsuario = 'p.user-reviecard-info'
+
 }

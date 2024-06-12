@@ -281,10 +281,10 @@ describe('Avaliação de filme', function () {
                 expect(response.status).to.equal(201)
             });
 
-            cy.buscaFilmeId(idFilme).then(function (response) {                                
+            cy.buscaFilmeId(idFilme).then(function (response) {
 
                 expect(response.id).to.equal(idFilme)
-                
+
                 expect(response.criticScore).to.equal(0)
                 expect(response.audienceScore).to.equal(4)
 
@@ -302,7 +302,7 @@ describe('Avaliação de filme', function () {
 
 
             })
-       
+
             // cy.fixture('filmes/bodyReview2.json').as('review')
             // cy.request({
             //     method: 'GET',
@@ -332,7 +332,7 @@ describe('Avaliação de filme', function () {
                 expect(response.status).to.equal(201)
             });
 
-            cy.request('GET', 'users/review/all'). then(function (response) {
+            cy.request('GET', 'users/review/all').then(function (response) {
                 expect(response.status).to.equal(200)
                 expect(response.body).to.deep.equal(this.review)
             })
@@ -340,7 +340,7 @@ describe('Avaliação de filme', function () {
         });
 
         it('Deve ser possível atualizar a avaliação de um filme e não deve existir duas avaliações do mesmo usuario', function () {
-                       
+
             cy.criarReview(idFilme, userComum.token)
 
             cy.request({
@@ -357,7 +357,7 @@ describe('Avaliação de filme', function () {
             });
 
             cy.buscaFilmeId(idFilme).then(function (response) {
-                expect(response.reviews).to.be.an('array').to.have.lengthOf(1)                
+                expect(response.reviews).to.be.an('array').to.have.lengthOf(1)
 
                 expect(response.id).to.equal(idFilme)
 
@@ -483,9 +483,29 @@ describe('Avaliação de filme', function () {
             cy.buscaFilmeId(idFilme).then(function (response) {
                 expect(response.criticScore).to.equal(5)
                 expect(response.audienceScore).to.equal(0)
-            })
+            });
         });
 
+        it('Avaliação de filme por um usuário administrador não deve impactar as notas de avaliações', function () {
+
+            cy.request({
+                method: 'POST',
+                url: 'users/review',
+                body: {
+                    movieId: idFilme,
+                    score: 5,
+                    reviewText: 'Gostei do filme'
+                },
+                headers: { Authorization: 'Bearer ' + userAdmin.token }
+            }).then(function (response) {
+                expect(response.status).to.equal(201)
+            });
+            cy.buscaFilmeId(idFilme).then(function (response) {
+                expect(response.criticScore).to.equal(0)
+                expect(response.audienceScore).to.equal(0)
+            })
+        });
+        // novo teste
 
     });
 });
