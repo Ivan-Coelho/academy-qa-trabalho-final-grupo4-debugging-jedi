@@ -18,7 +18,5 @@ Espera o elemento e verifica o atributo
     Wait Until Element Is Visible        ${elemento}    10
     Element Attribute Should Match       ${elemento}    ${atributo}    ${valor_atributo}    regexp=true  
 
-Espera o elemento e faz o inputtest    
-    [Arguments]    ${elemento}    ${texto}
-    Wait Until Element Is Visible    ${elemento}  
-    Input Text    ${elemento}     ${texto}  
+ 
+
