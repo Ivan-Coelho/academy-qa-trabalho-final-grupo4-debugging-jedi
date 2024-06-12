@@ -1,52 +1,42 @@
 import { faker } from "@faker-js/faker";
 
 describe("Atualizar filme", () => {
-  it("Deve ser possível um usuario admin atualizar um filme com sucesso", () => {});
+  let usuarioAdmin;
+  let usuarioComum;
+  let usuarioCritico;
+  let filme;
 
-  it("Deve ser possível um usuario admin atualizar parcialmente as informações de um filme", () => {});
+  before(() => {
+    cy.criarUsuarioAdmin().then((response) => {
+      usuarioAdmin = { ...response };
+      const anoAtual = new Date().getFullYear();
+      const filmeObj = {
+        title: faker.lorem.words(10),
+        genre: faker.lorem.words(3),
+        description: faker.lorem.words(20),
+        durationInMinutes: Math.floor(Math.random() * (140 - 100 + 1)) + 100,
+        releaseYear: Math.floor(Math.random() * (anoAtual - 1895 + 1)) + 1895,
+      };
+      cy.cadastrarFilmeComBody(response.token, filmeObj).then((response) => {
+        filme = { ...response };
+      });
+    });
 
-  it("Não deve ser possível um usuário não logado realizar a atualização de um filme", () => {});
+    cy.criarUsuario().then((response) => {
+      usuarioComum = { ...response };
+    });
 
-  it("Não deve ser possível um usuário comum realizar a atualização de um filme", () => {});
+    cy.criarUsuarioCritico().then((response) => {
+      usuarioCritico = { ...response };
+    });
+  });
 
-  it("Não deve ser possível um usuário crítico realizar a atualização de um filme", () => {});
+  it("Deve ser possível um usuario admin atualizar um filme com sucesso", () => {
+    filme.genre = faker.lorem.words(5);
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filme).then((response) => {
+      expect(response.status).to.equal(204);
+    });
+  });
 
-  it("Não deve ser possível atualizar um filme com ano no futuro", () => {});
 
-  it("Não deve ser possível atualizar um filme não cadastrado", () => {});
-
-  it("Deve ser possível atualizar um filme com título de 1 caracter", () => {});
-
-  it("Deve ser possível atualizar um filme com título de 100 caracteres", () => {});
-
-  it("Não deve ser possível atualizar um filme com título de 101 caracteres", () => {});
-
-  it("Deve ser possível atualizar um filme com gênero de 1 caracter", () => {});
-
-  it("Deve ser possível atualizar um filme com gênero de 100 caracteres", () => {});
-
-  it("Não deve ser possível atualizar um filme com gênero de 101 caracteres", () => {});
-
-  it("Deve ser possível atualizar um filme com descrição de 1 caracter", () => {});
-
-  it(" Deve ser possível atualizar um filme com descrição de 500 caracteres", () => {});
-
-  it("Não deve ser possível atualizar um filme com descrição de 501 caracteres", () => {});
-
-  it("Deve ser possível atualizar um filme com ano de lançamento 1895", () => {});
-
-  it("Deve ser possível atualizar um filme com ano de lançamento 2024", () => {});
-
-  it("Não deve ser possível atualizar um filme com ano de lançamento 1894", () => {});
-
-  it("Não deve ser possível atualizar um filme com ano de lançamento 2025", () => {});
-
-  it("Deve ser possível atualizar um filme de 1 minuto de duração", () => {});
-
-  it("Deve ser possível atualizar um filme de 720 horas de duração", () => {});
-
-  it("Não deve ser possível atualizar um filme com menos de 1 minuto de duração", () => {});
-
-  it("Não deve ser possível atualizar um filme de 721 horas de duração", () => {});
-
-});
+})
