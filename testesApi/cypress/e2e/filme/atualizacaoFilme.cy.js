@@ -223,7 +223,15 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it("Deve ser possível atualizar um filme de 720 horas de duração", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.durationInMinutes = 720;
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  });
 
-  
 
 })
