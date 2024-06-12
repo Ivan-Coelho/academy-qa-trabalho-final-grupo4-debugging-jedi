@@ -171,6 +171,15 @@ describe("Atualizar filme", () => {
     );
   });
 
+  it("Deve ser possível atualizar um filme com ano de lançamento 1895", () => {
+    let filmeNovo = { ...filme };
+    filmeNovo.releaseYear = 1895;
+    cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
+      (response) => {
+        expect(response.status).to.equal(204);
+      }
+    );
+  });
 
 
 })
