@@ -38,5 +38,13 @@ describe("Atualizar filme", () => {
     });
   });
 
+  it("Não deve ser possível um usuário não logado realizar a atualização de um filme", () => {
+    filme.genre = faker.lorem.words(5);
+    cy.atualizarFilme(null, filme.id, filme).then((response) => {
+      expect(response.status).to.equal(401);
+    });
+  });
+
+  
 
 })
