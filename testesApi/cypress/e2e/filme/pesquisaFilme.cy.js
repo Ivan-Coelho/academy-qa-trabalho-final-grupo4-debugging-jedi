@@ -93,10 +93,14 @@ describe("Pesquisar Filme", () => {
     });
   });
 
+  it("Deve ser possível visualizar a descrição contida no súmario do filme encontrado", () => {
+    const tituloNovo = `${filme.title}`;
+    cy.buscarFilmeResponseCompleto(tituloNovo).then((response) => {
+      expect(response.status).to.equal(200);
+      expect(response.body[0].description).to.equal(filme.description);
+    });
+  });
 
-  it("Deve ser possível pesquisar um filme que contenha caracteres especiais no título", () => {});
-
-  it("Deve ser possível visualizar a descrição contida no súmario do filme encontrado", () => {});
 
   it("Deve ser possível visualizar a nota do filme encontrado", () => {});
 
