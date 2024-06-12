@@ -239,6 +239,19 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add("buscarListaFilme", function (token = null, sort = false) {
+  return cy
+    .request({
+      method: "GET",
+      url: "/movies",
+      headers: { Authorization: "Bearer " + token },
+      qs: { sort: sort },
+    })
+    .then(function (response) {
+      return response;
+    });
+});
+
 Cypress.Commands.add("deletarFilme", function (idFilme, tokenAdmin) {
   cy.request({
     method: "DELETE",
