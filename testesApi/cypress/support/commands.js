@@ -159,13 +159,8 @@ Cypress.Commands.add("criarUsuarioCritico", function () {
         method: "PATCH",
         url: "/users/apply",
         headers: { Authorization: "Bearer " + tokenCritico },
-      }).then(function () {
-        return {
-          id: usuario.id,
-          token: tokenCritico,
-          email: user.email,
-          nome: user.name,
-        };
+      }).then(function (response) {
+        return { ...usuario, token: tokenCritico };
       });
     });
   });
@@ -272,6 +267,25 @@ Cypress.Commands.add("criarReview", function (idFilme, token) {
     };
   });
 });
+
+Cypress.Commands.add(
+  "criarReviewCompleto",
+  function (idFilme, score, reviewText, token) {
+    cy.request({
+      method: "POST",
+      url: "users/review",
+      failOnStatusCode: false,
+      body: {
+        movieId: idFilme,
+        score: score,
+        reviewText: reviewText,
+      },
+      headers: { Authorization: "Bearer " + token },
+    }).then(function (response) {
+      return response;
+    });
+  }
+);
 
 Cypress.Commands.add("inativarConta", function (token) {
   cy.request({
