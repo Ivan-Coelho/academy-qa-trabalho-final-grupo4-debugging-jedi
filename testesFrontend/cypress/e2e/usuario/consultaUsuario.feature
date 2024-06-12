@@ -8,17 +8,20 @@ Funcionalidade: Consulta de avaliações do usuário
         Dado que o usuário está logado e autenticado na aplicação
            
         Cenario: Consulta de Avaliações por Usuário 
-            Quando o usuário acessa a seção de consulta de avaliações
+            Quando o usuário tem avaliações de filme registradas
+            E o usuário acessa a seção de consulta de avaliações
             Entao todas as avaliações feitas pelo usuário são exibidas
             E as avaliações pertencem apenas ao usuário autenticado
 
         Cenario: Verificação de Avaliações Únicas por Filme
-            Quando o usuário acessa a seção de consulta de avaliações
+            Quando o usuário tem avaliações de filme registradas
+            E o usuário acessa a seção de consulta de avaliações
             Entao todas as avaliações feitas pelo usuário são exibidas
             E não existem avaliações duplicadas para o mesmo filme
 
         Cenario: Visualização de Detalhes das Avaliações
-            Quando o usuário acessa a seção de consulta de avaliações
+            Quando o usuário tem avaliações de filme registradas
+            E o usuário acessa a seção de consulta de avaliações
             Entao todas as avaliações feitas pelo usuário são exibidas
             E os detalhes do filme avaliado são exibidos
            

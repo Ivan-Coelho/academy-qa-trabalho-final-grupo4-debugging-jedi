@@ -42,5 +42,6 @@ export default class DetalhesFilmePage{
     notaUsuario = 'star-container-reviewcard'
     nomeUsuario = 'h3.user-reviecard-info'
     comentarioUsuario = 'p.user-reviecard-info'
-
+    dataReview = ".user-review-card label"
+    
 }
