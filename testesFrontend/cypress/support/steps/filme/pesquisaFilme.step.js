@@ -10,15 +10,19 @@ const paginaInicial = new InicioPage();
 const paginaDetalhes = new DetalhesFilmePage();
 const paginaLogin = new LoginPage();
 
-Given ('', function () {
+Given ('que o usuário acessou  a pagina inicial', function () {
+    cy.visit('')
+})
+
+When('inserir o título completo do filme na barra de pesquisa', function () {
     
 })
 
-When('', function () {
+When('acionar o recurso de buscar', function () {
     
 })
 
-Then('', function () {
+Then('o sistema deve retornar o filme correspondente ao título completo', function () {
     
 })
 

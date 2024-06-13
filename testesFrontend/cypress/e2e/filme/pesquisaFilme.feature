@@ -4,9 +4,10 @@ Funcionalidade: Pesquisa de filmes
 
 
 Cenário: Deve ser possível pesquisar um filme pelo título completo
-Dado que o usuário acessou  inseriu o título completo do filme na caixa de pesquisa,
-Quando acionar o recurso de buscar,
-Então o sistema deve retornar o filme correspondente ao título completo.
+Dado que o usuário acessou  a pagina inicial 
+Quando inserir o título completo do filme na barra de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar o filme correspondente ao título completo
 
 # Cenário: Deve ser possível pesquisar um filme com título parcial
 # Dado que o usuário inseriu parte do título do filme na caixa de pesquisa,
