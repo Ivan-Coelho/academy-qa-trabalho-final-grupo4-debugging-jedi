@@ -60,7 +60,7 @@ export default class DetalhesFilmePage{
     cardReview = ".profile-review-card"
     dataReview = ".user-review-card label"
     
-
+    cardReviewNome ='.profile-nickname label'
 
     clickButtonLogin(){
         cy.get(this.buttonLoginAva).click();

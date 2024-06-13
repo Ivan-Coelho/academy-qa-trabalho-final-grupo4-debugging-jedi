@@ -4,33 +4,33 @@ Funcionalidade: Consulta de avaliações do usuário
     Desejo poder consultar as avaliações feitas por mim
     Para pode ter histórico de minhas avaliações
     
-    Contexto: Consulta de Avaliações do Usuário Autenticado
-        Dado que o usuário está logado e autenticado na aplicação
-           
+    Contexto: Consulta de Avaliações do Usuário comum Autenticado
+        Dado que o usuário comum está logado e autenticado na aplicação
+        @filmeReviewComum @deletar 
         Cenario: Consulta de Avaliações por Usuário 
-            Quando o usuário tem avaliações de filme registradas
-            E o usuário acessa a seção de consulta de avaliações
+            Quando o usuário acessa a seção de consulta de avaliações 
+            E o usuário comum tem avaliações de filme registradas
             Entao todas as avaliações feitas pelo usuário são exibidas
             E as avaliações pertencem apenas ao usuário autenticado
-
+        @filmeReviewComum @deletar
         Cenario: Verificação de Avaliações Únicas por Filme
-            Quando o usuário tem avaliações de filme registradas
-            E o usuário acessa a seção de consulta de avaliações
+            Quando o usuário acessa a seção de consulta de avaliações 
+            E o usuário comum tem avaliações de filme registradas
             Entao todas as avaliações feitas pelo usuário são exibidas
             E não existem avaliações duplicadas para o mesmo filme
-
+        @filmeReviewComum @deletar
         Cenario: Visualização de Detalhes das Avaliações
-            Quando o usuário tem avaliações de filme registradas
-            E o usuário acessa a seção de consulta de avaliações
+            Quando o usuário acessa a seção de consulta de avaliações 
+            E o usuário comum tem avaliações de filme registradas
             Entao todas as avaliações feitas pelo usuário são exibidas
             E os detalhes do filme avaliado são exibidos
            
         
-        Cenario: A consulta de avaliações do filme usuário deve visualizar avaliaçoes marcadas conforme seu perfil usado na avaliação
-            Quando o usuário acessa a seção de consulta de avaliações
-            E existem avaliaçoes anteriores para o mesmo filme feita pelos perfis crítico e administrador
-            Entao todas as avaliações feitas pelo usuário são exibidas
-            E as avaliações devem estar marcadas conforme o perfil
+        # Cenario: A consulta de avaliações do filme usuário deve visualizar avaliaçoes marcadas conforme seu perfil usado na avaliação
+        #     Quando o usuário acessa a seção de consulta de avaliações
+        #     E existem avaliaçoes anteriores para o mesmo filme feita pelos perfis crítico e administrador
+        #     Entao todas as avaliações feitas pelo usuário são exibidas
+        #     E as avaliações devem estar marcadas conforme o perfil
 
         Cenario: Consulta de Avaliações por Usuário sem avaliação registrada
             Quando o usuário acessa a seção de consulta de avaliações

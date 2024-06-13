@@ -40,6 +40,8 @@ Cypress.Commands.add('criarUsuario', function () {
     })
 })
 
+
+
 Cypress.Commands.add('usuarioLogado', function () {
     let user = {
         name: faker.person.fullName(),
@@ -432,4 +434,65 @@ Cypress.Commands.add("listarReview", function (token) {
     headers: { Authorization: "Bearer " + token },
   });
 });
+
+Cypress.Commands.add('usuarioComum', function () {
+  let user = {
+      name: "Teste Raro",
+      email: faker.internet.email(),
+      password: '123456'
+  }
+  cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+      body: user
+  }).then(function (response) {
+    usuario = response.body
+    email = response.body.email
+    cy.request({
+    method: "POST",
+    url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+    body: {
+        email: email,
+        password: "123456"
+    }
+}).then(function (response) {
+    tokenComum = response.body.accessToken
+})
+})
+})
+Cypress.Commands.add('usuarioComumLogado', function () {
+  let user = {
+      name: "Teste Raro",
+      email: faker.internet.email(),
+      password: '123456'
+  }
+  let tokenComum
+  let usuario
+
+  cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+      body: user
+  }).then(function (response) {
+      usuario = response.body
+
+      cy.request({
+          method: "POST",
+          url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+          body: {
+              email: usuario.email,
+              password: "123456"
+          }
+      }).then(function (response) {
+          tokenComum = response.body.accessToken
+      }).then(function () {
+          return {
+              nome: user.name,
+              email: user.email,
+              id: usuario.id,
+              token: tokenComum
+          }
+      })
+  })
+})
 

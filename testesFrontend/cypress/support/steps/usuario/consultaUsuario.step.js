@@ -16,47 +16,71 @@ const paginaLogin = new LoginPage();
 const paginaPerfil = new PerfilPage();
 
 let userAdmin;
-let nota1;
-let nota2;
+let notaComum;
+let notaCritico;
+let email;
+let nome = "Teste Raro";
+let tokenComum;
 
-Before(function () {
-  cy.visit("");
+Before({ tags: "@filmeReviewComum" }, function () {
   cy.criarUsuarioAdmin().then(function (dadosAdmin) {
-    cy.cadastrarFilme(dadosAdmin.token).then(function (filme1) {
-      cy.cadastrarFilme(dadosAdmin.token).then(function (filme2) {
-        userAdmin = dadosAdmin;
+    cy.cadastrarFilme(dadosAdmin.token).then(function (response) {
+      cy.wrap(dadosAdmin).as("userAdmin");
+      cy.wrap(response).as("dadosFilmeC");
 
-        cy.wrap(userAdmin).as("userAdmin");
-        cy.wrap(filme1).as("dadosFilme1");
-        cy.wrap(filme2).as("dadosFilme2");
+      cy.usuarioComumLogado().then(function (dadosComum) {
+        email = dadosComum.email;
+        tokenComum = dadosComum.token;
+        cy.criarReview(response.body.id, dadosComum.token).then(function (
+          reviewC
+        ) {
+          notaComum = reviewC.score;
+          cy.wrap(reviewC).as("reviewComum");
+          cy.wrap(dadosComum).as("userComum");
+        });
       });
     });
   });
 });
 
-// After({ tags: "@deletar" }, function () {
-//   cy.criarUsuarioAdmin().then(function (dadosAdmin) {
-//     let userAdmin = dadosAdmin;
-//     cy.wrap(userAdmin).as("userAdmin");
-//     cy.get("@userAdmin").then(function (userAdmin) {
-//       cy.get("@idFilme").then(function (response) {
-//         cy.deletarFilme(response.body.id, userAdmin.token);
-//         cy.deletarUsuario(userAdmin.id, userAdmin.token);
-//       });
-//     });
-//   });
-// });
+Before({ tags: "@filmeReviewCritico" }, function () {
+  cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+    cy.cadastrarFilme(dadosAdmin.token).then(function (response) {
+      cy.wrap(dadosAdmin).as("userAdmin");
+      cy.wrap(response).as("dadosFilme");
 
-Given("que o usuário está logado e autenticado na aplicação", function () {
-  cy.get("@userAdmin").then(function (userAdmin) {
-    let email = userAdmin.email;
+      cy.criarUsuarioCritico().then(function (dadosCritico) {
+        cy.criarReview(response.body.id, dadosCritico.token).then(function (
+          review
+        ) {
+          notaCritico = review.score;
 
+          cy.inativarConta(dadosCritico.token);
+          cy.wrap(sNota).as("somaNota");
+        });
+      });
+    });
+  });
+});
+
+//   After({ tags: '@deletar' }, function () {
+//     cy.get('@userAdmin').then(function (userAdmin) {
+//         cy.get('@dadosFilme').then(function (response) {
+//             cy.deletarFilme(response.body.id, userAdmin.token);
+//             cy.deletarUsuario(userAdmin.id, userAdmin.token);
+//         })
+//     })
+// })
+
+Given(
+  "que o usuário comum está logado e autenticado na aplicação",
+  function () {
     cy.visit("/login");
     paginaLogin.typeEmail(email);
     paginaLogin.typeSenha("123456");
     paginaLogin.clickButtonLogin();
-  });
-});
+  }
+);
 
 Given("que o usuário não está autenticado na aplicação", function () {});
 
@@ -64,110 +88,79 @@ When("o usuário acessa a seção de consulta de avaliações", function () {
   paginaInicial.clickPaginaPerfil();
 });
 
-When("o usuário tem avaliações de filme registradas", function () {
-  cy.get("@dadosFilme1").then(function (response) {
-    cy.criarReview(response.body.id, userAdmin.token).then(function (review1) {
-      cy.wrap(review1).as("reviewFilme1");
-    });
-  });
-  cy.get("@dadosFilme2").then(function (response) {
-     cy.criarReview( response.body.id, userAdmin.token).then(function (review2) {
-      nota1 = review2.score;
-      cy.wrap(review2).as("reviewFilme2");
-    });
+When("o usuário comum tem avaliações de filme registradas", function () {
+  cy.get("@dadosFilmeC").then(function (dados) {
+    cy.get(paginaPerfil.reviewCard1).should("contain", dados.body.title);
+    cy.get(paginaPerfil.scoreFilme).should("be.visible");
   });
 });
 
 Then("todas as avaliações feitas pelo usuário são exibidas", function () {
-  cy.get("@dadosFilme1").then(function (dados) {
-    cy.get(paginaPerfil.reviewCard1).should("contain", dados.body.title);
-    cy.get(paginaPerfil.scoreFilme).should("be.visible");
-  });
-  cy.get("@dadosFilme2").then(function (dados) {
-    cy.get(paginaPerfil.reviewCard2).should("contain", dados.body.title);
-    cy.get(paginaPerfil.scoreFilme).should("be.visible");
-  });
+  cy.get(paginaDetalhes.cardReview).should("have.length", 1);
 });
 
 Then("as avaliações pertencem apenas ao usuário autenticado", function () {
-  paginaPerfil.clickReviewCard1();
-  cy.wait(4000);
-  cy.get("@reviewFilme1").then(function (dados) {
-    cy.get(".stars")
-      .scrollIntoView()
+  cy.get("@reviewComum").then(function () {
+    cy.get(paginaDetalhes.cardReview)
+
       .should("be.visible")
       .then(function () {
-        cy.get(".stars .filled").should("have.length", dados.score);
-        cy.contains(dados.comentario);
-      });
-  });
-  cy.go("back");
-  cy.wait(4000);
-  paginaPerfil.clickReviewCard2();
-  cy.wait(4000);
-  cy.get("@reviewFilme2").then(function (dados) {
-    cy.get(".stars")
-      .scrollIntoView()
-      .should("be.visible")
-      .then(function () {
-        cy.get(".stars .filled").should("have.length", dados.score);
-        cy.contains(dados.comentario);
+        cy.get(paginaDetalhes.cardReviewNome)
+          .invoke("text")
+          .then(function (iniciais) {
+            expect(iniciais).to.equal("TR");
+          });
+        cy.get(paginaDetalhes.reviewDetalhesScore)
+          .should("be.visible")
+          .then(function () {
+            cy.get(".stars .filled").should("have.length", notaComum);
+          });
       });
   });
 });
 
 Then("não existem avaliações duplicadas para o mesmo filme", function () {
-  
-    cy.get("@dadosFilme2").then(function (response) {
-    cy.criarReview(response.body.id, userAdmin.token).then(function(review){
-      
-      cy.wrap(review).as("reviewFilme3");
-    });
-  });
-    cy.get("@reviewFilme3").then(function (dados) {
-      cy.get(paginaDetalhes.reviewScore3).then(function (dados) {
-        cy.get(paginaDetalhes.reviewScore1).should("be.visible")
-          .within(function(){
-        cy.get('.stars .filled').should('have.length', review.score);
-        
-        //cy.get(paginaDetalhes.reviewScore2).should('have.length', 1);
-        cy.get(paginaDetalhes.reviewScore2).contains('.stars .filled', dados.score);
-      });
+  cy.get("@dadosFilmeC").then(function (response) {
+    cy.criarReview(response.body.id, tokenComum).then(function (review2) {
+      let notareview2 = review2.score;
+      cy.wrap(review2).as("reviewComum2");
+
+      cy.get("@reviewComum2").then(function (dados) {
+        cy.get(paginaDetalhes.reviewDetalhesScore)
+          .should("be.visible")
+          .then(function () {
+            cy.get(".stars .filled").should("have.length", notareview2);
+          });
+        cy.get(paginaDetalhes.reviewDetalhesScore).should("have.length", 1);
       });
     });
   });
-
-
+});
 
 Then("os detalhes do filme avaliado são exibidos", function () {
-  cy.get("@reviewFilme1").then(function (dados) {
-    cy.get(paginaDetalhes.cardReview).should("contain", dados.body.title)
-    cy.get(paginaDetalhes.reviewScore1).should("be.visible")
+  cy.get("@dadosFilmeC").then(function (dados) {
+    cy.get(paginaDetalhes.cardReview).should("contain", dados.body.title);
+
+    cy.get(paginaDetalhes.reviewScore1).should("be.visible");
   });
-  cy.get("@reviewFilme2").then(function (dados) {
-    cy.get(paginaDetalhes.cardReview).should("contain", dados.body.title)
-    cy.get(paginaDetalhes.reviewScore2).should("be.visible")
-  });
-  
- 
-    
-    });
-  
+});
 
+// Then(
+//   "existem avaliaçoes anteriores para o mesmo filme feita pelos perfis crítico e administrador",
+//   function () {
 
- 
+//   });
 
-Then(
-  "existem avaliaçoes anteriores para o mesmo filme feita pelos perfis crítico e administrador",
-  function () {
-
-  });
-
-Then("as avaliações devem estar marcadas conforme o perfil", function () {});
+// Then("as avaliações devem estar marcadas conforme o perfil", function () {});
 
 Then("que o usuário não possui avaliações registradas", function () {});
 
-Then("e exibida uma lista de avaliçoes vazia", function () {});
+Then("e exibida uma lista de avaliçoes vazia", function () {
+  cy.get(paginaDetalhes.cardReview).should("not.be.visible")
+
+    cy.get(paginaDetalhes.reviewScore1).should("not.be.visible");
+    cy.get(paginaDetalhes.reviewDetalhesScore).should("have.length", 1);
+});
 
 Then("o acesso é negado", function () {});
 
