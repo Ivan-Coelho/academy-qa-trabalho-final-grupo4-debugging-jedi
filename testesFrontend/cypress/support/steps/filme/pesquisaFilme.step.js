@@ -26,6 +26,20 @@ Then('o sistema deve retornar o filme correspondente ao título completo', funct
     cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
 })
 
+When('inserir apenas uma parte do título do filme na caixa de pesquisa', function () {
+    cy.get('.search-input').type('Star W')
+})
+
+When('inserir um título com um erro de digitação', function () {
+    cy.get('.search-input').type('Star WarsB')
+})
+
+Then('o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado', function () {
+    cy.get('p').contains('Nenhum filme encontrado').should('be.visible')
+})
+
+
+
 // Given('que acessei o site Raro Filmes', function () {
    
 // });

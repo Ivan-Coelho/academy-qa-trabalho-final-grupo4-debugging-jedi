@@ -9,15 +9,17 @@ Quando inserir o título completo do filme na barra de pesquisa
 E acionar o recurso de buscar
 Então o sistema deve retornar o filme correspondente ao título completo
 
-# Cenário: Deve ser possível pesquisar um filme com título parcial
-# Dado que o usuário inseriu parte do título do filme na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar todos os filmes que contêm o título parcial inserido.
+Cenário: Deve ser possível pesquisar um filme com título parcial
+Dado que o usuário acessou  a pagina inicial 
+Quando inserir apenas uma parte do título do filme na caixa de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar o filme correspondente ao título completo
 
-# Cenário: Deve ser possível pesquisar um filme com erro de digitação
-# Dado que o usuário inseriu um título com um pequeno erro de digitação,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve sugerir o filme correto ou retornar resultados relevantes próximos ao título inserido.
+Cenário: Não deve ser possível pesquisar um filme com erro de digitação
+Dado que o usuário acessou  a pagina inicial 
+Quando inserir um título com um erro de digitação
+E acionar o recurso de buscar
+Então o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado
 
 # Cenário: Deve ser possível pesquisar um filme com letras maiúsculas
 # Dado que o usuário inseriu o título do filme com letras maiúsculas,
