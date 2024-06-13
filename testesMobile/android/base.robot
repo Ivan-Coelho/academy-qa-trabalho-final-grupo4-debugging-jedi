@@ -2,5 +2,9 @@
 
 Library    AppiumLibrary
 
-Resource    page/Page.robot
+#Utils
 Resource    utils/config.robot
+Resource    utils/commons.robot
+
+#Pages
+Resource    page/Page.robot

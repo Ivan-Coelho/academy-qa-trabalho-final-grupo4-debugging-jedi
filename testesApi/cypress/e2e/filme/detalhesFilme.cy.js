@@ -93,8 +93,9 @@ describe('Consulta de detalhes de filmes', function () {
             })
         });
 
+        // faz sentido esse teste?
         it('Buscar um filme por id utilizando um id inexistente deve retornar vazio', function () {
-            // faz sentido esse teste?
+
             cy.request({
                 method: 'GET',
                 url: '/movies/' + 99758
@@ -103,32 +104,36 @@ describe('Consulta de detalhes de filmes', function () {
                 expect(response.body).to.equal('').that.is.empty
             })
         });
-        //Analisar esse teste
+
         it('Ao buscar um filme por id com review de usuário do tipo administrador deve retornar a avaliação e os dados do usuário', function () {
 
             cy.criarReview(idFilme, userAdmin.token).then(function (response) {
                 let comentario = response.comentario
-                //let nota = response.score
+                let nota = response.score
 
 
-                cy.request({ // como fazer esse teste ?????? deixou de fazer sentido
+                cy.request({ 
                     method: 'GET',
                     url: '/movies/' + idFilme
                 }).then(function (response) {
                     expect(response.status).to.equal(200);
                     expect(response.body.id).to.equal(idFilme)
 
-                    expect(response.body.reviews).to.be.an('array')
-                    expect(response.body.reviews[0].reviewText).to.equal(comentario)
-                    expect(response.body.reviews[0].id).to.be.an('number')
-                    //expect(response.body.reviews[0].reviewType).to.equal(0)  O QUE FAZER AQUI? Deveria quebrar nesse ponto
-                    //expect(response.body.reviews[0].score).to.equal(nota)
-                    expect(response.body.reviews[0].updatedAt).to.be.an('string')
-
                     expect(response.body.reviews[0].user.id).to.equal(userAdmin.id)
                     expect(response.body.reviews[0].user.name).to.equal(userAdmin.nome)
                     expect(response.body.reviews[0].user.type).to.equal(1)
-                    //expect(response.body.adminScore).to.equal(nota)
+
+                    expect(response.body.reviews).to.be.an('array')
+                    expect(response.body.reviews[0].reviewText).to.equal(comentario)
+                    expect(response.body.reviews[0].id).to.be.an('number')
+                    expect(response.body.reviews[0].score).to.equal(nota)
+                    expect(response.body.reviews[0].updatedAt).to.be.an('string')
+                    expect(response.body.reviews[0].reviewType).not.equal(1)
+                    expect(response.body.reviews[0].reviewType).not.equal(0)
+
+
+
+
                 })
 
             })
@@ -204,7 +209,8 @@ describe('Consulta de detalhes de filmes', function () {
                 cy.deletarUsuario(userComum.id, userAdmin.token);
             });
         })
-        // posso validar só o array? acho que não precisa desse teste
+
+        // posso validar só o array? precisa desse teste?
         it('Ao buscar um filme por id todas as avaliações devem ser listadas', function () {
 
             //let userComum = []
@@ -405,6 +411,62 @@ describe('Consulta de detalhes de filmes', function () {
                 })
             });
         })
+
+        it('Ao buscar um filme por id com 2 reviews de usuário do tipo administrador deve retornar as avaliações e os dados dos usuários', function () {
+            let userAdmin2
+
+            cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+                userAdmin2 = dadosAdmin
+
+                cy.criarReview(idFilme, userAdmin2.token).then(function (response) {
+                    let nota1 = response.score
+                    let comentario1 = response.comentario
+
+                    cy.criarReview(idFilme, userAdmin.token).then(function (response) {
+                        let nota2 = response.score
+                        let comentario2 = response.comentario                        
+
+                        cy.request({
+                            method: 'GET',
+                            url: '/movies/' + idFilme
+                        }).then(function (response) {
+                            expect(response.status).to.equal(200);
+                            expect(response.body.id).to.equal(idFilme)                           
+
+                            expect(response.body.reviews).to.be.an('array')
+                            expect(response.body.reviews[0].reviewText).to.equal(comentario1)
+                            expect(response.body.reviews[0].id).to.be.an('number')
+                           //expect(response.body.reviews[0].reviewType).not.equal(0)
+                            expect(response.body.reviews[0].reviewType).not.equal(1)
+                            expect(response.body.reviews[0].score).to.equal(nota1)
+                            expect(response.body.reviews[0].updatedAt).to.be.an('string')
+
+                            expect(response.body.reviews[0].user.id).to.equal(userAdmin2.id)
+                            expect(response.body.reviews[0].user.name).to.equal(userAdmin2.nome)
+                            expect(response.body.reviews[0].user.type).to.equal(1)
+
+                            expect(response.body.reviews[1].reviewText).to.equal(comentario2)
+                            expect(response.body.reviews[1].id).to.be.an('number')
+                            //expect(response.body.reviews[1].reviewType).not.equal(0)
+                            expect(response.body.reviews[1].reviewType).not.equal(1)
+                            expect(response.body.reviews[1].score).to.equal(nota2)
+                            expect(response.body.reviews[1].updatedAt).to.be.an('string')
+
+                            expect(response.body.reviews[1].user.id).to.equal(userAdmin.id)
+                            expect(response.body.reviews[1].user.name).to.equal(userAdmin.nome)
+                            expect(response.body.reviews[1].user.type).to.equal(1)
+
+                            expect(response.body.criticScore).to.equal(0)
+                            expect(response.body.audienceScore).to.equal(0)
+                            expect(response.body.reviews[0].reviewType).not.equal(0)
+                            expect(response.body.reviews[1].reviewType).not.equal(0)
+                        });
+                        cy.deletarUsuario(userAdmin2.id, userAdmin.token);                        
+
+                    });
+                });
+            });
+        });
 
         it('A nota de audiência deve ser a média das notas de avaliações dos usuários do tipo comum', function () {
             let userComum = []
