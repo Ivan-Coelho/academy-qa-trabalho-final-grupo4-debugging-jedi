@@ -45,20 +45,23 @@ Quando inserir um título que não corresponde a nenhum filme cadastrado
 E acionar o recurso de buscar
 Então o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado
 
-# Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
-# Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
+Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
+Dado que o usuário acessou  a pagina inicial
+Quando inserir um título com caracteres especiais na caixa de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar o filme correspondente ao título completo
 
-# Cenário: Deve ser possível pesquisar com um título muito curto 
-# Dado que o usuário inseriu um título muito curto (como uma única letra) na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar todos os filmes que contêm a letra inserida no título.
+Cenário: Deve ser possível pesquisar com um título muito curto 
+Dado que o usuário acessou  a pagina inicial
+Quando inserir um título muito curto, como uma única letra na caixa de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar todos os filmes que contêm a letra inserida no título
 
-# Cenário: Deve ser possível pesquisar um filme com espaços extras no título
-# Dado que o usuário inseriu um título com espaços extras antes ou depois do texto,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
+Cenário: Deve ser possível pesquisar um filme com espaços extras no título
+Dado que o usuário acessou  a pagina inicial
+Quando inserir um título com espaços extras antes ou depois do texto
+E acionar o recurso de buscar
+Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
 
 # Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
 # Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,

@@ -10,6 +10,28 @@ const paginaInicial = new InicioPage();
 const paginaDetalhes = new DetalhesFilmePage();
 const paginaLogin = new LoginPage();
 
+Before({tags: '@cadastroFilme'}, function(){
+    
+    cy.criarUsuarioAdmin().then(function(dadosAdmin){        
+        cy.cadastrarFilme(dadosAdmin.token).then(function(response){
+            let userAdmin = dadosAdmin
+            
+            cy.wrap(userAdmin).as('userAdmin');
+            cy.wrap(response).as('idFilme');
+        });
+    })
+});
+
+
+After({tags: '@deletar'}, function(){
+    cy.get('@userAdmin').then(function(userAdmin){
+        cy.get('@idFilme').then(function(response){
+            cy.deletarFilme(response.body.id, userAdmin.token);
+            cy.deletarUsuario(userAdmin.id, userAdmin.token);
+        })
+    })    
+})
+
 Given ('que o usuário acessou  a pagina inicial', function () {
     cy.visit('')
 })
@@ -53,6 +75,27 @@ When('inserir o título do filme com letras maiúsculas e minúsculas misturadas
 When('inserir um título que não corresponde a nenhum filme cadastrado', function () {
     cy.get('.search-input').type('Istar uórz: u imperiu contar traca')
 })
+
+When('inserir um título com caracteres especiais na caixa de pesquisa', function () {
+    cy.get('.search-input').type('Star Wars #!$%')
+})
+
+When('inserir um título muito curto, como uma única letra na caixa de pesquisa', function () {
+    cy.get('.search-input').type('S')
+})
+
+Then('o sistema deve retornar todos os filmes que contêm a letra inserida no título', function () {
+    cy.get('.search-movie-container').contains('S').should('be.visible')
+})
+
+When('inserir um título com espaços extras antes ou depois do texto', function () {
+    cy.get('.search-input').type('  Star Wars  ')
+})
+
+Then('o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.', function () {
+    cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
+})
+
 
 
 
