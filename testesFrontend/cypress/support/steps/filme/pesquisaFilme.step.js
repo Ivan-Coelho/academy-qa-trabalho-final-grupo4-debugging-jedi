@@ -38,6 +38,17 @@ Then('o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado', fu
     cy.get('p').contains('Nenhum filme encontrado').should('be.visible')
 })
 
+When('inserir o título do filme com letras maiúsculas', function () {
+    cy.get('.search-input').type('STAR WARS')
+})
+
+When('inserir o título do filme com letras minúsculas', function () {
+    cy.get('.search-input').type('star wars')
+})
+
+When('inserir o título do filme com letras maiúsculas e minúsculas misturadas', function () {
+    cy.get('.search-input').type('sTaR wArS')
+})
 
 
 // Given('que acessei o site Raro Filmes', function () {
