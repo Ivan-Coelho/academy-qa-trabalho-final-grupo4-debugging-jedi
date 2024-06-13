@@ -321,7 +321,251 @@ describe('Testes de criação de usuário', function () {
           expect(response.body.active).to.equal(usuarioAtivo);
         });
       });
+      it('Deve ser possível criar usuário cujo nome possua 99 caractere ', function () {
 
-    })   
+        name = 'Julia Moura Costa Soares Santos Miranda Souza Matos Dias Duarte Carvalho Rezende Oto Lima Magalhães';
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+
+      it('Deve ser possível criar usuário cujo nome possua 100 caracteres', function () {
+
+        name = 'Julia Moura Costa Soares Santos Miranda Souza Matos Dias Duarte Carvalho Rezende Leite Lima  Castros';
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+  
+      it('Deve ser possível criar usuário cujo nome possua caractere especial ', function () {
+  
+        name = 'Joana D´Arc';
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+  
+      it('Deve ser possível criar usuário cujo nome possua todas as letra em Maiusculas', function () {
+  
+        name = 'SAMIRA DIAS';
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+  
+      it('Deve ser possível criar usuário cuja a senha possua caracteres especiais', function () {
+  
+        name = 'faker.person.fullName();';
+        email = faker.internet.email().toLowerCase();
+        senha = '2345#@'
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+      it('Deve ser possível criar usuário cuja a senha possua 6 caracteres ', function () {
+  
+        name = 'faker.person.fullName();';
+        email = faker.internet.email().toLowerCase();
+        senha = 'AV@#12'
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+  
+      it('Deve ser possível criar usuário cuja a senha possua 7 caracteres ', function () {
+  
+        name = 'faker.person.fullName();';
+        email = faker.internet.email().toLowerCase();
+        senha = 'AV@#120'
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+      it('Deve ser possível criar usuário cuja a senha possua 11 caracteres ', function () {
+  
+        name = 'faker.person.fullName();';
+        email = faker.internet.email().toLowerCase();
+        senha = 'AV@#1208911'
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+      it('Deve ser possível criar usuário cuja a senha possua 12 caracteres ', function () {
+  
+        name = 'faker.person.fullName();';
+        email = faker.internet.email().toLowerCase();
+        senha = 'AV@#12089112'
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+     
+    });   
   
   })      
