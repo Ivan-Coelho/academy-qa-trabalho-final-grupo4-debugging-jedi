@@ -188,13 +188,13 @@ Then('o usuário conseguirá visualizar um totalizador com a média das avaliaç
     }); cy.contains(paginaDetalhes.numeroAudiencia, '5 avaliações').and('be.visible');
 
 });
-
+//OLHAR ESSE TESTE totalizador ta certo?
 Then('o usuário conseguirá visualizar um totalizador com a média das avaliações de críticos', function () {
     cy.get('@somaNota').then(function (sNota) {
 
         let media = sNota / 5
         if (sNota % 5 == 0) {
-            cy.get(paginaDetalhes.totalizadorAudiencia).should('have.length', media);
+            cy.get(paginaDetalhes.totalizadorCritico).should('have.length', media);
         } else {
             media = Math.floor(media);
             cy.get(paginaDetalhes.totalizadorCritico).should('have.length', media);

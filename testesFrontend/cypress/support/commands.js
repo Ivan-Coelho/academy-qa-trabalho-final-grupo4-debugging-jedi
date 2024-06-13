@@ -181,7 +181,7 @@ Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {
             url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
             headers: { Authorization: 'Bearer ' + tokenAdmin },
             body: arquivo
-        }).then(function (response) {            
+        }).then(function (response) {
             return response
         })
     })
@@ -222,23 +222,23 @@ Cypress.Commands.add('criarReview', function (idFilme, token) {
             reviewText: comentario
         },
         headers: { Authorization: 'Bearer ' + token },
-    }).then(function(){
-        return{
+    }).then(function () {
+        return {
             score: nota,
             comentario: comentario
         }
     })
 })
 
-Cypress.Commands.add('inativarConta', function(token){
+Cypress.Commands.add('inativarConta', function (token) {
     cy.request({
-        method: 'PATCH', 
+        method: 'PATCH',
         url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/inactivate',
         headers: { Authorization: 'Bearer ' + token }
     })
 });
 
-Cypress.Commands.add('buscaFilmeId', function(idFilme){
+Cypress.Commands.add('buscaFilmeId', function (idFilme) {
     cy.request({
         method: 'GET',
         url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/' + idFilme
@@ -247,3 +247,24 @@ Cypress.Commands.add('buscaFilmeId', function(idFilme){
 
     });
 });
+
+Cypress.Commands.add('cadastrarFilme2', function (tokenAdmin) {
+
+    let nome = faker.lorem.words()
+    cy.request({
+
+        method: 'POST',
+        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+        headers: { Authorization: 'Bearer ' + tokenAdmin },
+        body: {
+            title: nome,
+            genre: "Épico, Aventura, Ficção científica",
+            description: "Star Wars de bollywood",
+            durationInMinutes: 124,
+            releaseYear: 1980
+        }
+    }).then(function (response) {
+        return response
+    })
+
+})

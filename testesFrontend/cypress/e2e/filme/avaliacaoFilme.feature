@@ -8,12 +8,21 @@ Funcionalidade: Avaliação de filme
 Contexto: Usuário cadastrado e logado acessa a página de um filme
     Dado que usuário logado acessa o site
     Quando acessa a página de detalhes de um filme
+
 @cadastroFilme @deletar
 Cenário: Deve ser possível para um usuário logado criar uma review com sucesso ao informar uma nota e um comentário sobre o filme    
     E informa uma nota
     E informa um comentario para o filme
     E envia a avaliação do filme
-    Então a avaliação do filme deve ser criada com sucesso
+    Então a avaliação do filme será criada com sucesso
+
+@cadastroFilmeReview @deletar
+Cenário: Usuário criar review em um filme já com uma review deve alterar a nota de audiência imediatamente   
+    E informa uma nota
+    E informa um comentario para o filme
+    E envia a avaliação do filme
+    Então a avaliação do filme será criada
+    E a nota de audiência será alterada para a média
 
 # Cenário: Deve ser possível para um usuário logado criar uma review com sucesso ao informar uma nota mas sem informar um comentário sobre o filme
 #     E informa uma nota
