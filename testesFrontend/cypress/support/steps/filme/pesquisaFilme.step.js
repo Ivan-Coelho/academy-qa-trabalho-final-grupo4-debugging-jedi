@@ -50,6 +50,11 @@ When('inserir o título do filme com letras maiúsculas e minúsculas misturadas
     cy.get('.search-input').type('sTaR wArS')
 })
 
+When('inserir um título que não corresponde a nenhum filme cadastrado', function () {
+    cy.get('.search-input').type('Istar uórz: u imperiu contar traca')
+})
+
+
 
 // Given('que acessei o site Raro Filmes', function () {
    

@@ -39,10 +39,11 @@ Quando inserir o título do filme com letras maiúsculas e minúsculas misturada
 E acionar o recurso de buscar
 Então o sistema deve retornar o filme correspondente ao título completo
 
-# Cenário: Não deve ser possível pesquisar um filme com título inexistente
-# Dado que o usuário inseriu um título que não corresponde a nenhum filme no banco de dados,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve informar que não foram encontrados resultados para a pesquisa.
+Cenário: Não deve ser possível pesquisar um filme com título inexistente
+Dado que o usuário acessou  a pagina inicial
+Quando inserir um título que não corresponde a nenhum filme cadastrado
+E acionar o recurso de buscar
+Então o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado
 
 # Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
 # Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
