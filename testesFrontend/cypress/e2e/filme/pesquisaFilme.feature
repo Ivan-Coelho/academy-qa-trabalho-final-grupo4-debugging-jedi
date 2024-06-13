@@ -63,10 +63,17 @@ Quando inserir um título com espaços extras antes ou depois do texto
 E acionar o recurso de buscar
 Então o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.
 
-# Cenário: Deve ser possível pesquisar um filme que contenha caracteres especiais no título
-# Dado que o usuário inseriu um título com caracteres especiais na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido, incluindo os caracteres especiais.
+Cenário: Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes
+Dado que um usuário não logado acessou  a pagina inicial
+Quando inserir um título de filme na caixa de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar o filme correspondente ao título inserido.
+
+Cenário: Deve ser possível um usuário logado no sistema realizar pesquisas no catálogo de filmes
+Dado que um usuário logado acessou o site
+Quando inserir um título de filme na caixa de pesquisa
+E acionar o recurso de buscar
+Então o sistema deve retornar o filme correspondente ao título inserido.
 
 # Cenário: Deve ser possível visualizar uma imagem de capa do filme encontrado 
 # Dado que o usuário inseriu um título na caixa de pesquisa,
@@ -74,19 +81,15 @@ Então o sistema deve ignorar os espaços extras e retornar o filme corresponden
 # Então o sistema deverá retornar o filme correspondente e uma imagem de capa que o represente.
 
 # Cenário: Deve ser possível visualizar a descrição contida no súmario do filme encontrado
-# Dado que o usuário encontrou um filme pesquisado,
-# Quando selecionar o filme encontrado,
+# Dado que o usuário acessou  a pagina inicial
+# Quando inserir o título completo do filme na barra de pesquisa
+# E acionar o recurso de buscar
 # Então o sistema deverá retornar as informações contidas na descrição do filme selecionado.
 
 # Cenário: Deve ser possível visualizar a nota do filme encontrado
 # Dado que o usuário encontrou um filme pesquisado,
 # Quando selecionar o filme encontrado,
 # Então o sistema deverá retornar as informações referente a nota de avaliação do filme retornado.
-
-# Cenário: Deve ser possível um usuário não logado no sistema realizar pesquisas no catálogo de filmes
-# Dado que um usuário não logado inseriu um título de filme na caixa de pesquisa,
-# Quando acionar o recurso de buscar,
-# Então o sistema deve retornar o filme correspondente ao título inserido.
 
 # Cenário: Deve ser possível um usuário comum realizar uma pesquisa no catálogo de filmes
 # Dado que um usuário comum inseriu um título de filme na caixa de pesquisa,
