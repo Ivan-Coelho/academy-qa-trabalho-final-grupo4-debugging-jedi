@@ -242,6 +242,86 @@ describe('Testes de criação de usuário', function () {
         });
       });
 
+
+      it('Deve ser possível criar usuário cujo email possua 60 caracteres ', function () {
+
+        name = faker.person.fullName();
+        email = 'emailcomsessentacaracteresaceitonotestedelimite@gmail.com.br';
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+  
+  
+      it('Deve ser possível criar usuário cujo email possua 59 caracteres ', function () {
+  
+        name = faker.person.fullName();
+        email = 'emailcomsessentacaracteresaceitonotestedelimit@gmail.com.br';
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });      
+
+      it('Deve ser possível criar usuário cujo nome possua 1 caractere ', function () {
+        name = 'A';
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: '123456'
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+
     })   
   
   })      
