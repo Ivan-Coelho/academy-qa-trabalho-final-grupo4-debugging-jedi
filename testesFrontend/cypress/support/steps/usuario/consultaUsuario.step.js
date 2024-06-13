@@ -43,34 +43,34 @@ Before({ tags: "@filmeReviewComum" }, function () {
   });
 });
 
-Before({ tags: "@filmeReviewCritico" }, function () {
-  cy.criarUsuarioAdmin().then(function (dadosAdmin) {
-    cy.cadastrarFilme(dadosAdmin.token).then(function (response) {
-      cy.wrap(dadosAdmin).as("userAdmin");
-      cy.wrap(response).as("dadosFilme");
+// Before({ tags: "@filmeReviewCritico" }, function () {
+//   cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+//     cy.cadastrarFilme(dadosAdmin.token).then(function (response) {
+//       cy.wrap(dadosAdmin).as("userAdmin");
+//       cy.wrap(response).as("dadosFilme");
 
-      cy.criarUsuarioCritico().then(function (dadosCritico) {
-        cy.criarReview(response.body.id, dadosCritico.token).then(function (
-          review
-        ) {
-          notaCritico = review.score;
+//       cy.criarUsuarioCritico().then(function (dadosCritico) {
+//         cy.criarReview(response.body.id, dadosCritico.token).then(function (
+//           review
+//         ) {
+//           notaCritico = review.score;
 
-          cy.inativarConta(dadosCritico.token);
-          cy.wrap(sNota).as("somaNota");
-        });
-      });
-    });
-  });
-});
+//           cy.inativarConta(dadosCritico.token);
+//           cy.wrap(sNota).as("somaNota");
+//         });
+//       });
+//     });
+//   });
+// });
 
-//   After({ tags: '@deletar' }, function () {
-//     cy.get('@userAdmin').then(function (userAdmin) {
-//         cy.get('@dadosFilme').then(function (response) {
-//             cy.deletarFilme(response.body.id, userAdmin.token);
-//             cy.deletarUsuario(userAdmin.id, userAdmin.token);
-//         })
-//     })
-// })
+  After({ tags: '@deletar' }, function () {
+    cy.get('@userAdmin').then(function (userAdmin) {
+        cy.get('@dadosFilmeC').then(function (response) {
+            cy.deletarFilme(response.body.id, userAdmin.token);
+            cy.deletarUsuario(userAdmin.id, userAdmin.token);
+        })
+    })
+})
 
 Given(
   "que o usuário comum está logado e autenticado na aplicação",
@@ -82,7 +82,7 @@ Given(
   }
 );
 
-Given("que o usuário não está autenticado na aplicação", function () {});
+// Given("que o usuário não está autenticado na aplicação", function () {});
 
 When("o usuário acessa a seção de consulta de avaliações", function () {
   paginaInicial.clickPaginaPerfil();
@@ -153,15 +153,22 @@ Then("os detalhes do filme avaliado são exibidos", function () {
 
 // Then("as avaliações devem estar marcadas conforme o perfil", function () {});
 
-Then("que o usuário não possui avaliações registradas", function () {});
-
-Then("e exibida uma lista de avaliçoes vazia", function () {
-  cy.get(paginaDetalhes.cardReview).should("not.be.visible")
-
-    cy.get(paginaDetalhes.reviewScore1).should("not.be.visible");
-    cy.get(paginaDetalhes.reviewDetalhesScore).should("have.length", 1);
+Then("que o usuário não possui avaliações registradas", function () {
+  cy.get('@userAdmin').then(function (userAdmin) {
+    cy.get('@dadosFilmeC').then(function (response) {
+      cy.deletarFilme(response.body.id, userAdmin.token);
 });
 
-Then("o acesso é negado", function () {});
+});
+});
 
-Then("uma mensagem de erro é exibida", function () {});
+Then("e exibida uma lista de avaliçoes vazia", function () {
+    cy.get(paginaDetalhes.cardReview).should("not.exist");
+    cy.get('.ratings-container').should('be.empty');
+    cy.get(paginaDetalhes.reviewScore1).should("not.exist");
+    cy.get(paginaDetalhes.reviewDetalhesScore).should("have.length", 0);
+});
+
+// Then("o acesso é negado", function () {});
+
+// Then("uma mensagem de erro é exibida", function () {});

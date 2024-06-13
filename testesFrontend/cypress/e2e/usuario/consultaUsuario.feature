@@ -6,6 +6,7 @@ Funcionalidade: Consulta de avaliações do usuário
     
     Contexto: Consulta de Avaliações do Usuário comum Autenticado
         Dado que o usuário comum está logado e autenticado na aplicação
+
         @filmeReviewComum @deletar 
         Cenario: Consulta de Avaliações por Usuário 
             Quando o usuário acessa a seção de consulta de avaliações 
@@ -31,16 +32,17 @@ Funcionalidade: Consulta de avaliações do usuário
         #     E existem avaliaçoes anteriores para o mesmo filme feita pelos perfis crítico e administrador
         #     Entao todas as avaliações feitas pelo usuário são exibidas
         #     E as avaliações devem estar marcadas conforme o perfil
-
+        @filmeReviewComum @deletar
         Cenario: Consulta de Avaliações por Usuário sem avaliação registrada
             Quando o usuário acessa a seção de consulta de avaliações
             E que o usuário não possui avaliações registradas
             Entao e exibida uma lista de avaliçoes vazia
+        
                  
     # Contexto: Consulta de Avaliações do Usuário não Autenticado
-        Dado que o usuário não está autenticado na aplicação
+        # Dado que o usuário não está autenticado na aplicação
         
-        Cenario: Nao deve ser possivel que um usuário não autenticado acesse as avaliações
-            Quando o usuário acessa a seção de consulta de avaliações
-            Entao o acesso é negado
-            E uma mensagem de erro é exibida
+        # Cenario: Nao deve ser possivel que um usuário não autenticado acesse as avaliações
+        #     Quando o usuário acessa a seção de consulta de avaliações
+        #     Entao o acesso é negado
+        #     E uma mensagem de erro é exibida
