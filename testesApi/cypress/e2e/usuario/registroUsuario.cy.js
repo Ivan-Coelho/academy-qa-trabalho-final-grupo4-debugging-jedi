@@ -168,4 +168,80 @@ describe('Testes do método POST da rota /users', function () {
       });
   
     }) 
-}) 
+   
+describe('Testes de criação de usuário', function () {
+      var idUsuario;
+      var name;
+      var senha = '123456';
+      var email;
+      var token;
+      const tipoUsuarioComum = 0;
+      const usuarioAtivo = true;
+  
+      afterEach(function () {
+        cy.autenticarUsuario(email, senha).then(function (response) {
+          token = response.body.accessToken;
+          cy.inativarUsuario(token);
+        })
+      }) 
+
+      it('Deve ser possível criar usuário com dados válidos', function () {
+
+        name = faker.person.fullName();
+        email = faker.internet.email().toLowerCase();
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+  
+  
+  
+        });
+      });
+
+      it('Deve ser possível criar usuário cujo email possua 6 caracteres ', function () {
+
+        name = faker.person.fullName();
+        email = 'a@i.co';
+  
+        cy.request('POST', '/users', {
+          name: name,
+          email: email,
+          password: senha
+        }).then(function (response) {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.have.property('id');
+          expect(response.body).to.have.property('name');
+          expect(response.body).to.have.property('email');
+          expect(response.body).to.have.property('type');
+          expect(response.body).to.have.property('active');
+          expect(response.body.id).to.be.an('number');
+          expect(response.body.name).to.be.an('string');
+          expect(response.body.email).to.be.an('string');
+          expect(response.body.type).to.be.an('number');
+          expect(response.body.name).to.equal(name);
+          expect(response.body.email).to.equal(email);
+          expect(response.body.type).to.equal(tipoUsuarioComum);
+          expect(response.body.active).to.equal(usuarioAtivo);
+        });
+      });
+
+    })   
+  
+  })      
