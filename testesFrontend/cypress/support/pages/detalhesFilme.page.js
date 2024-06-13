@@ -47,11 +47,20 @@ export default class DetalhesFilmePage{
     
     totalReviewUsuarios = '.user-review-info'
     reviewUsuarios = '.user-review-card'
+    reviewDetalhesUsuario = ".profile-main-container > :nth-child(2)"
+    reviewTitulo1 = ":nth-child(1) > .review-card-header > p"
+    reviewTitulo2 = ":nth-child(2) > .review-card-header > p"
+    reviewScore1 = ":nth-child(1) > .stars"
+    reviewScore2 = ":nth-child(2) > .stars"
+    reviewScore3 = ":nth-child(3) > .stars"
     notaUsuario = 'star-container-reviewcard'
     nomeUsuario = 'h3.user-reviecard-info'
     comentarioUsuario = 'p.user-reviecard-info'
-
+    reviewDetalhesScore = ".stars"
+    cardReview = ".profile-review-card"
     dataReview = ".user-review-card label"
+    
+
 
     clickButtonLogin(){
         cy.get(this.buttonLoginAva).click();
