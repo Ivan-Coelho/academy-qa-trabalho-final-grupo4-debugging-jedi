@@ -15,15 +15,15 @@ Given ('que o usuário acessou  a pagina inicial', function () {
 })
 
 When('inserir o título completo do filme na barra de pesquisa', function () {
-    
+    cy.get('.search-input').type('Star Wars')
 })
 
 When('acionar o recurso de buscar', function () {
-    
+    cy.get('.search-button').click()
 })
 
 Then('o sistema deve retornar o filme correspondente ao título completo', function () {
-    
+    cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
 })
 
 // Given('que acessei o site Raro Filmes', function () {
