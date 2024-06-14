@@ -56,7 +56,73 @@ describe('Testes do método POST da rota /users', function () {
         });
       });
 
-    it('Deve receber bad request ao tentar cadastrar um usuário com e-mail invalido', function () {
+      it('Deve receber bad request ao tentar cadastrar um usuário enviando string vazia para os valores das chaves do body', function () {
+    
+       
+        cy.request({
+          method: 'POST',
+          url: '/users',
+          body: {
+            name: "",
+            email: "",
+            password: ""
+          },
+          failOnStatusCode: false,
+        }).then((response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body).to.have.property('error');
+          expect(response.body.message[0]).to.include('name must be longer than or equal to 1 characters');
+          expect(response.body.message[1]).to.include('name should not be empty');
+          expect(response.body.message[2]).to.include('email must be longer than or equal to 5 characters');
+          expect(response.body.message[3]).to.include('email must be an email');
+          expect(response.body.message[4]).to.include('email should not be empty');
+          expect(response.body.message[5]).to.include('password must be longer than or equal to 6 characters');
+          expect(response.body.message[6]).to.include('password should not be empty');
+        });
+    });
+
+    it('Deve receber bad request ao tentar cadastrar um usuário enviando string vazia para o nome', function () {
+    
+       
+      cy.request({
+        method: 'POST',
+        url: '/users',
+        body: {
+          name: "",
+          email: "email@12345",
+          password: "123456"
+        },
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.equal(400);
+        expect(response.body).to.have.property('error');
+        expect(response.body.message[0]).to.include('name must be longer than or equal to 1 characters');
+        expect(response.body.message[1]).to.include('name should not be empty');
+      });
+  });
+
+  it('Deve receber bad request ao tentar cadastrar um usuário enviando string vazia para o email', function () {
+    
+       
+    cy.request({
+      method: 'POST',
+      url: '/users',
+      body: {
+        name: "Maria da Silva",
+        email: "",
+        password: "123445"
+      },
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.equal(400);
+      expect(response.body).to.have.property('error');
+      expect(response.body.message[0]).to.include('email must be longer than or equal to 5 characters');
+      expect(response.body.message[1]).to.include('email must be an email');
+      expect(response.body.message[2]).to.include('email should not be empty');
+    });
+  });
+
+  it('Deve receber bad request ao tentar cadastrar um usuário com e-mail invalido', function () {
         cy.request({
           method: 'POST',
           url: '/users',
@@ -120,7 +186,26 @@ describe('Testes do método POST da rota /users', function () {
           expect(response.body).to.have.property('error')
           expect(response.body.message[0]).to.include('name must be shorter than or equal to 100 characters')
         });
-      });    
+      });   
+      
+    it('Deve receber bad request ao tentar cadastrar um usuário enviando string vazia para a senha', function () {
+    
+       
+        cy.request({
+          method: 'POST',
+          url: '/users',
+          body: {
+            name: "Joaquim Dias",
+            email: "joaquim23432@gmail.com",
+            password: ""
+          },
+          failOnStatusCode: false,
+        }).then((response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body).to.have.property('error');
+          expect(response.body.message[0]).to.include('password must be longer than or equal to 6 characters');
+          expect(response.body.message[1]).to.include('password should not be empty');
+        });      
       
     it('Deve receber bad request ao tentar cadastrar um usuário cuja senha possua 5 caracteres', function () {
         cy.request({
@@ -567,5 +652,5 @@ describe('Testes de criação de usuário', function () {
       });
      
     });   
-  
+  })
   })      
