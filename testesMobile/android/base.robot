@@ -1,6 +1,12 @@
 *** Settings ***
 
 Library    AppiumLibrary
+Library    FakerLibrary
 
-Resource    page/Page.robot
+#Utils
 Resource    utils/config.robot
+Resource    utils/commons.robot
+Resource    utils/commonsApi.robot
+
+#Pages
+Resource    page/Page.robot
