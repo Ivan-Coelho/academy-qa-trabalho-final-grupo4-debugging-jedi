@@ -344,3 +344,15 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add("login", (usuario) => {
+  let informacoes = {
+    email: usuario.email,
+    password: usuario.password,
+  }
+  return cy
+    .request({
+      method: "POST",
+      url: baseUrl + "/users",
+      body: informacoes,
+    }); 
+});
