@@ -265,3 +265,16 @@ Cypress.Commands.add("listarReview", function (token) {
     headers: { Authorization: "Bearer " + token },
   });
 });
+
+Cypress.Commands.add("login", (usuario) => {
+  let informacoes = {
+    email: usuario.email,
+    password: usuario.password,
+  }
+  return cy
+    .request({
+      method: "POST",
+      url: baseUrl + "/users",
+      body: informacoes,
+    }); 
+});
