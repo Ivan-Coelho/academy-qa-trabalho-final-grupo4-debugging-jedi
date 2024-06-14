@@ -251,6 +251,63 @@ describe('Testes do método POST da rota /users', function () {
         });
   
       });
+
+      it.skip('Deve receber bad request ao tentar cadastrar um usuário enviando 6 espaços em branco para o email', function () {
+        cy.request({
+          method: 'POST',
+          url: '/users',
+          body: {
+            name: "Maria da Silva",
+            email: "              ",
+            password: "123445"
+          },
+          failOnStatusCode: false,
+        }).then((response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body).to.have.property('error');
+          expect(response.body.message).to.include('email must be an email');
+  
+        });
+      });
+  
+      //cenario pulado devido ao erro de cadastrar nome com espaços em branco
+      it.skip('Deve receber bad request ao tentar cadastrar um usuário enviando um espaço em branco  para o nome', function () {
+        cy.request({
+          method: 'POST',
+          url: '/users',
+          body: {
+            name: "  ",
+            email: "nome2232@gmail.com",
+            password: "123456"
+          },
+          failOnStatusCode: false,
+        }).then((response) => {
+          expect(response.status).to.equal(400);
+          expect(response.body).to.have.property('error');
+          expect(response.body.message).to.include('name should not be empty');
+        });
+      });
+  
+     //cenario pulado devido ao erro de cadastrar senha com espaços em branco
+      it.skip('Deve receber bad request ao tentar cadastrar um usuário enviando 6 espaços em branco para a senha', function () {
+  
+        cy.request({
+         method: 'POST',
+         url: '/users',
+         body: {
+           name: "Joaquim Dias",
+           email: "joaquim23432@gmail.com",
+           password: "      "
+         },
+         failOnStatusCode: false,
+       }).then((response) => {
+         expect(response.status).to.equal(400);
+         expect(response.body).to.have.property('error');
+         expect(response.body.message[1]).to.include('password should not be empty');
+       });
+     });
+  
+    })      
   
     }) 
    
@@ -653,4 +710,4 @@ describe('Testes de criação de usuário', function () {
      
     });   
   })
-  })      
+      
