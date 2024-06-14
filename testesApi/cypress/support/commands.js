@@ -26,20 +26,40 @@
 
 import { faker } from "@faker-js/faker";
 // validar as URL
-Cypress.Commands.add("criarUsuario", function () {
-  let user = {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    password: "123456",
+Cypress.Commands.add("criarUsuario", () => {
+  const user = {
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      password: "123456",
   };
-  cy.request({
-    method: "POST",
-    url: "/users",
-    body: user,
-  }).then(function (response) {
-    return response;
+
+  return cy.request({
+      method: "POST",
+      url: "/users",
+      body: user,
+  }).then((response) => {
+      const usuario = response.body;
+
+      return cy.request({
+          method: "POST",
+          url: "/auth/login",
+          body: {
+              email: usuario.email,
+              password: "123456",
+          },
+      }).then((response) => {
+          const tokenComum = response.body.accessToken;
+
+          return {
+              nome: user.name,
+              email: user.email,
+              id: usuario.id,
+              token: tokenComum,
+          };
+      });
   });
 });
+
 
 Cypress.Commands.add("usuarioLogado", function () {
   let user = {
@@ -266,15 +286,13 @@ Cypress.Commands.add("listarReview", function (token) {
   });
 });
 
-Cypress.Commands.add("login", (usuario) => {
-  let informacoes = {
-    email: usuario.email,
-    password: usuario.password,
-  }
-  return cy
-    .request({
-      method: "POST",
-      url: baseUrl + "/users",
-      body: informacoes,
-    }); 
+Cypress.Commands.add("login", (infoUsuario) => {
+  cy.request({
+    method: "POST",
+    url: "/auth/login",
+    body: {
+      email: infoUsuario.email,
+      password: infoUsuario.password
+    },
+  });
 });
