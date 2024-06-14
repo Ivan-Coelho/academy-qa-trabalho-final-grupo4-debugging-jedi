@@ -53,6 +53,20 @@ export default class DetalhesFilmePage{
     // notaUsuario = 'star-container-reviewcard'
     // nomeUsuario = 'h3.user-reviecard-info'
     // comentarioUsuario = 'p.user-reviecard-info'
+    reviewDetalhesUsuario = ".profile-main-container > :nth-child(2)"
+    reviewTitulo1 = ":nth-child(1) > .review-card-header > p"
+    reviewTitulo2 = ":nth-child(2) > .review-card-header > p"
+    reviewScore1 = ":nth-child(1) > .stars"
+    reviewScore2 = ":nth-child(2) > .stars"
+    reviewScore3 = ":nth-child(3) > .stars"
+    notaUsuario = 'star-container-reviewcard'
+    nomeUsuario = 'h3.user-reviecard-info'
+    comentarioUsuario = 'p.user-reviecard-info'
+    reviewDetalhesScore = ".stars"
+    cardReview = ".profile-review-card"
+    dataReview = ".user-review-card label"
+    
+    cardReviewNome ='.profile-nickname label'
 
     nomeUsuario1 = ':nth-child(1) > .user-review-info > .user-reviecard-info > h3'
     comentarioUsuario1 =':nth-child(1) > p'
