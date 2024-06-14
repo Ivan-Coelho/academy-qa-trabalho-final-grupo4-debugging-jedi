@@ -26,40 +26,20 @@
 
 import { faker } from "@faker-js/faker";
 // validar as URL
-Cypress.Commands.add("criarUsuario", () => {
-  const user = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      password: "123456",
+Cypress.Commands.add("criarUsuario", function () {
+  let user = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: "123456",
   };
-
-  return cy.request({
-      method: "POST",
-      url: "/users",
-      body: user,
-  }).then((response) => {
-      const usuario = response.body;
-
-      return cy.request({
-          method: "POST",
-          url: "/auth/login",
-          body: {
-              email: usuario.email,
-              password: "123456",
-          },
-      }).then((response) => {
-          const tokenComum = response.body.accessToken;
-
-          return {
-              nome: user.name,
-              email: user.email,
-              id: usuario.id,
-              token: tokenComum,
-          };
-      });
+  cy.request({
+    method: "POST",
+    url: "/users",
+    body: user,
+  }).then(function (response) {
+    return response;
   });
 });
-
 
 Cypress.Commands.add("usuarioLogado", function () {
   let user = {
@@ -286,13 +266,80 @@ Cypress.Commands.add("listarReview", function (token) {
   });
 });
 
-Cypress.Commands.add("login", (infoUsuario) => {
+Cypress.Commands.add("cadastrarFilmeComBody", function (tokenAdmin, body) {
   cy.request({
     method: "POST",
-    url: "/auth/login",
-    body: {
-      email: infoUsuario.email,
-      password: infoUsuario.password
-    },
+    url: "/movies",
+    headers: { Authorization: "Bearer " + tokenAdmin },
+    body: body,
+  }).then(function (response) {
+    return {
+      id: response.body.id,
+      title: response.body.title,
+      genre: response.body.genre,
+      description: response.body.description,
+      durationInMinutes: response.body.durationInMinutes,
+      releaseYear: response.body.releaseYear,
+    };
   });
 });
+
+Cypress.Commands.add("atualizarFilme", function (tokenAdmin, id, body) {
+  cy.request({
+    method: "PUT",
+    url: `/movies/${id}`,
+    headers: { Authorization: "Bearer " + tokenAdmin },
+    failOnStatusCode: false,
+    body: body,
+  }).then(function (response) {
+    return response;
+  });
+});
+
+Cypress.Commands.add(
+  "buscarFilmeResponseCompleto",
+  function (titulo, token = null) {
+    return cy
+      .request({
+        method: "GET",
+        url: "/movies/search",
+        headers: { Authorization: "Bearer " + token },
+        qs: { title: titulo },
+      })
+      .then(function (response) {
+        return response;
+      });
+  }
+);
+
+Cypress.Commands.add("buscarListaFilme", function (token = null, sort = false) {
+  return cy
+    .request({
+      method: "GET",
+      url: "/movies",
+      headers: { Authorization: "Bearer " + token },
+      qs: { sort: sort },
+    })
+    .then(function (response) {
+      return response;
+    });
+});
+
+Cypress.Commands.add(
+  "criarReviewCompleto",
+  function (idFilme, score, reviewText, token) {
+    cy.request({
+      method: "POST",
+      url: "users/review",
+      failOnStatusCode: false,
+      body: {
+        movieId: idFilme,
+        score: score,
+        reviewText: reviewText,
+      },
+      headers: { Authorization: "Bearer " + token },
+    }).then(function (response) {
+      return response;
+    });
+  }
+);
