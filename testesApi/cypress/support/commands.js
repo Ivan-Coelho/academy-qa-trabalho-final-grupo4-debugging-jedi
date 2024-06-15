@@ -433,3 +433,13 @@ Cypress.Commands.add(
     });
   }
 );
+Cypress.Commands.add("login", (infoUsuario) => {
+  cy.request({
+    method: "POST",
+    url: "/auth/login",
+    body: {
+      email: infoUsuario.email,
+      password: infoUsuario.password
+    },
+  })
+})

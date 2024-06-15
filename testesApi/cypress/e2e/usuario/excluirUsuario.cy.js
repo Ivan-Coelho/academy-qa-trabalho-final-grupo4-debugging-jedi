@@ -1,14 +1,15 @@
-describe ("Excluir Usuarios", () => {
-    let token;
-    let filme;
+describe ("Excluir Usuários", () => {
     let usuario;
-    let usuarioExcluido;
 
     beforeEach(() => {
         cy.criarUsuario().then((novoUsuario) => {
             usuario = novoUsuario;
         });
-    });
+    })
+
+    afterEach(() => {
+        cy.deletarUsuario(usuario);
+    })
 
     it("Um administrador deve poder excluir um usuário", () => {
         cy.criarUsuarioAdmin().then(function (dadosAdmin) {
