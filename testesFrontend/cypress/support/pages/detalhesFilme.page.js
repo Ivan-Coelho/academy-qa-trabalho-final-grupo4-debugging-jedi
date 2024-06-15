@@ -49,7 +49,7 @@ export default class DetalhesFilmePage{
     textoAvaliacaoUsuarios = '.user-reviews-section > h2'    
     
     totalReviewUsuarios = '.user-review-info'
-    // reviewUsuarios = '.user-review-card'
+    reviewUsuarios = '.user-review-card'
     // notaUsuario = 'star-container-reviewcard'
     // nomeUsuario = 'h3.user-reviecard-info'
     // comentarioUsuario = 'p.user-reviecard-info'
@@ -72,11 +72,16 @@ export default class DetalhesFilmePage{
     comentarioUsuario1 =':nth-child(1) > p'
     notausuario1 = ':nth-child(1) > .user-review-info > .user-reviecard-info > .star-container-reviewcard > .filled'
     datausuario1 = '.user-reviews-container > :nth-child(1) > label'
+    datausuario = '.user-review-card > label'
 
     nomeUsuario2 = ':nth-child(2) > .user-review-info > .user-reviecard-info > h3'
     comentarioUsuario2 =':nth-child(2) > p'
     notausuario2 = ':nth-child(2) > .user-review-info > .user-reviecard-info > .star-container-reviewcard > .filled'
     datausuario2 = '.user-reviews-container > :nth-child(2) > label'
+
+    mensagemAlerta = '.modal-body'
+    textoMensagemAlerta = '.error-message'
+    buttonOkErro = '.modal-actions'       
 
     clickButtonLogin(){
         cy.get(this.buttonLoginAva).click();
@@ -104,6 +109,14 @@ export default class DetalhesFilmePage{
     }
     clickEstrela5(){
         cy.get(this.estrelaAvaliacao5).click();
+    }
+
+    criarReview(review){
+        cy.get(this.estrelaAvaliacao3).click();
+        cy.get(this.inputReview).clear().type(review)
+        cy.get(this.buttonEnviar).click();
+        
+
     }
 
 }

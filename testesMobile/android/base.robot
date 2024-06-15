@@ -2,6 +2,7 @@
 
 Library    AppiumLibrary
 Library    FakerLibrary
+Library    RequestsLibrary
 
 #Utils
 Resource    utils/config.robot
