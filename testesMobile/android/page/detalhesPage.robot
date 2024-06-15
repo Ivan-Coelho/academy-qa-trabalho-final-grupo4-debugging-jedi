@@ -28,7 +28,7 @@ ${CARD_REI_LEAO}                xpath=//android.widget.ImageView[contains(@conte
 
 *** Keywords ***
 
-Dado que usuario não cadastrado acessa o site
+Dado que usuario comum acessa o site
     Abrir App
 Quando acessa a página de detalhes de um filme
 
@@ -46,14 +46,22 @@ Dado que usuário logado acessa o site
     Registrar Usuário
     Efetuar Login com Dados Registrados  
 
-# Então usuário conseguirá ver detalhes do filme Rei leao
-#     Element Should Be Visible    ${LABEL_HOME}
-#     Swipe até o elemento visível    ${PARTE_DO_CONTENT_DESC}
-#     Clicar no Elemento               ${PARTE_DO_CONTENT_DESC}
+Então o usuário conseguirá visualizar um totalizador das avaliações
     
-Quando acessa a página de detalhes do filme rei leao
+Quando acessa o filme especifico
     
     Element Should Be Visible    ${LABEL_HOME}
     Swipe até o elemento visível    ${CARD_REI_LEAO}
     Sleep    2    
     Clicar no Elemento               ${CARD_REI_LEAO}
+
+Então usuário conseguirá ver a página de detalhes do filme especifico
+    Wait Until Page Contains Element        ${LABEL_TITULO}
+    Verifica se contem o text no content-desc    ${CARD_FILME}    Ano de Lançamento:
+    Verifica se contem o text no content-desc    ${CARD_FILME}    Duração:
+    Verifica se contem o text no content-desc    ${CARD_FILME}    Gênero:
+    Wait Until Page Contains Element    ${CARD_VALIACAO_AUDIENCIA}
+    Swipe até o elemento visível    ${CARD_VALIACAO_CRITICA}
+    Swipe Até Elemento Visível    ${CARD_VALIACOES}
+    Wait Until Page Contains Element    ${ADICIONAR_REVIEW}
+

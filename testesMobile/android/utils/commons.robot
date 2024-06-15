@@ -70,3 +70,9 @@ Swipe até o elemento visível
         Swipe    500    1500    500    500
         ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=2s
     END
+
+Verifica se contem o text no content-desc
+    [Arguments]    ${elemento}    ${text}
+    Wait Until Element Is Visible    ${elemento}    5s
+    ${contentDesc}    Get Element Attribute    ${elemento}    content-desc
+    Should Contain    ${contentDesc}    ${text}
