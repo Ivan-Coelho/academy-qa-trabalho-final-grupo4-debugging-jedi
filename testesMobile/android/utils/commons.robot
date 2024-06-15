@@ -57,3 +57,10 @@ Efetuar Login com Dados Registrados
       
     Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
     Click Element    ${BTN_LOGIN}
+Swipe até o elemento visível
+    [Arguments]    ${element_locator}    ${timeout}=30s
+    ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=${timeout}
+    WHILE    '${status}' == 'False'
+        Swipe    500    1500    500    500
+        ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=2s
+    END
