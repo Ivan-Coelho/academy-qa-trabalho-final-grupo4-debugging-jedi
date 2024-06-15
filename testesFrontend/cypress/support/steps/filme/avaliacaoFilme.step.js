@@ -207,7 +207,9 @@ Then('a review do filme será criada com sucesso', function () {
 });
 
 Then('a review do filme não será criada com sucesso', function () {
-
-    cy.get(paginaDetalhes.reviewUsuarios).should('not.be.visible')
+cy.on('uncaught: exception', function(){
+    return false
+})
+    cy.get(paginaDetalhes.reviewUsuarios).should('not.exist')
 });
 

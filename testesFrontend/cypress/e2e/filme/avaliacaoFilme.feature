@@ -20,6 +20,7 @@ Cenário: Usuário criar review em um filme já com uma review deve alterar a no
     E envia a avaliação do filme
     Então a avaliação do filme será criada
     E a avaliação do filme será criada
+    E a nota de audiência será alterada para a média
 
 @cadastroFilme @deletar
 Cenário: Deve ser possível para um usuário logado criar uma review com sucesso ao informar uma nota mas sem informar um comentário sobre o filme
@@ -64,3 +65,4 @@ Cenário: não deve ser possível criar uma review com comentário com mais de 5
     
 
 # cenário de interferencia de nota
+#Acho que perdi cenários aqui 
