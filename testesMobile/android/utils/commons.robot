@@ -33,7 +33,8 @@ Registrar Usuário
     Dado que o usuario acessa a tela inicial
     Entao deve visualizar a home
     Quando clica na opcao menu
-    E clica na opcao registrar-se
+    Wait Until Element Is Visible    ${REGISTRE-SE}    
+    Click Element    ${REGISTRE-SE}
     
     Wait Until Element Is Visible        ${NOME}    10
     [Arguments]
@@ -45,13 +46,14 @@ Registrar Usuário
     Clica no elemento e insere texto    ${CONFIRMAR_SENHA}    123456
     Hide Keyboard
     Click Element    ${REGISTRAR}
-    ${emailR}    Set Variable    ${email_random}
+    Set Global Variable    ${emailR}    ${email_random}
     Entao o usuario sera registrado
 
 Efetuar Login com Dados Registrados  
     Wait Until Element Is Visible        ${HOME}    10
     Quando acessa a página de Login
     Wait Until Element Is Visible       ${CAMPO_LOGIN}          
-    Clica no elemento e insere texto  ${IMPUT_EMAIL}   ${emailR}     
+    Clica no elemento e insere texto  ${IMPUT_EMAIL}   ${emailR}  
+      
     Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
     Click Element    ${BTN_LOGIN}
