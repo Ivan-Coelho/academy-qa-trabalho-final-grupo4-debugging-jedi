@@ -265,3 +265,26 @@ Cypress.Commands.add("listarReview", function (token) {
     headers: { Authorization: "Bearer " + token },
   });
 });
+
+Cypress.Commands.add('autenticarUsuario',function(email, password ){
+  cy.request({
+      method: 'POST',
+      url: '/auth/login',
+      body: { 
+          email: email,
+          password: password
+      }
+  }).then(function (response) {
+      return response
+  })
+});
+
+Cypress.Commands.add('inativarUsuario',function (token){
+  cy.request({
+      method: 'PATCH',
+      url: '/users/inactivate',
+      headers: {Authorization: 'Bearer '+ token}
+  }).then(function (response) {
+      return response
+  })
+});
