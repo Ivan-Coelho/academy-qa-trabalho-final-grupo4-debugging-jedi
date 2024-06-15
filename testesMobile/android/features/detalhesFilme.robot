@@ -33,7 +33,7 @@ CT 05- A página de detalhes do filme deve conter a opção para avaliar o filme
     Então será permitido criar uma avaliação para o filme 
 
 CT 06- A página de detalhes do filme deve conter todas as avaliações registradas para o filme
-    Dado que usuario não cadastrado acessa o site
-    Quando informa o id valido de um filme para acessar a pagina do filme
+    Dado que usuario comum acessa o site
+    Quando acessa a página de detalhes de um filme
     Então o usuário conseguirá visualizar todas as avaliações registradas para o filme
  
