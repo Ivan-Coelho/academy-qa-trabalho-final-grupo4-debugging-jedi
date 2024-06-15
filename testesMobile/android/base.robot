@@ -11,3 +11,4 @@ Resource    utils/commonsApi.robot
 
 #Pages
 Resource    page/Page.robot
+Resource    page/detalhesPage.robot

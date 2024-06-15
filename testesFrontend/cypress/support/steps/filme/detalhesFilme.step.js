@@ -138,7 +138,7 @@ When('informa o id valido de um filme para acessar a pagina do filme', function 
 })
 
 When('informa o id de um filme {string}', function (id) {
-    cy.visit('/movies/' + id)
+    cy.visit('/movies/' + id);
 });
 
 Then('usuário conseguirá ver a página de detalhes do filme', function () {
