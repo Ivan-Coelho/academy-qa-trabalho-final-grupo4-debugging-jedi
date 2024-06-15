@@ -344,3 +344,18 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add("evoluirCritico", function (token) {
+  cy.request({
+    method: "PATCH",
+    url: "/users/apply",
+    headers: { Authorization: "Bearer " + token },
+  });
+});
+
+Cypress.Commands.add("evoluirAdministrador", function (token) {
+  cy.request({
+    method: "PATCH",
+    url: "/users/admin",
+    headers: { Authorization: "Bearer " + token },
+  });
+});
