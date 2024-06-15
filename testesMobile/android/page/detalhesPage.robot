@@ -11,8 +11,9 @@ Library    OperatingSystem
 ${HOME}			                 xpath=//android.view.View[@content-desc="Home"]
 ${BTN_MENU}		                 xpath=//android.widget.Button[@content-desc="Open navigation menu"]
 ${VIEW_FILME}                    xpath=//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View
-${CARD_FILME}                    xpath=//android.widget.ImageView[contains(@content-desc, '${parte_do_content_desc}')]
-${PARTE_DO_CONTENT_DESC}    Por lugares incríveis
+
+${CARD_FILME}                    xpath=//android.widget.ImageView[contains(@content-desc, '')]
+
 ${CARD_VALIACAO_AUDIENCIA}       xpath=//android.view.View[contains(@content-desc,"Avaliação da audiência")]
 ${CARD_VALIACAO_CRITICA}         xpath=//android.view.View[contains(@content-desc,"Avaliação da crítica")]
 ${CARD_VALIACOES}                xpath=//android.widget.ImageView[contains(@content-desc,"")]/android.view.View[3]
@@ -22,14 +23,15 @@ ${LABEL_TITULO}		             xpath=//android.view.View[@content-desc="Detalhes 
 ${LABEL_HOME}		             xpath=//android.view.View[@content-desc="Home"]
 ${BASE_URL}                      url=https://raromdb-3c39614e42d4.herokuapp.com/api/movies
 
+${PARTE_DO_CONTENT_DESC}        O Rei Leão
+${CARD_REI_LEAO}                xpath=//android.widget.ImageView[contains(@content-desc, '${PARTE_DO_CONTENT_DESC}')]
 
 *** Keywords ***
-# ${filme_texto} =    Get Text    ${CARD_FILME}
 
 Dado que usuario não cadastrado acessa o site
     Abrir App
 Quando acessa a página de detalhes de um filme
-    
+
     Element Should Be Visible    ${LABEL_HOME}
     Wait Until Page Contains Element        ${CARD_FILME}
     Clicar no Elemento               ${CARD_FILME}
@@ -43,10 +45,15 @@ Então usuário conseguirá ver a página de detalhes do filme
 Dado que usuário logado acessa o site
     Registrar Usuário
     Efetuar Login com Dados Registrados  
-Criar Filme
-   ${filme_data} =    Create Dictionary
-    ...    title=Teste Raro
-    ...    genre=Debugando
-    ...    description=Eu gosto e assim
-    ...    durationInMinutes=124
-    ...    releaseYear=2024
+
+# Então usuário conseguirá ver detalhes do filme Rei leao
+#     Element Should Be Visible    ${LABEL_HOME}
+#     Swipe até o elemento visível    ${PARTE_DO_CONTENT_DESC}
+#     Clicar no Elemento               ${PARTE_DO_CONTENT_DESC}
+    
+Quando acessa a página de detalhes do filme rei leao
+    
+    Element Should Be Visible    ${LABEL_HOME}
+    Swipe até o elemento visível    ${CARD_REI_LEAO}
+    Sleep    2    
+    Clicar no Elemento               ${CARD_REI_LEAO}
