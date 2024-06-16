@@ -8,6 +8,7 @@ export default class LoginPage{
     inputSenha = ('[placeholder="Password"]');
 
     buttonLogin = ('.login-button')
+    campoLogin = ".login-form"
 
     inputFilmes = ('[placeholder="Buscar filmes"]');
     buttonPesquisarFilme = ('.search-button');
