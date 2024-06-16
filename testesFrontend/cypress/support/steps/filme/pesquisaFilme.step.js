@@ -1,10 +1,7 @@
 import {
   Given,
   When,
-  Then,
-  Before,
-  After,
-  BeforeAll,
+  Then
 } from "@badeball/cypress-cucumber-preprocessor";
 import { faker } from "@faker-js/faker";
 
