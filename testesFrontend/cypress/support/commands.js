@@ -349,7 +349,6 @@ Cypress.Commands.add('cadastrarFilme2', function (tokenAdmin) {
   })
 
 })
-
 Cypress.Commands.add('cadastrarFilmeComBody', function (tokenAdmin, body) {
     cy.request({
       method: 'POST',
