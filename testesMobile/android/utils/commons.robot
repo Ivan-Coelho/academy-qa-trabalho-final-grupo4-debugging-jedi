@@ -62,7 +62,7 @@ Efetuar Login com Dados Registrados
     Clica no elemento e insere texto  ${IMPUT_EMAIL}   ${emailR}  
     Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
     Click Element    ${BTN_LOGIN}
-    Sleep    5
+    Wait Until Element Is Visible    ${HOME}
 Swipe até o elemento visível
     [Arguments]    ${element_locator}    ${timeout}=5s
     ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=${timeout}
@@ -70,3 +70,21 @@ Swipe até o elemento visível
         Swipe    500    1500    500    500
         ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=2s
     END
+
+Efetua Login do usuário
+    [Arguments]    ${email}
+    Wait Until Element Is Visible        ${HOME}    10
+    Quando acessa a página de Login
+    Wait Until Element Is Visible       ${CAMPO_LOGIN}          
+    Clica no elemento e insere texto    ${IMPUT_EMAIL}   ${email}  
+    Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
+    Click Element    ${BTN_LOGIN}
+    Wait Until Element Is Visible    ${HOME}
+
+Verifica texto
+    [Arguments]    ${elemento}    ${texto}
+    ${contenDesc}=     AppiumLibrary.Get Element Attribute    ${elemento}    content-desc    
+    Should Contain    ${contenDesc}    ${texto}
+
+tira foto
+    Capture Page Screenshot

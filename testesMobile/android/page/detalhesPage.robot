@@ -42,7 +42,7 @@ Então usuário conseguirá ver a página de detalhes do filme
     Swipe até o elemento visível    ${CARD_VALIACAO_CRITICA}
     Swipe Até Elemento Visível    ${CARD_VALIACOES}
     
-Dado que usuário logado acessa o site
+Dado que usuário logado acessa o aplicativo
     Registrar Usuário
     Efetuar Login com Dados Registrados  
 

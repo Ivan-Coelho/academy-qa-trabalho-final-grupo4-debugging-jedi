@@ -23,15 +23,15 @@ Dado que usuario acessa o site
     Abrir App
 Quando acessa a página de Login
     
-    Element Should Be Visible    ${BTN_MENU}
+    Element Should Be Visible               ${BTN_MENU}
     Wait Until Page Contains Element        ${CARD_FILME}
-    Clicar no Elemento               ${BTN_MENU}
-    Element Should Be Visible    ${CAMPO_LOGIN}
-    Clicar no Elemento               ${CAMPO_LOGIN}
+    Clicar no Elemento                      ${BTN_MENU}
+    Element Should Be Visible               ${CAMPO_LOGIN}
+    Clicar no Elemento                      ${CAMPO_LOGIN}
 
-E realiza o Login
+# E realiza o Login
 
-    Espera o elemento e verifica o atributo ${BTN_LOGIN}   Login
-    Wait Until Page Contains Element        ${IMPUT_EMAIL}
-    Clica no elemento e insere texto    ${IMPUT_EMAIL}
-    Clica no elemento e insere texto    ${IMPUT_SENHA}
+    # Espera o elemento e verifica o atributo${BTN_LOGIN}       Login
+    # Wait Until Page Contains Element            ${IMPUT_EMAIL}
+    # Clica no elemento e insere texto            ${IMPUT_EMAIL}
+    # Clica no elemento e insere texto            ${IMPUT_SENHA}

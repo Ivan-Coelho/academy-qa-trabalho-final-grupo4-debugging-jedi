@@ -26,3 +26,51 @@ ${BTN_SALVAR}		             xpath=//android.widget.Button[@content-desc="Salvar"
 ${ERRO_LOGIN}		             xpath=//android.view.View[@content-desc="Faça login e tente novamente."]
 ${SUCESSO_REVIEW}		         xpath=//android.view.View[@content-desc="Sua review foi adicionada!"]
 ${ERRO_REVIEW}		             xpath=//android.view.View[@content-desc="Não foi possível adicionar sua review."]
+${FILME_ENCONTRADO}              //android.widget.ImageView[contains(@content-desc, "Star Wars: Uma nova esperança")]
+  
+
+*** Keywords ***
+Existe um filme cadastrado
+    cadastrar usuario na API
+    Login usuario pela API    ${EMAIL_API}
+    Evoluir para administrador    ${TOKEN}
+    Criar um filme    ${TOKEN}
+
+Dado que usuário critico acessa o aplicativo
+    cadastrar usuario na API
+    Login usuario pela API    ${EMAIL_API}
+    Evoluir para Critico    ${TOKEN}
+    Efetua Login do usuário    ${EMAIL_API}
+
+E encontra um filme de interesse
+    [Arguments]    ${filme}
+    Swipe até o elemento visível    ${filme}    
+
+Quando acessa o filme
+    Espera o elemento e clica no elemento    ${FILME_ENCONTRADO}
+
+E acessa a tela de avaliaçao do filme
+    Espera o elemento e clica no elemento    ${ADICIONAR_REVIEW}
+
+E da uma nota para o filme
+    [Arguments]    ${LOCATOR_NOTA}
+    Espera o elemento e clica no elemento    ${SCORE_5}
+
+E escreve um comentario
+    [Arguments]    ${texto}
+    Clica no elemento e insere texto    ${IMPUT_TEXT_REVIEW}     ${texto}
+    
+E salva a Avaliação
+    Espera o elemento e clica no elemento    ${BTN_SALVAR}
+
+Então o sistemar retorna uma mensagem
+    [Arguments]    ${elemento}    ${texto}
+    Wait Until Element Is Visible     ${elemento}
+    Verifica texto    ${ERRO_LOGIN}    ${texto}
+
+E será possível vizualizar a sua avaliação
+    Press Keycode    4
+    Press Keycode    4
+    tira foto
+
+    
