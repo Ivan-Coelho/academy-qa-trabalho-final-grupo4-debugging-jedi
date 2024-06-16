@@ -13,6 +13,7 @@ describe ("Inativar Usuários", () => {
     })
 
 
+
 it ("Um usuário comum pode se tornar Admin", () => {
     cy.login(usuario).then((login) => {
         token = login.body.accessToken
