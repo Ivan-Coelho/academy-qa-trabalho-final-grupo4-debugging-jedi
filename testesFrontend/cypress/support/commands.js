@@ -23,7 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import { faker } from "@faker-js/faker"
+import { faker } from "@faker-js/faker";
 // validar as URL
 Cypress.Commands.add('criarUsuario', function () {
     let user = {
@@ -75,7 +75,6 @@ Cypress.Commands.add('usuarioLogado', function () {
         })
     })
 })
-
 
 Cypress.Commands.add('criarUsuarioAdmin', function () {
     let user = {
@@ -149,7 +148,7 @@ Cypress.Commands.add('criarUsuarioCritico', function () {
 
         cy.request({
             method: "POST",
-            url: '/auth/login',
+            url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
             body: {
                 email: usuario.email,
                 password: "123456"
@@ -181,7 +180,7 @@ Cypress.Commands.add('cadastrarFilme', function (tokenAdmin) {
             url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
             headers: { Authorization: 'Bearer ' + tokenAdmin },
             body: arquivo
-        }).then(function (response) {            
+        }).then(function (response) {
             return response
         })
     })
@@ -209,41 +208,155 @@ Cypress.Commands.add('deletarFilme', function (idFilme, tokenAdmin) {
 
 });
 
-Cypress.Commands.add('criarReview', function (idFilme, token) {
-    let comentario = faker.lorem.lines(1);
-    let nota = faker.number.int({ min: 1, max: 5 });
+Cypress.Commands.add("criarReview", function (idFilme, token) {
+  let comentario = faker.lorem.lines(1);
+  let nota = faker.number.int({ min: 1, max: 5 });
 
-    cy.request({
-        method: 'POST',
-        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/review',
-        body: {
-            movieId: idFilme,
-            score: nota,
-            reviewText: comentario
-        },
-        headers: { Authorization: 'Bearer ' + token },
-    }).then(function(){
-        return{
-            score: nota,
-            comentario: comentario
-        }
-    })
-})
-
-Cypress.Commands.add('inativarConta', function(token){
-    cy.request({
-        method: 'PATCH', 
-        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users/inactivate',
-        headers: { Authorization: 'Bearer ' + token }
-    })
+  cy.request({
+    method: "POST",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/review",
+    body: {
+      movieId: idFilme,
+      score: nota,
+      reviewText: comentario,
+    },
+    headers: { Authorization: "Bearer " + token },
+  }).then(function () {
+    return {
+      score: nota,
+      comentario: comentario,
+    };
+  });
 });
 
-Cypress.Commands.add('buscaFilmeId', function(idFilme){
-    cy.request({
-        method: 'GET',
-        url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/' + idFilme
-    }).then(function (response) {
-        return response.body
+Cypress.Commands.add("inativarConta", function (token) {
+  cy.request({
+    method: "PATCH",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/users/inactivate",
+    headers: { Authorization: "Bearer " + token },
+  });
+});
 
+Cypress.Commands.add("buscaFilmeId", function (idFilme) {
+  cy.request({
+    method: "GET",
+    url: "https://raromdb-3c39614e42d4.herokuapp.com/api/movies/" + idFilme,
+  }).then(function (response) {
+    return response.body;
+  });
+});
+
+Cypress.Commands.add("listarUsuario", function (tokenAdmin) {
+  cy.request({
+    method: "GET",
+    url: "/users",
+    headers: { Authorization: "Bearer " + tokenAdmin },
+  });
+});
+Cypress.Commands.add("listarUsuarioId", function (idUsuario, tokenAdmin) {
+  cy.request({
+    method: "GET",
+    url: "/users/" + idUsuario,
+    headers: { Authorization: "Bearer " + tokenAdmin },
+  });
+});
+Cypress.Commands.add("listarReview", function (token) {
+  cy.request({
+    method: "GET",
+    url: "users/review/all",
+    headers: { Authorization: "Bearer " + token },
+  });
+});
+
+Cypress.Commands.add('usuarioComum', function () {
+  let user = {
+      name: "Teste Raro",
+      email: faker.internet.email(),
+      password: '123456'
+  }
+  cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+      body: user
+  }).then(function (response) {
+    usuario = response.body
+    email = response.body.email
+    cy.request({
+    method: "POST",
+    url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+    body: {
+        email: email,
+        password: "123456"
+    }
+}).then(function (response) {
+    tokenComum = response.body.accessToken
+})
+})
+})
+Cypress.Commands.add('usuarioComumLogado', function () {
+  let user = {
+      name: "Teste Raro",
+      email: faker.internet.email(),
+      password: '123456'
+  }
+  let tokenComum
+  let usuario
+
+  cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/users',
+      body: user
+  }).then(function (response) {
+      usuario = response.body
+
+      cy.request({
+          method: "POST",
+          url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/auth/login',
+          body: {
+              email: usuario.email,
+              password: "123456"
+          }
+      }).then(function (response) {
+          tokenComum = response.body.accessToken
+      }).then(function () {
+          return {
+              nome: user.name,
+              email: user.email,
+              id: usuario.id,
+              token: tokenComum
+          }
+      })
+  })
+})
+
+Cypress.Commands.add('cadastrarFilme2', function (tokenAdmin) {
+
+  let nome = faker.lorem.words()
+  cy.request({
+
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+      headers: { Authorization: 'Bearer ' + tokenAdmin },
+      body: {
+          title: nome,
+          genre: "Épico, Aventura, Ficção científica",
+          description: "Star Wars de bollywood",
+          durationInMinutes: 124,
+          releaseYear: 1980
+      }
+  }).then(function (response) {
+      return response
+  })
+
+})
+Cypress.Commands.add('cadastrarFilmeComBody', function (tokenAdmin, body) {
+    cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+      headers: { Authorization: "Bearer " + tokenAdmin },
+      failOnStatusCode: false,
+      body: body,
+    }).then(function (response) {
+      return response;
     });
 });

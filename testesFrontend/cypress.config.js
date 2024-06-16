@@ -11,6 +11,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://raromdb-frontend-c7d7dc3305a0.herokuapp.com/',
     specPattern: 'cypress/e2e/**/*.feature',
+    //numTestsKeptInMemory : 0,
     env: {
       TAGS: 'not @ignore',
     },
