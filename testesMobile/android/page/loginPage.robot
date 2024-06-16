@@ -14,20 +14,22 @@ ${CAMPO_LOGIN}		  xpath=//android.view.View[@content-desc="Login"]
 ${LOGADO}             ${None}
 ${LOGINSUCESSO}       xpath=//android.view.View[@content-desc="Login realizado!"]
 ${ALERTALOGIN}        xpath=//android.view.View[@content-desc="Usuário ou senha inválidos."]
+${ALERTA_EMAIL}       xpath=//android.view.View[@content-desc="Informe o e-mail."]
+${ALERTA_SENHA}       xpath=//android.view.View[@content-desc="Informe uma senha."]
 
 *** Keywords ***
 Fazer login aplicativo
     [Arguments]    ${userEmail}    ${userPassword}
-    Inserir dados    ${INPUTEMAIL}    ${userEmail}
-    Inserir dados    ${inputSenha}    ${userPassword}
-    Espera elemento e clica    ${BTN_LOGIN}
+    Clica no elemento e insere texto    ${INPUTEMAIL}    ${userEmail}
+    Clica no elemento e insere texto    ${INPUTSENHA}    ${userPassword}
+    Espera o elemento e clica no elemento    ${BTN_LOGIN}
 
 E acessa a opção de login
-    Espera elemento e clica    ${LOGIN}
+    Espera o elemento e clica no elemento    ${CAMPO_LOGIN}
 
 Então será possivel acessar a tela de login
-    Espera elemento está visivel    ${INPUTEMAIL}
-    Espera elemento está visivel    ${inputSenha}
+    Espera se elemento está visivel    ${INPUTEMAIL}
+    Espera se elemento está visivel    ${INPUTSENHA}
 
 Dado que o usuário acessa a tela de login
     Acessa login
@@ -37,38 +39,38 @@ Quando informa as credenciais cadastradas
     Fazer login aplicativo    ${usuarioCriado}[email]    ${usuarioCriado}[password]
     Set Global Variable    ${usuarioLogado}    ${usuarioCriado}
 
-Então usuário deve autenticar-se com sucesso
-    Espera elemento está visivel    ${loginRealizado}
+Então usuário deve logar com sucesso
+    Espera se elemento está visivel      ${loginRealizado}
 
 Quando informa as credenciais exceto campo Email
-    Inserir dados    ${inputSenha}    123456
+    Clica no elemento e insere texto    ${INPUTSENHA}    123456
 
-E acessa funcionalidade login
-    Espera elemento e clica    ${logar}
+E clica em login
+    Espera o elemento e clica no elemento    ${BTN_LOGIN}
 
-Quando informa as credenciais exceto campo Senha
-    Inserir dados    ${INPUTEMAIL}    debugging@strikesback.com
+Quando digita os campos de login exceto Senha
+    Clica no elemento e insere texto    ${INPUTEMAIL}    debugging@strikesback.com
 
 Então deve alertar no formulário o campo Senha como obrigatória
-    Espera elemento está visivel    ${ALERTA_SENHA}
+    Espera se elemento está visivel    ${ALERTA_SENHA}
 
-Quando não informa Email e Senha
-    Espera elemento e clica    ${INPUTEMAIL}
-    Espera elemento e clica    ${inputSenha}
+Quando não preenche os campos de Email e Senha
+    Espera o elemento e clica no elemento    ${INPUTEMAIL}
+    Espera o elemento e clica no elemento    ${INPUTSENHA}
 
-Então deve alertar no formulário os campos obrigatórios de login
-    Então deve alertar no formulário o campo Email como obrigatório
-    Então deve alertar no formulário o campo Senha como obrigatória
+Então deve surgir um aviso de preenchimento de campos obrigatórios
+    Espera se elemento está visivel    ${ALERTA_SENHA}
+    Espera se elemento está visivel    ${ALERTA_EMAIL}
 
-Quando informa as credenciais utilizando email não cadastrado
-    Inserir dados    ${INPUTEMAIL}    blablablabla@gblas.com
-    Inserir dados    ${inputSenha}    12345678
+Quando preenche com um e-mail não cadastrado
+    Clica no elemento e insere texto    ${INPUTEMAIL}    blablablabla@gblas.com
+    Clica no elemento e insere texto    ${INPUTSENHA}    12345678
 
 Então o site deve exibir alerta de usuário ou senha inválidos
-    Espera elemento está visivel    ${alertaLogin}
+    Espera se elemento está visivel    ${ALERTALOGIN}
 
-Quando informa as credenciais utilizando senha incorreta
-    Quando informa as credenciais utilizando email não cadastrado
+Quando preenche com uma senha incorreta
+    Quando preenche com um e-mail não cadastrado
 
 Quando o usuario abrir o menu
 
@@ -79,7 +81,8 @@ Quando o usuario abrir o menu
 *** Keywords ***
 Dado que usuario acessa o APP
     Abrir App
-Quando acessa a página de Login
+
+Dado que o usuario acessou a tela de Login
     
     Element Should Be Visible    ${BTN_MENU}
     Wait Until Page Contains Element        ${CARD_FILME}
@@ -96,3 +99,9 @@ E realiza o Login
 
 Quando digita seus dados válidos
     Efetuar Login com Dados Registrados
+
+Então deve surgir um aviso de preenchimento de e-mail obrigatório
+    Espera se elemento está visivel    ${ALERTA_EMAIL}
+
+Então deve surgir um aviso de preenchimento de senha obrigatório
+    Espera se elemento está visivel    ${ALERTA_SENHA}

@@ -76,3 +76,8 @@ Verifica se contem o text no content-desc
     Wait Until Element Is Visible    ${elemento}    5s
     ${contentDesc}    Get Element Attribute    ${elemento}    content-desc
     Should Contain    ${contentDesc}    ${text}
+
+Espera se elemento está visivel
+    [Arguments]    ${elemento}
+    Wait Until Element Is Visible    ${elemento}    10
+    Element Should Be Visible    ${elemento}
