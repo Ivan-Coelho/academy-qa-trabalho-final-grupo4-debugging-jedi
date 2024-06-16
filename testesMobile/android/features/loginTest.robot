@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource    ../../base.robot
+Resource    ../base.robot
 Resource    ../page/loginPage.robot
 
 Test Setup        Abrir App
@@ -8,9 +8,9 @@ Test Teardown     Teardown
 
 *** Test Cases ***
 CT - Deve ser possível acessar tela de Login
-    Dado que o usuário abriu o aplicativo
+    Dado que usuario acessa o APP
     Quando o usuario abrir o menu
-    E a opção de login
+    E acessa a opção de login
     Então será possivel acessar a tela de login
 
 CT - Deve ser possível usuário logar com os campos válidos
