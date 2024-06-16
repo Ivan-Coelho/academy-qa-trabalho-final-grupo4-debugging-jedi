@@ -1,10 +1,17 @@
 import { Given, When, Then  } from '@badeball/cypress-cucumber-preprocessor';
 
 import RegistroUsuarioPage  from '../page/registroUsuario.page'
+import { fakerPT_BR, faker } from '@faker-js/faker';
 
-import { faker } from '@faker-js/faker';
 
 const paginaRegistroUsuario = new RegistroUsuarioPage();
+
+let name;
+let email;
+let senha;
+let id;
+let tokenAdmin;
+let idAdmin;
 
 
 Given('que acessei a pagina de registro de usuario', function () {
@@ -94,6 +101,17 @@ Then('uma mensagem de alerta vai aparecer', function (){
     cy.contains(paginaRegistroUsuario.mensagemErro,"A senha deve ter no máximo 12 dígitos").should('be.visible');
 });
 
+When('informar um novo nome com espaço em branco', function (){
+    paginaRegistroUsuario.digitarNome('    ')
+});
+
+When('informar uma nova senha com espaco em branco', function (){
+    paginaRegistroUsuario.digitarSenha('    ')
+});
+When('confirmar a nova senha', function (){
+    paginaRegistroUsuario.confirmarSenha('      ')
+});
+
 When('informar nome com 1 letra', function (){
     paginaRegistroUsuario.digitarNome('M')
 });
@@ -114,17 +132,17 @@ When('informar um novo nome com caracteres especiais', function (){
 });
 
 When('informar um novo email com 59 caracteres', function (){
-    paginaRegistroUsuario.digitarEmail('thulliuscarloseduaardsosarthsurssaulosilvioas@yahoo.com.br')
+    paginaRegistroUsuario.digitarEmail(faker.random.alpha(50) + '@mail.com')
 });
 
 When('informar um novo email 60 caracteres', function (){
-    paginaRegistroUsuario.digitarEmail('saulodanielsamuelrafaeldeoliveirareisantunesilva@hotmail.com')
+    paginaRegistroUsuario.digitarEmail(faker.random.alpha(51) + '@mail.com')
 });
 
 When('informar uma nova senha com caracteres especiais', function (){
     paginaRegistroUsuario.digitarSenha('!@#$%*')
 });
-When('confirmar a nova senha', function (){
+When('confirmar', function (){
     paginaRegistroUsuario.confirmarSenha('!@#$%*')
 });
 
@@ -162,3 +180,29 @@ When('informar uma nova senha com letras', function (){
 When('confirmar a senha com letras', function (){
     paginaRegistroUsuario.confirmarSenha('nome123')
 });
+
+When('salvar as informações', function(){
+    cy.intercept('POST', 'https://raromdb-3c39614e42d4.herokuapp.com/api/users').as('cadastro')
+    paginaRegistroUsuario.clicarBotaoCadastrar()
+    cy.wait('@cadastro')
+
+});
+
+When('informar um email de um usuário já cadastrado', function(){
+    cy.criarUsuario().then(function(response){
+        id=  response.body.id
+        name= response.body.name
+        email= response.body.email
+        senha= '123456'
+        paginaRegistroUsuario.digitarEmail(email)
+     });
+
+})
+
+Then('uma mensagem de falha no cadastro irá aparecer', function(){
+    cy.contains(paginaRegistroUsuario.mensagemOcoreuErro,"Falha no cadastro").should('be.visible');
+
+})
+
+    
+

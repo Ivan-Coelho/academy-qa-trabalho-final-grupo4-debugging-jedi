@@ -68,6 +68,7 @@ Cenario: Tentativa de registrar usuario informando senha 5 caracteres
   E confirmar a operação
   Entao vai aparecer o alerta
 
+Cenario: Tentativa de registrar usuario informando senha 13 caracteres
   Quando informar um novo nome
   E informar um novo email
   E informar uma nova senha contendo 13 caracteres
@@ -75,13 +76,37 @@ Cenario: Tentativa de registrar usuario informando senha 5 caracteres
   E confirmar a operação
   Então uma mensagem de alerta vai aparecer 
 
+Cenario: Tentativa de registrar usuario informando nome com espaco em branco
+  Quando informar um novo nome com espaço em branco
+  E informar um novo email
+  E informar uma nova senha 
+  E confirmar a senha 
+  E confirmar a operação
+  Então aparecera a mensagem de erro
+
+Cenario: Tentativa de registrar usuario informando senha com espaco em branco
+  Quando informar um novo nome
+  E informar um novo email
+  E informar uma nova senha com espaco em branco
+  E confirmar a senha 
+  E confirmar a operação
+  Então aparecerao as mensagens  
+
+Cenario: Tentativa de registrar usuario utilizando um e-mail de um usuario já cadastrado
+  Quando informar um novo nome
+  E informar um email de um usuário já cadastrado
+  E informar uma nova senha
+  E confirmar a senha 
+  E confirmar a operação
+  Então uma mensagem de falha no cadastro irá aparecer
+
 
 Cenario: Registrar usuario com nome de 1 letra    
   Quando informar nome com 1 letra
   E informar um novo email
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado  
 
 Cenario: Registrar usuario com nome de 99 letras    
@@ -89,7 +114,7 @@ Cenario: Registrar usuario com nome de 99 letras
   E informar um novo email
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado
    
 Cenario: Registrar usuario com um nome de 100 letras    
@@ -97,16 +122,15 @@ Cenario: Registrar usuario com um nome de 100 letras
   E informar um novo email
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado   
-
 
 Cenario: Registrar usuario com caracteres especiais    
   Quando informar um novo nome com caracteres especiais
   E informar um novo email
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado  
 
 Cenario: Registrar usuario com email 59 caracteres    
@@ -114,7 +138,7 @@ Cenario: Registrar usuario com email 59 caracteres
   E informar um novo email com 59 caracteres
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado  
 
 Cenario: Registrar usuario com email 60 caracteres    
@@ -122,15 +146,15 @@ Cenario: Registrar usuario com email 60 caracteres
   E informar um novo email 60 caracteres 
   E informar uma nova senha 
   E confirmar a senha 
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado  
 
 Cenario: Registrar usuario informando senha com caracteres especias    
   Quando informar um novo nome
   E informar um novo email 
   E informar uma nova senha com caracteres especiais
-  E confirmar a nova senha 
-  E confirmar a operação
+  E confirmar 
+  E salvar as informações
   Então o usuario sera cadastrado 
 
 Cenario: Registrar usuario informando senha 6 caracteres
@@ -138,7 +162,7 @@ Cenario: Registrar usuario informando senha 6 caracteres
   E informar um novo email  
   E informar uma nova senha 6 caracteres
   E confirmar a senha de 6 caracteres
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado
 
 Cenario: Registrar usuario informando senha 7 caracteres
@@ -146,7 +170,7 @@ Cenario: Registrar usuario informando senha 7 caracteres
   E informar um novo email 
   E informar uma nova senha 7 caracteres
   E confirmar a senha de 7 caracteres
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado 
 
 Cenario: Registrar usuario informando senha 11 caracteres
@@ -154,7 +178,7 @@ Cenario: Registrar usuario informando senha 11 caracteres
   E informar um novo email 
   E informar uma nova senha 11 caracteres
   E confirmar a senha de 11 caracteres
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado   
 
 Cenario: Registrar usuario informando senha 12 caracteres
@@ -162,7 +186,7 @@ Cenario: Registrar usuario informando senha 12 caracteres
   E informar um novo email  
   E informar uma nova senha 12 caracteres
   E confirmar a senha de 12 caracteres
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado
 
 Cenario: Registrar usuario informando senha contendo letras
@@ -170,5 +194,5 @@ Cenario: Registrar usuario informando senha contendo letras
   E informar um novo email  
   E informar uma nova senha com letras
   E confirmar a senha com letras
-  E confirmar a operação
+  E salvar as informações
   Então o usuario sera cadastrado
