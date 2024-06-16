@@ -9,6 +9,7 @@ ${ANDROID_PLATFORM_VERSION}   11
 ${APP_PACKAGE}                com.example.raromdb
 ${APP_ACTIVITY}               .MainActivity
 
+${CARD_FILME}     xpath=//android.widget.ImageView[contains(@content-desc, "")]
 
 *** Keywords ***
 Abrir App
@@ -21,3 +22,12 @@ Teardown
     [Arguments]
     Run Keyword If Test Failed    Capture Page Screenshot
     Close All Applications
+
+Clicar no Elemento
+    [Arguments]    ${element_locator}
+    Click Element    ${element_locator}
+
+Swipe Até Elemento Visível
+    [Arguments]    ${element_locator}
+    ${element_visible}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=10s
+    

@@ -1,7 +1,6 @@
 *** Settings ***
-Resource    ../utils/config.robot
-Resource    ../utils/commons.robot
-Resource    ../page/Page.robot
+
+Resource    ../base.robot        
 
 
 Test Setup        Abrir App

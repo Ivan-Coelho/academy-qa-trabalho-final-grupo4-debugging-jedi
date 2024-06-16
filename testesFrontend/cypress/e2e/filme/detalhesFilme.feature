@@ -53,9 +53,6 @@ Cenário: O totalizador das avaliações de notas críticas que será a média d
     Quando informa o id valido de um filme para acessar a pagina do filme
     Então o usuário conseguirá visualizar um totalizador com a média das avaliações de críticos
 
-
-
-
 @cadastroFilme @deletar
 Cenário:A página de detalhes do filme deve conter a opção para avaliar o filme se for acessada por um usuário logado
     Dado que usuário logado acessa o site
@@ -75,7 +72,9 @@ Cenário: A página de detalhes do filme deve conter todas as avaliações regis
     Quando informa o id valido de um filme para acessar a pagina do filme
     Então o usuário conseguirá visualizar todas as avaliações registradas para o filme
 
-# Cenário: As avaliações registradas para o filme devem conter as informações relevantes (data da avaliação (opcionalmente exibir a hora/minuto), nome do usuário que escreveu a avaliação, nota e texto da avaliação)
-    # Dado que usuario não cadastrado acessa o site
-    # Quando acessa a página de detalhes de um filme
-    # Então o usuário conseguirá visualizar todas as informações relevantes das avaliações do filme
+@filmeDuasReview @deletar
+Cenário: As avaliações registradas para o filme devem conter as informações relevantes 
+    Dado que usuario não cadastrado acessa o site
+    Quando informa o id valido de um filme para acessar a pagina do filme
+    Então o usuário conseguirá visualizar todas as informações relevantes das avaliações do filme
+    # E limpar a base
