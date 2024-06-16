@@ -1,30 +1,61 @@
-export default class InicialPage{
-    linkPaginaRegistro = '[href="/register"]';
-    linkPaginaLogin = '[href="/login"]';
-    linkInicio = '.logo'
-    linkPerfilPage = ('a[href="/profile"]');
+export default class GerenciarContaPage{
 
-    inputFilmes = '[placeholder="Buscar filmes"]';
+    linkPaginaPerfil = ('a[href="/profile"]');
+    linkPaginaGerenciarConta = ('a[href="/account"]');
+
+    inputNome = ('[placeholder="Nome"]');
+    inputSenha = ('[placeholder="Senha"]');
+    inputConfirmarSenha = ('[placeholder="Confirmar senha"]');
+    inputTipoUsuario = (':nth-child(3) > .profile-input')
+
+
+    labelEmail = ('[placeholder="E-mail"]');
+
     buttonPesquisarFilme = ('.search-button');
+    buttonAlterarSenha = ('.account-password-button');
+    buttonSalvar = ('.account-save-button');
+    buttonCancelar = ('.account-password-button-cancel');
 
-    clickPaginaRegistro(){
-        cy.get(this.linkPaginaRegistro).click();
+
+    mensagem = ('div.modal-body p');
+    mensagemErro = ('.input-error')
+    mensagemSucesso = ('div.modal-body h3')
+
+
+    typeNome(nome){
+        cy.get(this.inputNome).clear().type(nome);
     }
 
-    clickPaginaLogin(){
-        cy.get(this.linkPaginaLogin).click();
+    typeSenha(senha){
+        cy.get(this.inputSenha).type(senha);
+    }
+
+    typeConfSenha(confSenha){
+        cy.get(this.inputConfirmarSenha).type(confSenha);
+    }
+
+    clickButtonAlterarSenha(){
+        cy.get(this.buttonAlterarSenha).click();
+    }
+
+    clickButtonSalvar(){
+        cy.get(this.buttonSalvar).click();
+    }
+
+    clickButtonCancelar(){
+        cy.get(this.buttonCancelar).click();
     }
 
     clickPaginaPerfil(){
-        cy.get(this.linkPerfilPage).click();
+        cy.get(this.linkPaginaPerfil).click();
     }
 
-    typeFilme(filme){
-        cy.get(this.inputFilmes).type(filme);
+    clickPaginaGerenciarConta(){
+        cy.get(this.linkPaginaGerenciarConta).click();
     }
 
-    clickPesquisaFilme(){
-        cy.get(this.buttonPesquisarFilme).click();
+    emailDesabilitado(){
+        if(this.labelEmail.disabled)
+            cy.log('email desabilitado')
     }
-
 }
