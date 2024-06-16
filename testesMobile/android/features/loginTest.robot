@@ -1,8 +1,9 @@
 *** Settings ***
 
 Resource    ../../base.robot
+Resource    ../page/loginPage.robot
 
-Test Setup        Open App
+Test Setup        Abrir App
 Test Teardown     Teardown
 
 *** Test Cases ***

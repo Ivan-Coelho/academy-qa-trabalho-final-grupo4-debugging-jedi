@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.12.3 on win32)" generated="2024-06-16T10:09:59.382364" rpa="false" schemaversion="5">
+<robot generator="Robot 7.0 (Python 3.12.3 on win32)" generated="2024-06-16T13:23:34.850249" rpa="false" schemaversion="5">
 <suite id="s1" name="registrarTest" source="c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\features\registrarTest.robot">
-<test id="s1-t1" name="CT000 - Visitar pagina inicial" line="13">
+<test id="s1-t1" name="CT001 - Visitar pagina inicial" line="12">
 <kw name="Abrir App" owner="config" type="SETUP">
 <kw name="Open Application" owner="AppiumLibrary">
-<msg time="2024-06-16T10:10:02.508865" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D1156F8C0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
-<msg time="2024-06-16T10:10:04.557971" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D1156FDD0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
-<msg time="2024-06-16T10:10:06.608925" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D11584E00&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:37.818809" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495D9BBF0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:39.900942" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBE000&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:41.967190" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBE990&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
 <kw name="Capture Page Screenshot" owner="AppiumLibrary">
-<msg time="2024-06-16T10:10:08.637893" level="FAIL">No application is open</msg>
+<msg time="2024-06-16T13:23:44.014114" level="FAIL">No application is open</msg>
 <doc>Takes a screenshot of the current page and embeds it into the log.</doc>
-<status status="FAIL" start="2024-06-16T10:10:08.636893" elapsed="0.263458">No application is open</status>
+<status status="FAIL" start="2024-06-16T13:23:44.014114" elapsed="0.280843">No application is open</status>
 </kw>
-<msg time="2024-06-16T10:10:08.902349" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
-<msg time="2024-06-16T10:10:08.905329" level="FAIL">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D115850A0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<msg time="2024-06-16T13:23:44.294957" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
+<msg time="2024-06-16T13:23:44.294957" level="FAIL">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBED80&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
 <arg>http://127.0.0.1:4723</arg>
 <arg>automationName=${ANDROID_AUTOMATION_NAME}</arg>
 <arg>platformName=${ANDROID_PLATFORM_NAME}</arg>
@@ -28,40 +28,40 @@ Please check https://github.com/appium/appium/blob/master/docs/en/writing-runnin
 | remote_url          | Yes    | Appium server url |
 | alias               | no     | alias             |
 | strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
-<status status="FAIL" start="2024-06-16T10:10:00.325361" elapsed="8.589961">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D115850A0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+<status status="FAIL" start="2024-06-16T13:23:35.651014" elapsed="8.665391">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBED80&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
 </kw>
-<status status="FAIL" start="2024-06-16T10:10:00.323365" elapsed="8.592960">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D115850A0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+<status status="FAIL" start="2024-06-16T13:23:35.651014" elapsed="8.665391">MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBED80&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
 </kw>
 <kw name="Teardown" owner="config" type="TEARDOWN">
 <kw name="Run Keyword If Test Failed" owner="BuiltIn">
 <kw name="Capture Page Screenshot" owner="AppiumLibrary">
 <kw name="Capture Page Screenshot" owner="AppiumLibrary">
-<msg time="2024-06-16T10:10:08.935316" level="FAIL">No application is open</msg>
+<msg time="2024-06-16T13:23:44.316405" level="FAIL">No application is open</msg>
 <doc>Takes a screenshot of the current page and embeds it into the log.</doc>
-<status status="FAIL" start="2024-06-16T10:10:08.934312" elapsed="0.007994">No application is open</status>
+<status status="FAIL" start="2024-06-16T13:23:44.316405" elapsed="0.007566">No application is open</status>
 </kw>
-<msg time="2024-06-16T10:10:08.947304" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
-<msg time="2024-06-16T10:10:08.954304" level="FAIL">No application is open</msg>
+<msg time="2024-06-16T13:23:44.323971" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
+<msg time="2024-06-16T13:23:44.333031" level="FAIL">No application is open</msg>
 <doc>Takes a screenshot of the current page and embeds it into the log.</doc>
-<status status="FAIL" start="2024-06-16T10:10:08.933311" elapsed="0.022988">No application is open</status>
+<status status="FAIL" start="2024-06-16T13:23:44.316405" elapsed="0.016626">No application is open</status>
 </kw>
 <arg>Capture Page Screenshot</arg>
 <doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="FAIL" start="2024-06-16T10:10:08.931315" elapsed="0.025983">No application is open</status>
+<status status="FAIL" start="2024-06-16T13:23:44.316405" elapsed="0.016626">No application is open</status>
 </kw>
 <kw name="Close All Applications" owner="AppiumLibrary">
 <doc>Closes all open applications.</doc>
-<status status="PASS" start="2024-06-16T10:10:08.958301" elapsed="0.012224"/>
+<status status="PASS" start="2024-06-16T13:23:44.333031" elapsed="0.007476"/>
 </kw>
-<status status="FAIL" start="2024-06-16T10:10:08.930314" elapsed="0.040211">No application is open</status>
+<status status="FAIL" start="2024-06-16T13:23:44.316405" elapsed="0.024102">No application is open</status>
 </kw>
-<status status="FAIL" start="2024-06-16T10:10:00.322366" elapsed="8.649158">Setup failed:
-MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D115850A0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))
+<status status="FAIL" start="2024-06-16T13:23:35.651014" elapsed="8.696745">Setup failed:
+MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBED80&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))
 
 Also teardown failed:
 No application is open</status>
 </test>
-<status status="FAIL" start="2024-06-16T10:09:59.403353" elapsed="9.583164"/>
+<status status="FAIL" start="2024-06-16T13:23:34.858250" elapsed="9.499721"/>
 </suite>
 <statistics>
 <total>
@@ -74,12 +74,7 @@ No application is open</status>
 </suite>
 </statistics>
 <errors>
-<msg time="2024-06-16T10:10:00.183406" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 6: Resource file 'android\utils\config.robot' does not exist.</msg>
-<msg time="2024-06-16T10:10:00.190920" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 7: Resource file 'android\utils\commons.robot' does not exist.</msg>
-<msg time="2024-06-16T10:10:00.204910" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 10: Resource file 'android\pages\registrarPage.robot' does not exist.</msg>
-<msg time="2024-06-16T10:10:00.214906" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 11: Resource file 'android\pages\loginTest.robot' does not exist.</msg>
-<msg time="2024-06-16T10:10:00.242891" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\Page.robot' on line 4: Resource file '..\pages\registrarPage.robot' does not exist.</msg>
-<msg time="2024-06-16T10:10:00.305855" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\Page.robot' on line 7: Importing library 'FakerLibrary' failed: ModuleNotFoundError: No module named 'pkg_resources'
+<msg time="2024-06-16T13:23:35.285753" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 4: Importing library 'FakerLibrary' failed: ModuleNotFoundError: No module named 'pkg_resources'
 Traceback (most recent call last):
   File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\FakerLibrary\__init__.py", line 1, in &lt;module&gt;
     import pkg_resources
@@ -93,10 +88,68 @@ PYTHONPATH:
   C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib
   C:\Users\Usuario\AppData\Local\Programs\Python\Python312
   C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
-<msg time="2024-06-16T10:10:02.508865" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D1156F8C0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
-<msg time="2024-06-16T10:10:04.557971" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D1156FDD0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
-<msg time="2024-06-16T10:10:06.608925" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000015D11584E00&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
-<msg time="2024-06-16T10:10:08.902349" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
-<msg time="2024-06-16T10:10:08.947304" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
+<msg time="2024-06-16T13:23:35.308722" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 5: Importing library 'RequestsLibrary' failed: ModuleNotFoundError: No module named 'RequestsLibrary'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_debug_adapter
+  C:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_ls\vendored
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
+<msg time="2024-06-16T13:23:35.417553" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\loginPage.robot' on line 68: Creating keyword 'Resource' failed: Keyword with same name defined multiple times.</msg>
+<msg time="2024-06-16T13:23:35.444247" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\loginPage.robot' on line 3: Resource file '..\..\base.robot' does not exist.</msg>
+<msg time="2024-06-16T13:23:35.475050" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\utils\commons.robot' on line 6: Importing library 'FakerLibrary' failed: ModuleNotFoundError: No module named 'pkg_resources'
+Traceback (most recent call last):
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\FakerLibrary\__init__.py", line 1, in &lt;module&gt;
+    import pkg_resources
+PYTHONPATH:
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_debug_adapter
+  C:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_ls\vendored
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
+<msg time="2024-06-16T13:23:35.518300" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 13: Resource file 'android\pages\registrarPage.robot' does not exist.</msg>
+<msg time="2024-06-16T13:23:35.518300" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\base.robot' on line 14: Resource file 'android\pages\loginTest.robot' does not exist.</msg>
+<msg time="2024-06-16T13:23:35.617935" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\Page.robot' on line 7: Importing library 'FakerLibrary' failed: ModuleNotFoundError: No module named 'pkg_resources'
+Traceback (most recent call last):
+  File "C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\FakerLibrary\__init__.py", line 1, in &lt;module&gt;
+    import pkg_resources
+PYTHONPATH:
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_debug_adapter
+  C:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_ls\vendored
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
+<msg time="2024-06-16T13:23:35.642453" level="ERROR">Error in file 'c:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi\testesMobile\android\page\detalhesPage.robot' on line 7: Importing library 'RequestsLibrary' failed: ModuleNotFoundError: No module named 'RequestsLibrary'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_debug_adapter
+  C:\Users\Usuario\Desktop\academy-qa-trabalho-final-grupo4-debugging-jedi
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src
+  c:\Users\Usuario\.vscode\extensions\robocorp.robotframework-lsp-1.12.0\src\robotframework_ls\vendored
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312
+  C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
+<msg time="2024-06-16T13:23:37.818809" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495D9BBF0&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:39.900942" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBE000&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:41.967190" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000021495DBE990&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente')': /session</msg>
+<msg time="2024-06-16T13:23:44.294957" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
+<msg time="2024-06-16T13:23:44.323971" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No application is open</msg>
 </errors>
 </robot>
