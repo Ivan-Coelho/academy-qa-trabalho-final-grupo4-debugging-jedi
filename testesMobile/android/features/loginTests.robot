@@ -10,4 +10,4 @@ Test Teardown     Teardown
 CT 01- usuário não logado deve conseguir acessar os detalhes dos filmes registrados no catálogo
     Dado que usuario acessa o APP
     Dado que o usuario acessou a tela de Login
-    E realiza o Login
+    # E realiza o Login

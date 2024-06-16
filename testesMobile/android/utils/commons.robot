@@ -85,8 +85,8 @@ Efetua Login do usuário
     Wait Until Element Is Visible        ${HOME}    10
 Quando acessa a página de Login
     # Wait Until Element Is Visible       ${CAMPO_LOGIN}          
-    Clica no elemento e insere texto    ${IMPUT_EMAIL}   ${email}  
-    Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
+    Clica no elemento e insere texto    ${INPUTEMAIL}   ${email}  
+    Clica no elemento e insere texto    ${INPUTSENHA}   123456
     Click Element    ${BTN_LOGIN}
     Sleep    2
 
