@@ -1,125 +1,168 @@
-import { Given, When, Then, Before, After} from '@badeball/cypress-cucumber-preprocessor';
-import { faker } from '@faker-js/faker';
+import {
+  Given,
+  When,
+  Then
+} from "@badeball/cypress-cucumber-preprocessor";
+import { faker } from "@faker-js/faker";
 
-import InicioPage from '../../pages/inicial.page'
-import DetalhesFilmePage from '../../pages/detalhesFilme.page';
-import LoginPage from'../../pages/login.page';
+import InicioPage from "../../pages/inicial.page";
+import LoginPage from "../../pages/login.page";
 
 const paginaInicial = new InicioPage();
-const paginaDetalhes = new DetalhesFilmePage();
 const paginaLogin = new LoginPage();
 
+let filme;
+let usuarioAdmin;
+let tituloSplit;
 
-Before({tags: '@cadastroFilme'}, function(){
-    
-    cy.criarUsuarioAdmin().then(function(dadosAdmin){        
-        cy.cadastrarFilme(dadosAdmin.token).then(function(response){
-            let userAdmin = dadosAdmin
-            
-            cy.wrap(userAdmin).as('userAdmin');
-            cy.wrap(response).as('idFilme');
+beforeEach({ tags: '@cadastroFilme' }, function () {
+    cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+        usuarioAdmin = { ...dadosAdmin };
+        const anoAtual = new Date().getFullYear();
+        const filmeObj = {
+            title: `${faker.lorem.words(3)} : ${faker.lorem.words(1)}`,
+            genre: faker.lorem.words(3),
+            description: faker.lorem.words(20),
+            durationInMinutes: Math.floor(Math.random() * (140 - 100 + 1)) + 100,
+            releaseYear: Math.floor(Math.random() * (anoAtual - 1895 + 1)) + 1895,
+        };
+        
+        cy.cadastrarFilmeComBody(dadosAdmin.token, filmeObj).then(function (response)  {
+            filme = { ...response.body };
+            tituloSplit = filme.title.split(" "); 
         });
     })
+}); 
+
+afterEach({ tags: "@deletar" }, function () {
+  cy.deletarFilme(filme.id, usuarioAdmin.token);
+  cy.deletarUsuario(usuarioAdmin.id, usuarioAdmin.token);
 });
 
+Given("que o usuário acessou  a pagina inicial", function () { 
+    cy.visit("");
+});
 
-After({tags: '@deletar'}, function(){
-    cy.get('@userAdmin').then(function(userAdmin){
-        cy.get('@idFilme').then(function(response){
-            cy.deletarFilme(response.body.id, userAdmin.token);
-            cy.deletarUsuario(userAdmin.id, userAdmin.token);
-        })
-    })    
-})
+Given("que um usuário logado acessou o site", function () {
+  cy.usuarioLogado().then(function (response) {
+    let email = response.email;
 
-Given ('que o usuário acessou  a pagina inicial', function () {
-    cy.visit('')
-})
+    cy.visit("/login");
+    paginaLogin.typeEmail(email);
+    paginaLogin.typeSenha("123456");
+    paginaLogin.clickButtonLogin();
+  });
+});
 
-Given('que um usuário logado acessou o site', function () {
-    cy.usuarioLogado().then(function(response){
-        let email = response.email
-        
-        cy.visit('/login')
-        paginaLogin.typeEmail(email)
-        paginaLogin.typeSenha('123456')
-        paginaLogin.clickButtonLogin()        
+When("inserir o título completo do filme na barra de pesquisa", function () {
+  paginaInicial.typeFilme(filme.title);
+});
 
-    });
-})
+When("acionar o recurso de buscar", function () {
+  paginaInicial.clickPesquisaFilme();
+});
 
+When(
+  "inserir apenas uma parte do título do filme na caixa de pesquisa",
+  function () {
+    const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}`;
+    paginaInicial.typeFilme(tituloParcial);
+  }
+);
 
-When('inserir o título completo do filme na barra de pesquisa', function () {
-    paginaInicial.typeFilme('Star Wars: O Império Contra-Ataca')
-})
+When("inserir um título com um erro de digitação", function () {
+    let filmeNomeIncorreto = `${filme.title} nome errado`;
+  paginaInicial.typeFilme(filmeNomeIncorreto);
+});
 
-When('acionar o recurso de buscar', function () {
-    paginaInicial.clickPesquisaFilme()
-})
+Then(
+  "o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado",
+  function () {
+    cy.get("p").contains("Nenhum filme encontrado").should("be.visible");
+  }
+);
 
+When("inserir o título do filme com letras maiúsculas", function () {
+  paginaInicial.typeFilme(filme.title.toUpperCase());
+});
 
-Then('o sistema deve retornar o filme correspondente ao título completo', function () {
-    cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
-})
+When("inserir o título do filme com letras minúsculas", function () {
+  paginaInicial.typeFilme(filme.title.toLowerCase());
+});
 
-When('inserir apenas uma parte do título do filme na caixa de pesquisa', function () {
-    paginaInicial.typeFilme('Star W')
-})
+When(
+  "inserir o título do filme com letras maiúsculas e minúsculas misturadas",
+  function () {
+    const tituloParcial = `${tituloSplit[0].toUpperCase()} ${tituloSplit[1].toLowerCase()}`;
+    paginaInicial.typeFilme(tituloParcial);
+  }
+);
 
-When('inserir um título com um erro de digitação', function () {
-    paginaInicial.typeFilme('Star WarsB')
-})
+When(
+  "inserir um título que não corresponde a nenhum filme cadastrado",
+  function () {
+    const tituloNovo = faker.lorem.words(10);
+    paginaInicial.typeFilme(tituloNovo);
+  }
+);
 
-Then('o sistema deve exibir uma mensagem de alerta: Nenhum filme encontrado', function () {
-    cy.get('p').contains('Nenhum filme encontrado').should('be.visible')
-})
+When(
+  "inserir um título com caracteres especiais na caixa de pesquisa",
+  function () {
+    
+    const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]} ${tituloSplit[2]}`;
+    paginaInicial.typeFilme(tituloParcial);
+  }
+);
 
-When('inserir o título do filme com letras maiúsculas', function () {
-    paginaInicial.typeFilme('STAR WARS')
-})
+When(
+  "inserir um título muito curto, como uma única letra na caixa de pesquisa",
+  function () {
+    paginaInicial.typeFilme("S");
+  }
+);
 
-When('inserir o título do filme com letras minúsculas', function () {
-    paginaInicial.typeFilme('star wars')
-})
+Then(
+  "o sistema deve retornar todos os filmes que contêm a letra inserida no título",
+  function () {
+    cy.get(".search-movie-container").contains("S").should("be.visible");
+  }
+);
 
-When('inserir o título do filme com letras maiúsculas e minúsculas misturadas', function () {
-    paginaInicial.typeFilme('sTaR wArS')
-})
+When(
+  "inserir um título com espaços extras antes ou depois do texto",
+  function () {
+    let nomeFilme = `  ${filme.title}  `
+    paginaInicial.typeFilme(nomeFilme);
+  }
+);
 
-When('inserir um título que não corresponde a nenhum filme cadastrado', function () {
-    paginaInicial.typeFilme('Istar uórz: u imperiu contar traca')
-})
+Then(
+  "o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.",
+  function () {
+    const tituloParcial = `${tituloSplit[0]} ${tituloSplit[1]}`;
+    cy.get(".movie-card-footer > .movie-title")
+      .first()
+      .contains(tituloParcial)
+      .should("be.visible");
+  }
+);
 
-When('inserir um título com caracteres especiais na caixa de pesquisa', function () {
-    paginaInicial.typeFilme('Star Wars #!$%')
-})
+Given("que um usuário não logado acessou  a pagina inicial", function () {
+  cy.visit("");
+});
 
-When('inserir um título muito curto, como uma única letra na caixa de pesquisa', function () {
-    paginaInicial.typeFilme('S')
-})
+When("inserir um título de filme na caixa de pesquisa", function () {
+  paginaInicial.typeFilme(filme.title);
+});
 
-Then('o sistema deve retornar todos os filmes que contêm a letra inserida no título', function () {
-    cy.get('.search-movie-container').contains('S').should('be.visible')
-})
-
-When('inserir um título com espaços extras antes ou depois do texto', function () {
-    paginaInicial.typeFilme('  Star Wars  ')
-})
-
-Then('o sistema deve ignorar os espaços extras e retornar o filme correspondente ao título correto.', function () {
-    cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
-})
-
-Given ('que um usuário não logado acessou  a pagina inicial', function () {
-    cy.visit('')
-})
-
-When('inserir um título de filme na caixa de pesquisa', function () {
-    paginaInicial.typeFilme('Star Wars')
-})
-
-Then('o sistema deve retornar o filme correspondente ao título inserido.', function () {
-    cy.get('[href="/movies/1125"] > .movie-card-footer > .movie-title').contains('Star Wars').should('be.visible')
-})
-
-
+Then(
+  "o sistema deve retornar o filme correspondente ao título inserido.",
+  function () {
+    const tituloParcial = `${tituloSplit[0]}`;
+    cy.get(".movie-card-footer > .movie-title")
+      .first()
+      .contains(tituloParcial)
+      .should("be.visible");
+  }
+);

@@ -349,3 +349,14 @@ Cypress.Commands.add('cadastrarFilme2', function (tokenAdmin) {
   })
 
 })
+Cypress.Commands.add('cadastrarFilmeComBody', function (tokenAdmin, body) {
+    cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+      headers: { Authorization: "Bearer " + tokenAdmin },
+      failOnStatusCode: false,
+      body: body,
+    }).then(function (response) {
+      return response;
+    });
+});
