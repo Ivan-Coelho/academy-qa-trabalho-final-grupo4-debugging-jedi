@@ -56,24 +56,34 @@ Registrar Usuário
 
 Efetuar Login com Dados Registrados  
     Wait Until Element Is Visible        ${HOME}    10
-    Quando acessa a página de Login
+    Dado que o usuario acessou a tela de Login
     Wait Until Element Is Visible       ${CAMPO_LOGIN}          
-    Clica no elemento e insere texto  ${IMPUT_EMAIL}   ${emailR}  
-    Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
+    Clica no elemento e insere texto  ${INPUTEMAIL}   ${emailR}  
+    Clica no elemento e insere texto    ${INPUTSENHA}   123456
     Click Element    ${BTN_LOGIN}
     Sleep    2
 Swipe até o elemento visível
-    [Arguments]    ${element_locator}    ${timeout}=5s
+    [Arguments]    ${element_locator}    ${timeout}=10s
     ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=${timeout}
     WHILE    '${status}' == 'False'
         Swipe    500    1500    500    500
         ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=2s
     END
+Verifica se contem o text no content-desc
+    [Arguments]    ${elemento}    ${text}
+    Wait Until Element Is Visible    ${elemento}    5s
+    ${contentDesc}    Get Element Attribute    ${elemento}    content-desc
+    Should Contain    ${contentDesc}    ${text}
+
+Espera se elemento está visivel
+    [Arguments]    ${elemento}
+    Wait Until Element Is Visible    ${elemento}    10
+    Element Should Be Visible    ${elemento}
 
 Efetua Login do usuário
     [Arguments]    ${email}
     Wait Until Element Is Visible        ${HOME}    10
-    Quando acessa a página de Login
+Quando acessa a página de Login
     # Wait Until Element Is Visible       ${CAMPO_LOGIN}          
     Clica no elemento e insere texto    ${IMPUT_EMAIL}   ${email}  
     Clica no elemento e insere texto    ${IMPUT_SENHA}   123456
