@@ -18,24 +18,25 @@ export default class RegistroPage{
     mensagemEmailjaCadastrado = ('.error-message');
     buttonOk = ('.modal-actions button');
 
-    typeNome(nome){
+    digitarNome(nome) {
         cy.get(this.inputlNome).type(nome);
     }
-
-    typeEmail(email){
+    
+    digitarEmail(email) {
         cy.get(this.inputEmail).type(email);
     }
-
-    typeSenha(senha){
+    
+    digitarSenha(senha) {
         cy.get(this.inputSenha).type(senha);
     }
-
-    typeConfSenha(confSenha){
-        cy.get(this.inputConfirmarSenha).type(confSenha);
+    
+    confirmarSenha(senha) {
+        cy.get(this.inputConfirmarSenha).type(senha);
     }
-
-    clickButtonCadastrar(){
-        cy.get(this.buttonCadastrar).click();    }
+    
+    clicarBotaoCadastrar() {
+        cy.get(this.buttonCadastrar).click();
+    }
 
 
 
