@@ -34,7 +34,7 @@ ${IMPUT_TEXT_REVIEW}             xpath=//android.widget.EditText
 *** Keywords ***
 
 Dado que usuario comum acessa o site
-    Abrir App
+    Element Should Be Visible    ${LABEL_HOME}
 Quando acessa a página de detalhes de um filme
 
     Element Should Be Visible    ${LABEL_HOME}
