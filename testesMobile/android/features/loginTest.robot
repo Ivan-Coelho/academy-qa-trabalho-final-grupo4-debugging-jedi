@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource    ../../base.robot
+Resource    ../base.robot
 Resource    ../page/loginPage.robot
 
 Test Setup        Abrir App

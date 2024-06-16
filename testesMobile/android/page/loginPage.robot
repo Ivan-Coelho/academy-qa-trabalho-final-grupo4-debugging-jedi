@@ -1,7 +1,7 @@
 *** Settings ***
 
-Resource    ../../base.robot
-Library    FakerLibrary
+Resource    ../base.robot
+
 
 
 *** Variables ***
@@ -32,17 +32,17 @@ Então será possivel acessar a tela de login
     Espera se elemento está visivel    ${INPUTSENHA}
 
 Dado que o usuário acessa a tela de login
-    Acessa login
+    Dado que o usuario acessou a tela de Login
 
 Quando informa as credenciais cadastradas
-    ${usuarioCriado}=    Criar usuário API
+    ${usuarioCriado} =    Registrar Usuário
     Fazer login aplicativo    ${usuarioCriado}[email]    ${usuarioCriado}[password]
     Set Global Variable    ${usuarioLogado}    ${usuarioCriado}
 
 Então usuário deve logar com sucesso
-    Espera se elemento está visivel      ${loginRealizado}
+    Espera se elemento está visivel      ${LOGINSUCESSO}
 
-Quando informa as credenciais exceto campo Email
+Quando digita os campos de login exceto Email
     Clica no elemento e insere texto    ${INPUTSENHA}    123456
 
 E clica em login
@@ -66,7 +66,7 @@ Quando preenche com um e-mail não cadastrado
     Clica no elemento e insere texto    ${INPUTEMAIL}    blablablabla@gblas.com
     Clica no elemento e insere texto    ${INPUTSENHA}    12345678
 
-Então o site deve exibir alerta de usuário ou senha inválidos
+Então deve surgir um aviso de e-mail ou senha incorretos
     Espera se elemento está visivel    ${ALERTALOGIN}
 
 Quando preenche com uma senha incorreta
@@ -94,14 +94,18 @@ E realiza o Login
 
     Espera o elemento e verifica o atributo ${BTN_LOGIN}   Login
     Wait Until Page Contains Element        ${INPUTEMAIL}
-    Clica no elemento e insere texto        ${INPUTEMAIL}
-    Clica no elemento e insere texto        ${INPUTSENHA}
-
+    Quando informa as credenciais cadastradas
+    E clica em login
+    
 Quando digita seus dados válidos
-    Efetuar Login com Dados Registrados
+    Clica no elemento e insere texto  ${INPUTEMAIL}   ${emailR}  
+    Clica no elemento e insere texto    ${INPUTSENHA}   123456
+    Click Element    ${BTN_LOGIN} 
 
 Então deve surgir um aviso de preenchimento de e-mail obrigatório
     Espera se elemento está visivel    ${ALERTA_EMAIL}
 
 Então deve surgir um aviso de preenchimento de senha obrigatório
     Espera se elemento está visivel    ${ALERTA_SENHA}
+
+    
