@@ -3,6 +3,7 @@
 Resource    ../base.robot
 
 
+
 *** Variables ***
 ${HOME}			      xpath=//android.view.View[@content-desc="Home"]
 ${BTN_MENU}		      xpath=//android.widget.Button[@content-desc="Open navigation menu"]

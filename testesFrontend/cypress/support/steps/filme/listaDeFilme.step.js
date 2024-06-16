@@ -1,11 +1,8 @@
 import {  Given,  When, Then,  Before,  After,} from "@badeball/cypress-cucumber-preprocessor";
 
 //Importar aqui os Page Objects para desenvolver os testes
-import InicioPage from "../../pages/inicial.page";
 import LoginPage from "../../pages/login.page";
-import { faker } from "@faker-js/faker";
 
-const paginaInicial = new InicioPage();
 const paginaLogin = new LoginPage();
 
 Given("que um usuário não logado acessou a página inicial", function () {
@@ -49,7 +46,7 @@ Given("que um usuário acessou a página inicial", function () {
   });
 
   When("o card de um filme deverá conter o título do mesmo", function () {
-    cy.get('.featured-movies > .carousel-container > .carousel-data > [href="/movies/1"]').contains('.movie-title').should('be.visible')
+    cy.get('.featured-movies > .carousel-container > .carousel-data').first().contains('.movie-title').should('be.visible')
   });
 
   Then("deverá haver uma opção de visualizar filmes mais bem avaliados", function () {

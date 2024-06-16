@@ -13,3 +13,5 @@ Resource    utils/commonsApi.robot
 Resource    page/loginPage.robot
 Resource    page/Page.robot
 Resource    page/detalhesPage.robot
+Resource    android/pages/registrarPage.robot
+Resource    android/pages/loginTest.robot
