@@ -22,7 +22,7 @@ CT 03- A página de detalhes do filme deve conter um totalizador das avaliaçõe
     Então o usuário conseguirá visualizar um totalizador das avaliações
 
 CT 04- A página de detalhes do filme deve conter a opção para avaliar o filme se for acessada por um usuário logado
-    Dado que usuário logado acessa o site
+    Dado que usuário logado acessa o aplicativo
     Quando acessa a página de detalhes de um filme
     Então será permitido criar uma avaliação para o filme 
 
@@ -31,8 +31,8 @@ CT 05- A página de detalhes do filme deve conter todas as avaliações registra
     Quando acessa a página de detalhes de um filme
     Então o usuário conseguirá visualizar todas as avaliações registradas para o filme
  
-# CT 06- Deve ser possível consultar um filme especifico
-#     Dado que usuario comum acessa o site
-#     E que tem um filme previamente cadastrado
-#     Quando acessa o filme especifico
-#     Então usuário conseguirá ver a página de detalhes do filme especifico
+CT 06- Deve ser possível consultar um filme especifico
+    Dado que usuario comum acessa o site
+    E que tem um filme previamente cadastrado
+    Quando acessa o filme especifico
+    Então usuário conseguirá ver a página de detalhes do filme especifico

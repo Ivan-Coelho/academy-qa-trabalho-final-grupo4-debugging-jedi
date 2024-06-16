@@ -49,7 +49,7 @@ Então usuário conseguirá ver a página de detalhes do filme
     Swipe até o elemento visível    ${CARD_VALIACAO_CRITICA}
     Swipe Até Elemento Visível    ${CARD_VALIACOES}
     
-Dado que usuário logado acessa o site
+Dado que usuário logado acessa o aplicativo
     Registrar Usuário
     Efetuar Login com Dados Registrados  
 
@@ -70,6 +70,7 @@ Quando acessa o filme especifico
 
 Então usuário conseguirá ver a página de detalhes do filme especifico
     Wait Until Page Contains Element        ${LABEL_TITULO}
+    Verifica se contem o text no content-desc    ${CARD_FILME_CADASTRADO}    Star Wars: Uma nova esperança
     Verifica se contem o text no content-desc    ${CARD_FILME_CADASTRADO}    Ano de Lançamento:
     Verifica se contem o text no content-desc    ${CARD_FILME_CADASTRADO}    Duração:
     Verifica se contem o text no content-desc    ${CARD_FILME_CADASTRADO}    Gênero: Épico, Aventura, Ficção científica
