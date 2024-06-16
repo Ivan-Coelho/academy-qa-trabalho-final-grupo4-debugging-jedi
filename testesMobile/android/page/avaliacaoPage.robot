@@ -36,6 +36,12 @@ Existe um filme cadastrado
     Evoluir para administrador    ${TOKEN}
     Criar um filme    ${TOKEN}
 
+Existe um filme cadastrado com review
+    cadastrar usuario na API
+    Login usuario pela API    ${EMAIL_API}
+    Evoluir para administrador    ${TOKEN}
+    Criar um filme    ${TOKEN}
+
 Dado que usuário critico acessa o aplicativo
     cadastrar usuario na API
     Login usuario pela API    ${EMAIL_API}
@@ -66,7 +72,7 @@ E salva a Avaliação
 Então o sistemar retorna uma mensagem
     [Arguments]    ${elemento}    ${texto}
     Wait Until Element Is Visible     ${elemento}
-    Verifica texto    ${ERRO_LOGIN}    ${texto}
+    Verifica texto    ${elemento}    ${texto}
 
 E será possível vizualizar a sua avaliação
     Press Keycode    4

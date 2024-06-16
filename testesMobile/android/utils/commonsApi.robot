@@ -1,6 +1,7 @@
 *** Settings ***
 Resource    ../base.robot
 Library    OperatingSystem
+Library    String
 
 *** Keywords ***
 
@@ -63,3 +64,9 @@ Evoluir para Critico
     Iniciar API COM TOKEN    ${token}
     PATCH On Session     alias=raromdb   url=/api/users/apply
     
+Cria uma review
+    [Arguments]    ${token}
+    ${score}    Convert To Number    3
+    Iniciar API COM TOKEN    ${token}
+    ${BODY_FILME}    Create Dictionary    movieId=${ID_FILME}    score=${score}    reviewText= Que filme maneiro zuumm zuummm
+
