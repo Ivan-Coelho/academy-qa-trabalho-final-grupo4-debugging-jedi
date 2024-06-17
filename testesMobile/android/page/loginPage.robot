@@ -80,7 +80,7 @@ Quando o usuario abrir o menu
 
 *** Keywords ***
 Dado que usuario acessa o APP
-    Abrir App
+    Element Should Be Visible    ${HOME}
 
 Dado que o usuario acessou a tela de Login
     

@@ -1,6 +1,6 @@
 import {Given, When, Then, Before, After} from '@badeball/cypress-cucumber-preprocessor';
-import LoginPage from '../page/login.page';
-import GerenciarContaPage from '../page/gerenciarConta.page';
+import LoginPage from '../../pages/login.page';
+import GerenciarContaPage from '../../pages/gerenciarConta.page'
 
 const paginaLogin = new LoginPage();
 const paginaGerenciarConta = new GerenciarContaPage();
