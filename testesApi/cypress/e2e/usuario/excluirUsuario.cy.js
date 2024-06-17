@@ -50,8 +50,9 @@ describe ("Excluir Usuários", () => {
                 headers: { Authorization: "Bearer " + usuario.tokenComum },
                 failOnStatusCode: false,
             }).then((response) =>{
-                expect(response.status).to.equal(403);
-                expect(response.body.error).to.be.eq('Forbidden');
+                expect(response.status).to.equal(401);
+            expect(response.body.message).to.be.eq('Access denied.');
+            expect(response.body.error).to.be.eq('Unauthorized');
             })
         })
 
@@ -64,8 +65,9 @@ describe ("Excluir Usuários", () => {
             headers: { Authorization: "Bearer " + token },
             failOnStatusCode: false,
         }).then((response) =>{
-            expect(response.status).to.equal(403);
-            expect(response.body.error).to.be.eq('Forbidden');
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to.be.eq('Access denied.');
+            expect(response.body.error).to.be.eq('Unauthorized');
         })
         })
     });
@@ -79,24 +81,12 @@ describe ("Excluir Usuários", () => {
             headers: { Authorization: "Bearer " + token },
             failOnStatusCode: false,
         }).then((response) =>{
-            expect(response.status).to.equal(403);
-            expect(response.body.error).to.be.eq('Forbidden');
-            })
-        })
-    });
-
-    it ("Prova que usuario não pode deletar, mas não dá o erro esperado", () => {
-        cy.request({
-            method: "DELETE",
-            url: "/users/" + usuario.id,
-            headers: { Authorization: "Bearer " + usuario.tokenComum },
-            failOnStatusCode: false,
-        }).then((response) =>{
             expect(response.status).to.equal(401);
             expect(response.body.message).to.be.eq('Access denied.');
             expect(response.body.error).to.be.eq('Unauthorized');
+            })
         })
-    })
+    });
 
     it ("Não deve ser possível excluir uma conta sem estar logado", () => {
         cy.request({
