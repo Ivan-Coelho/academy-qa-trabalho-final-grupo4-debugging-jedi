@@ -118,7 +118,9 @@ describe ("Excluir Usuários", () => {
             cy.deletarUsuario(userAdmin.id, tokenAdmin).then
         }).then(() => {
             cy.buscarFilmeResponseCompleto(nameFilm).then(function (response) {
-                expect(response.body.reviews).to.be.empty;
+                expect(response.status).to.equal(200);
+                expect(response.body.reviews).to.be.an("array");
+                expect(response.body.reviews.length).to.equal(0)
         });
         })
     })

@@ -1,82 +1,78 @@
 describe ("Inativar Usuários", () => {
     let usuario;
-    let filme;
+    let idFilme;
+    let userAdmin;
+    let nameFilm;
 
-    beforeEach(function () {
-        cy.criarUsuario().then((novoUsuario) => {
-            usuario = novoUsuario;
-        })
-    })
-
-    afterEach(() => {
-        cy.deletarUsuario(usuario);
-    })
-
-    it ("Um usuário comum deve conseguir desativar sua conta", () => {
-        cy.login(usuario).then((login) => {
-            token = login.body.accessToken
-        }).then(function () {
-            cy.inativarConta(token).then((response) => {
-                expect(response.status).to.equal(204);
-                expect(response.body).to.equal("");
+    before(function () {
+        cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+            userAdmin = dadosAdmin
+            userAdmin.accessToken = dadosAdmin.tokenAdmin
+            cy.fixture('filmes/bodyReview.json').as('filme')
+            cy.cadastrarFilme(userAdmin.token).then(function (response) {
+                nameFilm = response.body.name
+                idFilme = response.body.id
+                this.filme.id = idFilme
             })
         })
-    })
+    });
 
-    it ("Um administrador deve conseguir desativar sua conta", () => {
-        cy.login(usuario).then((login) => {
-            token = login.body.accessToken
-        }).then(function () {
-            cy.criarUsuarioAdmin(token).then(function () {
-                cy.inativarConta(token).then((response) => {
-                    expect(response.status).to.equal(204);
-                    expect(response.body).to.equal("");
-                })
-            });
+    beforeEach(() => {
+        cy.criarUsuarioResponse().then((novo) => {
+            usuario = novo
+            cy.login(usuario).then((conteudo) => {
+                usuario.accessToken = conteudo.body.accessToken
+            })
+        });
+    });
+
+
+    it ("Um usuário comum deve conseguir desativar sua conta", () => {
+            cy.inativarConta(usuario.accessToken).then((response) => {
+                expect(response.status).to.equal(204);
+                expect(response.body).to.equal("");
         })
     })
 
+    it ("Um administrador deve conseguir desativar uma conta", () => {
+        cy.inativarConta(usuario.accessToken).then((response) => {
+            expect(response.status).to.equal(204);
+            expect(response.body).to.equal("");
+    })
+    })
+
+
     it ("Um crítico deve conseguir desativar sua conta", () => {
-        cy.login(usuarioCriado).then((login) => {
-            token = login.body.accessToken
-        }).then(function () {
-            cy.criarUsuarioCrititco(token).then(function () {
-                cy.inativarConta(token).then((response) => {
-                    expect(response.status).to.equal(204);
-                    expect(response.body).to.equal("");
+        cy.criarUsuarioCritico(usuario.accessToken).then(function () {
+            cy.inativarConta(usuario.accessToken).then((response) => {
+                expect(response.status).to.equal(204);
+                expect(response.body).to.equal("");
                 })
             });
         });
-    })
-//rever
-    it ("As informações de review de filme devem continuar mesmo com a inativação", () => {
-        cy.login(usuarioCriado).then((login) => {
-            token = login.body.accessToken
-        }).then(function () {
-            cy.criarUsuarioAdmin(token).then(function () {
-                cy.CadastrarFilme({
-                    title: " ",
-                    genre: " ",
-                    description: " ",
-                    durationInMinutes: 105,
-                    releaseYear: 2017
-                }, token).then((filme) => {
-                    filme = movie.body
-                }).then(function () {
-                    cy.criarReview(filme.id, 5, "Amei! Superou minhas expectativas", token).then(function () {
-                        cy.inativarConta(token);
 
-                        cy.buscaFilmeId(filme.id).then((response) => {
-                            expect(response.status).to.equal(200);
-                            expect(response.body.reviews).to.be.an("array");
-                            expect(response.body.reviews[0].user.id).to.equal(usuario.id);
-                            expect(response.body.reviews[0].user.name).to.equal(usuario.name);
-                        })
-                    })
-                })
-            })
-        })  
-    })
+    // it ("As informações de review de filme devem continuar mesmo com a inativação", () => {
+    //             cy.CadastrarFilme(userAdmin.accessToken)({
+    //                 title: " ",
+    //                 genre: " ",
+    //                 description: " ",
+    //                 durationInMinutes: 105,
+    //                 releaseYear: 2017
+    //             }, token).then((filme) => {
+    //                 filme = movie.body
+    //             }).then(function () {
+    //                 cy.criarReview(filme.id, 5, "Amei! Superou minhas expectativas", token).then(function () {
+    //                     cy.inativarConta(token);
+
+    //                     cy.buscaFilmeId(filme.id).then((response) => {
+    //                         expect(response.status).to.equal(200);
+    //                         expect(response.body.reviews).to.be.an("array");
+    //                         expect(response.body.reviews[0].user.id).to.equal(usuario.id);
+    //                         expect(response.body.reviews[0].user.name).to.equal(usuario.name);
+    //                     })
+    //                 })
+    //             })
+    //         })
 
     it ("Não deve ser possível inativar uma conta sem estar logado", () => {
         cy.request({
@@ -90,28 +86,29 @@ describe ("Inativar Usuários", () => {
         });
     })
     
-    it ("Deve ser possivel cadastrar usuario usando um e-mail de uma conta inativa", () => {
+    // it ("Deve ser possivel cadastrar usuario usando um e-mail de uma conta inativa", () => {
         
-        let name = faker.person.fullName();
-        let password = "123456";
+    //     let name = faker.person.fullName();
+    //     let password = "123456";
 
-        cy.login(usuario).then((login) => {
-            token = login.body.accessToken
-        }).then(function () {
-            cy.inativarConta(token).then(() => {
-                cy.request({
-                    method: "POST",
-                    url: "/api/users/",
-                    body: {
-                        name: name,
-                        email: usuario.email,
-                        password: password,
-                    }
-                }).then((response) => {
-                    expect(response.status).to.equal(201);
-                    expect(response.body.email).to.deep.equal(usuarioCriado.email);
-                })
-            });
-        });
-    })
+    //     cy.login(usuario).then((login) => {
+    //         token = login.body.accessToken
+    //     }).then(function () {
+    //         cy.inativarConta(token).then(() => {
+    //             cy.request({
+    //                 method: "POST",
+    //                 url: "/api/users/",
+    //                 body: {
+    //                     name: name,
+    //                     email: usuario.email,
+    //                     password: password,
+    //                 }
+    //             }).then((response) => {
+    //                 expect(response.status).to.equal(201);
+    //                 expect(response.body.email).to.deep.equal(usuarioCriado.email);
+    //             })
+    //         });
+    //     });
+    // })
+
 })

@@ -562,3 +562,13 @@ Cypress.Commands.add("deletarUsuarioResponse", (usuario) => {
     });
   });
 });
+
+Cypress.Commands.add("admin", function (token) {
+  return cy.request({
+    method: "PATCH",
+    url: "/users/admin",
+    auth: {
+      bearer: token,
+    },
+  });
+});
