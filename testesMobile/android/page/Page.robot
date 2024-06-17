@@ -1,10 +1,7 @@
 *** Settings ***
 
 Resource   ../base.robot
-Resource   ../page/Page.robot
-Library    XML
-Library    AppiumLibrary
-Library    FakerLibrary
+
 
 *** Variables ***
 ${HOME}			                 xpath=//android.view.View[@content-desc="Home"]

@@ -21,6 +21,7 @@ Clica no elemento e insere texto
     Sleep    1
     Clear Text    ${elemento}
     Input Text     ${elemento}    ${texto}
+    Sleep    1
 
 Espera o elemento e verifica o atributo
     [Arguments]    ${elemento}    ${atributo}    ${valor_atributo}
@@ -30,8 +31,8 @@ Espera o elemento e verifica o atributo
  Duplo Clique no Elemento
     [Arguments]    ${locator}
     ${element} =    Get Webelement    ${locator}
-    Click Element    ${locator}
-    Click Element    ${locator}
+    Wait Until Keyword Succeeds    5    1    Click Element    ${locator}    
+    
 
 Registrar Usuário
     Dado que o usuario acessa a tela inicial
@@ -83,6 +84,14 @@ Espera se elemento está visivel
 Efetua Login do usuário
     [Arguments]    ${email}
     Wait Until Element Is Visible        ${HOME}    10
+    Dado que o usuario acessou a tela de Login
+    Wait Until Keyword Succeeds    5    1    Wait Until Element Is Visible       ${CAMPO_LOGIN}              
+    Clica no elemento e insere texto  ${INPUTEMAIL}   ${email}  
+    Clica no elemento e insere texto    ${INPUTSENHA}   123456
+    Click Element    ${BTN_LOGIN}
+    Sleep    2
+
+
 Quando acessa a página de Login
     # Wait Until Element Is Visible       ${CAMPO_LOGIN}          
     Clica no elemento e insere texto    ${INPUTEMAIL}   ${email}  

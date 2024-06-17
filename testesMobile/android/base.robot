@@ -19,3 +19,6 @@ Resource    page/Filme.robot
 Resource    page/loginPage.robot
 Resource    page/Filme.robot
 Resource    page/avaliacaoPage.robot
+
+
+

@@ -23,7 +23,9 @@ cadastrar usuario na API
     Set Test Variable    ${RESPONSE}    ${RESPOSTA.json()}    
     ${EMAIL_API}    Set Variable    ${RESPONSE['email']}
     Set Global Variable    ${EMAIL_API}
-    Set Global Variable    ${NOME_API}    ${RESPONSE['name']}    
+    Set Global Variable    ${NOME_API}       ${RESPONSE['name']}
+    Set Global Variable    ${ID_USER-API}    ${RESPONSE['id']}
+
 Login usuario pela API
     [Arguments]    ${email}
     ${BODY_LOGIN}    Create Dictionary    email=${email}    password=123456        

@@ -26,7 +26,7 @@ ${BTN_SALVAR}		             xpath=//android.widget.Button[@content-desc="Salvar"
 ${ERRO_LOGIN}		             xpath=//android.view.View[@content-desc="Faça login e tente novamente."]
 ${SUCESSO_REVIEW}		         xpath=//android.view.View[@content-desc="Sua review foi adicionada!"]
 ${ERRO_REVIEW}		             xpath=//android.view.View[@content-desc="Não foi possível adicionar sua review."]
-${FILME_ENCONTRADO}              //android.widget.ImageView[contains(@content-desc, "Star Wars: Uma nova esperança")]
+${FILME_ENCONTRADO}              xpath=//android.widget.ImageView[contains(@content-desc, "Star Wars: Uma nova esperança")]
   
 
 *** Keywords ***
@@ -51,9 +51,7 @@ Dado que usuário critico acessa o aplicativo
 E encontra um filme de interesse
     [Arguments]    ${filme}
     Swipe até o elemento visível    ${filme}    
-
-Quando acessa o filme
-    Espera o elemento e clica no elemento    ${FILME_ENCONTRADO}
+    Wait Until Keyword Succeeds    5    1    Espera o elemento e clica no elemento    ${FILME_ENCONTRADO}
 
 E acessa a tela de avaliaçao do filme
     Espera o elemento e clica no elemento    ${ADICIONAR_REVIEW}
@@ -77,6 +75,26 @@ Então o sistemar retorna uma mensagem
 E será possível vizualizar a sua avaliação
     Press Keycode    4
     Press Keycode    4
-    tira foto
+    Wait Until Keyword Succeeds    5    1    Page Should Contain Text    Melhor filme do mundo    
+    
+
+E avalia um filme
+    [Arguments]              ${nota}     ${comentario}    
+    E da uma nota para o filme    ${nota}
+    E escreve um comentario       ${comentario}
+    E salva a Avaliação
+
+E atualiza a review
+    [Arguments]        ${nota}    ${comentario}
+    E avalia um filme    ${nota}    ${comentario}
+
+
 
     
+# E avalia um filme sem comentar
+#     E da uma nota para o filme    ${SCORE_5}
+#     E salva a Avaliação
+
+# E avalia um filme sem atribuir uma nota
+#     E escreve um comentario       Melhor filme do mundo
+#     E salva a Avaliação
