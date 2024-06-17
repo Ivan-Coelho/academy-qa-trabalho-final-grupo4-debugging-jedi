@@ -27,7 +27,7 @@ Cenário: Consultar um filme utilizando um ID de filme inexistente não deve ret
     Então não encontrará nenhum filme
     E o usuário não conseguirá interagir com as funcionalidades
 
-#olhar onde se encaixa esse teste
+
 Cenário: Consultar um filme utilizando um ID de filme invalido não deve retornar nenhum filme e as funcionalidades da página devem estar desabilitadas
     Dado que usuario não cadastrado acessa o site
     Quando informa o id de um filme "sdadsa" 
@@ -77,4 +77,4 @@ Cenário: As avaliações registradas para o filme devem conter as informações
     Dado que usuario não cadastrado acessa o site
     Quando informa o id valido de um filme para acessar a pagina do filme
     Então o usuário conseguirá visualizar todas as informações relevantes das avaliações do filme
-    # E limpar a base
+  
