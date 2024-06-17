@@ -1,6 +1,82 @@
-# Rotina de Versionamento
+# Validação do sistema RaroMDB
+Esse projeto é a execução trabalho final do curso de Quality Assurance oferecido pela [Raro Academy](https://www.raroacademy.com.br/), e tem como objetivo validar a qualidade do sistema RaroMDB, utilizando de BDD, testes automatizados de API, Front-End e Mobile, utilizando tecnologias como Scrum, Cypress, Gherkin, Cucumber, Robot, Appium, Android Studio e suas devidas bibliotecas.
 
-## Rotina Diária
+### Membros do grupo Debugging Jedi: The Bugs Strike Back
+- Gabriel Vilela
+- Ivan Coelho
+- Maiara Magalhães
+- Samuel Souza
+- Tatiane Cavichiole
+
+### Sistemas Validados
+- [SWAGGER](https://raromdb-3c39614e42d4.herokuapp.com/swagger)
+- [Site](https://raromdb-frontend-c7d7dc3305a0.herokuapp.com/)
+- [APP](https://drive.google.com/file/d/1XXnwSrbgJgNgOyXOHfv7CKWAtf6A3MmD/view) - Este precisa ser baixado e instalado corretamente para execução dos testes de mobile.
+
+### Nossa organização
+- Divisão e acompanhamento do andamento do trabalho - [Trello](https://trello.com/b/jd6Sid02/kanban-grupo-4)
+- Report de Bugs - [Trello](https://trello.com/b/7gqMDifK/report-bugs)
+
+### Apresentação Final
+- [Apresentação]()
+
+## Como Instalar Dependências e Rodar os Testes
+O trabalho foi dividido em 3 pastas, cada uma delas possui uma dependência específica.
+
+### API
+Ao acessar o repositório, precisará abrir o terminal no seu editor de código, e entrar na pasta do testes de api utilizando o diretório: 
+
+```bash
+cd ~/academy-qa-trabalho-final-grupo4-debugging-jedi/testesApi
+```
+
+Instalar as dependências
+
+```bash
+npm install
+```
+
+Rodar os testes
+
+```bash
+npx cypress open
+```
+
+### Front-End
+Ao acessar o repositório, precisará abrir o terminal no seu editor de código, e entrar na pasta do testes de frontend utilizando o diretório: 
+
+```bash
+cd ~/academy-qa-trabalho-final-grupo4-debugging-jedi/testesFrontend
+
+```
+Instalar as dependências
+
+```bash
+npm install
+```
+
+Rodar os testes
+
+```bash
+npx cypress open
+```
+
+### Front-End
+Ao acessar o repositório, precisará abrir o terminal no seu editor de código, e entrar na pasta do testes de mobile utilizando o diretório: 
+
+```bash
+cd ~/academy-qa-trabalho-final-grupo4-debugging-jedi/testesMobile
+
+```
+Instalar as dependências
+
+```bash
+pip install robotframework-requests
+pip install setuptools
+pip install robotframework-faker
+```
+
+# Rotina de Versionamento
 
 Verificar em qual branch está
 
@@ -14,10 +90,10 @@ Se estiver em branch errada
 git checkout sua-branch
 ```
 
-Clonar a develop para sua branch
+Atualizar seu repositório remoto com o com o git
 
 ```bash
-git pull develop
+git pull
 ```
 
 Faça seus codigos e seus devidos commits
@@ -28,56 +104,52 @@ git commit -m "sua mensagem"
 git push -u origin sua-branch --force
 ```
 
-No final do dia, merge da sua branch com a develop (depois de ter feito seu último commit)
+Atualize novamente seu repositório remoto com o com o git, essa é uma boa prática, alguém pode ter trabalhado na sua branch
 
 ```bash
-git checkout develop
 git pull
-git pull sua-branch
-git commit -m "merge da sua branch"
-git push -u origin develop --force
 ```
 
-Branch main só será mergeada ao final do projeto
+Trate os Merge Conflits, se houver, e sincronize suas mudanças
 
+### Agora é hora de dar merge no seu desenvolvimento com a branch main
 
-## Atualização de Commands/Paths/Steps na develop
-
-Fazer checkout na develop
+Vá para a Main Branch e atualize ela, alguém pode ter trabalhado nela também
 
 ```bash
-git checkout develop
+git checkout main
+git pull
 ```
 
-Copiar path do arquivo (as barras são para direita "/") + nome da sua branch
+A boa prática, é sempre primeiro dar merge com da main na sua branch, e depois levar essas mudanças para a main
 
-```bash
-git checkout sua-branch -- C:/Users/Usuario/Desktop/teste-versionamento/commands.json
-```
-
-Adicionar na fila o path
-
-```bash
-git add C:/Users/Usuario/Desktop/teste-versionamento/commands.json
-```
-
-Commitar e enviar
-
-```bash
-git commit -m "commands atualizado"
-git push -u origin develop --force
-```
-
-## Pegar apenas atualização de commands
-
-Checkout na sua branch
+Volte para a sua branch
 
 ```bash
 git checkout sua-branch
 ```
 
-Trazer arquivo de commands da develop para sua branch sem alterar demais arquivos
+Dê merge com a main
 
 ```bash
-git checkout develop -- C:/Users/Usuario/Desktop/teste-versionamento/commands.json
+git merge main
 ```
+
+Trate os Merge Conflits, se houver, e sincronize suas mudanças
+
+Agora podemos voltar para a main e atualizar ela, alguém pode ter trabalhado nela enquanto estava fazendo merge
+
+```bash
+git checkout main
+git pull
+```
+
+Merge na sua-branch
+
+```bash
+git merge sua-branch
+```
+
+Trate os Merge Conflits, se houver, e sincronize suas mudanças
+
+Pronto, suas mudanças estão todas salvas, atualizadas, "mergeadas" e comentadas!!!
