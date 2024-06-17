@@ -1,5 +1,5 @@
 # Validação do sistema RaroMDB
-Esse projeto é a execução trabalho final do curso de Quality Assurance oferecido pela [Raro Academy](https://www.raroacademy.com.br/), e tem como objetivo validar a qualidade do sistema RaroMDB, utilizando de BDD, testes automatizados de API, Front-End e Mobile, utilizando tecnologias como Scrum, Cypress, Gherkin, Cucumber, Robot, Appium, Android Studio e suas devidas bibliotecas.
+Este projeto representa o trabalho final do curso de Quality Assurance oferecido pela [Raro Academy](https://www.raroacademy.com.br/). O objetivo é validar a qualidade do sistema RaroMDB por meio de BDD e testes automatizados de API, Front-End e Mobile. Utilizamos tecnologias como Scrum, Cypress, Gherkin, Cucumber, Robot, Appium, Android Studio e suas respectivas bibliotecas.
 
 ### Membros do grupo Debugging Jedi: The Bugs Strike Back
 - Gabriel Vilela
