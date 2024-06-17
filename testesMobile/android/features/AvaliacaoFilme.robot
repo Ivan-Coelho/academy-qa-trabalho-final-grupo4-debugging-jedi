@@ -48,7 +48,7 @@ CT005 - Não deve ser possível usuário avaliar um filme sem informar uma nota
     Dado que usuário logado acessa o aplicativo
     Quando acessa a página de detalhes de um filme
     E acessa a tela de avaliaçao do filme
-    E avalia um filme                               ${EMPTY}                  Melhor filme do mundo     
+    E avalia um filme sem atribuir uma nota         Melhor filme do mundo     
     Então o sistemar retorna uma mensagem           ${ERRO_REVIEW}            Não foi possível adicionar sua review.
 
 CT006 - Não deve ser possível usuário avaliar um filme com comentário de mais de 500 caracteres

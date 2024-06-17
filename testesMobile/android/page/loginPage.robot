@@ -85,7 +85,7 @@ Dado que usuario acessa o APP
 Dado que o usuario acessou a tela de Login
     
     Element Should Be Visible                ${BTN_MENU}
-    Wait Until Page Contains Element        ${CARD_FILME}
+    Wait Until Keyword Succeeds    5    1    Wait Until Page Contains Element        ${CARD_FILME}    
     Clicar no Elemento                      ${BTN_MENU}
     Wait Until Keyword Succeeds    5    1    Element Should Be Visible    ${CAMPO_LOGIN}    
     Clicar no Elemento                      ${CAMPO_LOGIN}

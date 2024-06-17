@@ -58,7 +58,7 @@ E acessa a tela de avaliaçao do filme
 
 E da uma nota para o filme
     [Arguments]    ${LOCATOR_NOTA}
-    Espera o elemento e clica no elemento    ${SCORE_5}
+    Espera o elemento e clica no elemento    ${LOCATOR_NOTA}
 
 E escreve um comentario
     [Arguments]    ${texto}
@@ -84,17 +84,16 @@ E avalia um filme
     E escreve um comentario       ${comentario}
     E salva a Avaliação
 
+
+E avalia um filme sem atribuir uma nota
+    [Arguments]                ${comentario} 
+    E escreve um comentario       ${comentario} 
+    E salva a Avaliação
+
 E atualiza a review
     [Arguments]        ${nota}    ${comentario}
     E avalia um filme    ${nota}    ${comentario}
 
 
 
-    
-# E avalia um filme sem comentar
-#     E da uma nota para o filme    ${SCORE_5}
-#     E salva a Avaliação
 
-# E avalia um filme sem atribuir uma nota
-#     E escreve um comentario       Melhor filme do mundo
-#     E salva a Avaliação
