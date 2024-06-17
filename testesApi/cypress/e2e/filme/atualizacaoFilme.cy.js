@@ -6,7 +6,7 @@ describe("Atualizar filme", () => {
   let usuarioCritico;
   let filme;
 
-  before(() => {
+  beforeEach(() => {
     cy.criarUsuarioAdmin().then((response) => {
       usuarioAdmin = { ...response };
       const anoAtual = new Date().getFullYear();
@@ -23,7 +23,7 @@ describe("Atualizar filme", () => {
     });
 
     cy.criarUsuario().then((response) => {
-      usuarioComum = { ...response };
+      usuarioComum = { ...response.body };
     });
 
     cy.criarUsuarioCritico().then((response) => {
@@ -31,10 +31,18 @@ describe("Atualizar filme", () => {
     });
   });
 
+  afterEach(() => {
+    cy.deletarFilme(filme.id, usuarioAdmin.token);
+    cy.deletarUsuario(usuarioComum.id, usuarioAdmin.token);
+    cy.deletarUsuario(usuarioCritico.id, usuarioAdmin.token);
+    cy.deletarUsuario(usuarioAdmin.id, usuarioAdmin.token);
+  });
+
   it("Deve ser possível um usuario admin atualizar um filme com sucesso", () => {
     filme.genre = faker.lorem.words(5);
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filme).then((response) => {
       expect(response.status).to.equal(204);
+      expect(response.statusText).to.equal("No Content");
     });
   });
 
@@ -42,6 +50,10 @@ describe("Atualizar filme", () => {
     filme.genre = faker.lorem.words(5);
     cy.atualizarFilme(null, filme.id, filme).then((response) => {
       expect(response.status).to.equal(401);
+      expect(response.statusText).to.equal("Unauthorized");
+      expect(response.body.error).to.equal("Unauthorized");
+      expect(response.body.message).to.equal("Access denied.");
+      expect(response.body.statusCode).to.equal(401);
     });
   });
 
@@ -49,6 +61,10 @@ describe("Atualizar filme", () => {
     filme.genre = faker.lorem.words(5);
     cy.atualizarFilme(usuarioComum.token, filme.id, filme).then((response) => {
       expect(response.status).to.equal(401);
+      expect(response.statusText).to.equal("Unauthorized");
+      expect(response.body.error).to.equal("Unauthorized");
+      expect(response.body.message).to.equal("Access denied.");
+      expect(response.body.statusCode).to.equal(401);
     });
   });
 
@@ -57,6 +73,9 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioCritico.token, filme.id, filme).then(
       (response) => {
         expect(response.status).to.equal(403);
+        expect(response.statusText).to.equal("Forbidden");
+        expect(response.body.message).to.equal("Forbidden");
+        expect(response.body.statusCode).to.equal(403);
       }
     );
   });
@@ -67,6 +86,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filmeNovo.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -76,6 +99,7 @@ describe("Atualizar filme", () => {
     filmeNovo.genre = faker.lorem.words(5);
     cy.atualizarFilme(usuarioAdmin.token, 0, filmeNovo).then((response) => {
       expect(response.status).to.equal(404);
+      expect(response.statusText).to.equal("Not Found");
       expect(response.body.error).to.equal("Not Found");
       expect(response.body.message).to.equal("Movie not found");
     });
@@ -87,6 +111,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -97,6 +122,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -107,6 +133,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -117,6 +147,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -127,6 +158,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -137,6 +169,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -147,6 +183,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -157,6 +194,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -167,6 +205,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -177,6 +219,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -187,6 +230,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -197,6 +241,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -209,6 +257,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -219,6 +271,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -229,6 +282,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
@@ -239,6 +293,10 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(400);
+        expect(response.statusText).to.equal("Bad Request");
+        expect(response.body.error).to.equal("Bad Request");
+        expect(response.body.message).to.be.an("array");
+        expect(response.body.statusCode).to.equal(400);
       }
     );
   });
@@ -249,6 +307,7 @@ describe("Atualizar filme", () => {
     cy.atualizarFilme(usuarioAdmin.token, filme.id, filmeNovo).then(
       (response) => {
         expect(response.status).to.equal(204);
+        expect(response.statusText).to.equal("No Content");
       }
     );
   });
