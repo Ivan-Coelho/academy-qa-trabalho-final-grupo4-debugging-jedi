@@ -1,46 +1,43 @@
 describe ("Consultar Informações de Usuário", () =>{
     let usuario;
     let consultar;  
-    
+    let token;
+    let userAdmin;
 
     beforeEach(() => {
-        cy.criarUSuario().then((novoUsuario) => {
+        cy.criarUsuarioResponse().then((novoUsuario) => {
           usuario = novoUsuario;
         });
-        cy.criarUsuario().then((novoUsuario) => {
+        cy.criarUsuarioResponse().then((novoUsuario) => {
           consultar = novoUsuario;
         });
       });
     
-      after(function () {
-        cy.deleteUser(usuario);
-        cy.deleteUser(consultar);
-      })
 
     it ("Sendo um usuário admin, deve ser possível consultar as informações do usuário", () =>{
-        cy.usuarioLogado(usuario).then((login) => {
-            token = login.body.accessToken
-            cy.criarUsuarioAdmin(token).then(function () {
-              cy.request({
-                method: 'GET',
-                url: '/users/' + consultar.id,
-                failOnStatusCode: false,
-                auth: {
-                  bearer: token
-                }
-              }).then((response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body).to.deep.include({
-                  id: consultar.id,
-                  name: consultar.name,
-                  email: consultar.email,
-                  active: consultar.active,
-                  type: consultar.type,
-                })
-              })
+      cy.login(usuario).then((login) => {
+        token = login.body.accessToken
+        cy.admin(token).then(function () {
+          cy.request({
+            method: 'GET',
+            url: '/users/' + consultar.id,
+            failOnStatusCode: false,
+            auth: {
+              bearer: token
+            }
+          }).then((response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body).to.deep.include({
+              id: consultar.id,
+              name: consultar.name,
+              email: consultar.email,
+              active: consultar.active,
+              type: consultar.type,
             })
-          });
-    })
+          })
+        })
+      });
+    });
     
     it ("Sendo um usuário comum, não deve ser possível consultar as informações do usuário", () =>{
         cy.login(usuario).then((login) => {
@@ -79,7 +76,7 @@ describe ("Consultar Informações de Usuário", () =>{
     })
     
     it ("Não deve ser possível consultar as informações do usuário, buscando por um id inválido", () =>{
-        cy.usuarioLogado(usuario).then((login) => {
+        cy.login(usuario).then((login) => {
             token = login.body.accessToken
             cy.criarUsuarioAdmin(token).then(function () {
               cy.request({
@@ -90,8 +87,7 @@ describe ("Consultar Informações de Usuário", () =>{
                   bearer: token
                 }
               }).then((response) => {
-                expect(response.status).to.equal(200);
-                expect(response.body).to.deep.equal("");
+                expect(response.status).to.equal(403);
               })
             })
           });
@@ -100,7 +96,7 @@ describe ("Consultar Informações de Usuário", () =>{
     it ("Não deve ser possível consultar as informações do usuário, sem fazer login", () =>{
         cy.request({
             method: 'GET',
-            url: '/api/users/' + usuarioConsulta.id,
+            url: '/users/' + consultar.id,
             failOnStatusCode: false,
           }).then((response) => {
             expect(response.status).to.equal(401);

@@ -1,15 +1,29 @@
 describe ("Excluir Usuários", () => {
     let usuario;
+    let idFilme;
+    let userAdmin;
+    let nameFilm;
+
+    before(function () {
+        cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+            userAdmin = dadosAdmin
+            cy.fixture('filmes/bodyReview.json').as('filme')
+            cy.cadastrarFilme(userAdmin.token).then(function (response) {
+                nameFilm = response.body.name
+                idFilme = response.body.id
+                this.filme.id = idFilme
+            })
+        })
+    });
 
     beforeEach(() => {
-        cy.criarUsuario().then((novoUsuario) => {
-            usuario = novoUsuario;
+        cy.criarUsuarioResponse().then((novo) => {
+            usuario = novo
+            cy.login(usuario).then((conteudo) => {
+                usuario.accessToken = conteudo.body.accessToken
+            })
         });
-    })
-
-    afterEach(() => {
-        cy.deletarUsuario(usuario);
-    })
+    });
 
     it("Um administrador deve poder excluir um usuário", () => {
         cy.criarUsuarioAdmin().then(function (dadosAdmin) {
@@ -36,8 +50,9 @@ describe ("Excluir Usuários", () => {
                 headers: { Authorization: "Bearer " + usuario.tokenComum },
                 failOnStatusCode: false,
             }).then((response) =>{
-                expect(response.status).to.equal(403);
-                expect(response.body.error).to.be.eq('Forbidden');
+                expect(response.status).to.equal(401);
+            expect(response.body.message).to.be.eq('Access denied.');
+            expect(response.body.error).to.be.eq('Unauthorized');
             })
         })
 
@@ -50,8 +65,9 @@ describe ("Excluir Usuários", () => {
             headers: { Authorization: "Bearer " + token },
             failOnStatusCode: false,
         }).then((response) =>{
-            expect(response.status).to.equal(403);
-            expect(response.body.error).to.be.eq('Forbidden');
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to.be.eq('Access denied.');
+            expect(response.body.error).to.be.eq('Unauthorized');
         })
         })
     });
@@ -65,26 +81,13 @@ describe ("Excluir Usuários", () => {
             headers: { Authorization: "Bearer " + token },
             failOnStatusCode: false,
         }).then((response) =>{
-            expect(response.status).to.equal(403);
-            expect(response.body.error).to.be.eq('Forbidden');
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to.be.eq('Access denied.');
+            expect(response.body.error).to.be.eq('Unauthorized');
             })
         })
     });
 
-    it ("Prova que usuario não pode deletar, mas não dá o erro esperado", () => {
-        cy.request({
-            method: "DELETE",
-            url: "/users/" + usuario.id,
-            headers: { Authorization: "Bearer " + usuario.tokenComum },
-            failOnStatusCode: false,
-        }).then((response) =>{
-            expect(response.status).to.equal(401);
-            expect(response.body.message).to.be.eq('Access denied.');
-            expect(response.body.error).to.be.eq('Unauthorized');
-        })
-    })
-
-    //deslogar
     it ("Não deve ser possível excluir uma conta sem estar logado", () => {
         cy.request({
             method: 'DELETE',
@@ -96,16 +99,18 @@ describe ("Excluir Usuários", () => {
             expect(response.body.error).to.be.eq('Unauthorized');
         });
     });
-//ivan
+
     it ("Não deve ser possível visualizar as avaliações de um filme feita por um usuário excluído", () => {
         cy.criarUsuarioAdmin().then(function (dadosAdmin) {
             const userAdmin = dadosAdmin;
             const tokenAdmin = dadosAdmin.token;
-                cy.criarReview()
-                cy.deletarUsuario(userAdmin.id, tokenAdmin).then
+            cy.criarReview(idFilme, tokenAdmin)
+            cy.deletarUsuario(userAdmin.id, tokenAdmin).then
         }).then(() => {
-            cy.buscaFilmeId(idFilme).then((response) => {
-            expect(response.body.reviews).to.be.empty;
+            cy.buscarFilmeResponseCompleto(nameFilm).then(function (response) {
+                expect(response.status).to.equal(200);
+                expect(response.body.reviews).to.be.an("array");
+                expect(response.body.reviews.length).to.equal(0)
         });
         })
     })

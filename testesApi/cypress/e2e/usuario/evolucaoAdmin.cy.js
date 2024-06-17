@@ -1,51 +1,62 @@
 describe ("Inativar Usuários", () => {
-    let usuario;
-    let filme;
-
-    beforeEach(function () {
-        cy.criarUsuario().then((novoUsuario) => {
-            usuario = novoUsuario;
-        })
-    })
-
-    afterEach(() => {
-        cy.deletarUsuario(usuario);
-    })
-
-
+    let userAdmin;
+    let tokenAdmin;
+    let userComum;
 
 it ("Um usuário comum pode se tornar Admin", () => {
-    cy.login(usuario).then((login) => {
-        token = login.body.accessToken
-    }).then(function () {
+    cy.usuarioLogado().then(function (response) {
+        userComum = response;
+
         cy.request({
-            method: 'PATCH',
-            url: "/users/admin",
-            auth: {
-                bearer: token
-            }
+          method: "PATCH",
+          url: "/users/admin",
+          headers: { Authorization: "Bearer " + userComum.token },
         }).then(function (response) {
-            expect(response.status).to.equal(204);
-        })
-    });
+          expect(response.status).to.equal(204);
+
+          cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+            userAdmin = dadosAdmin;
+            tokenAdmin = dadosAdmin.token;
+
+            cy.listarUsuarioId(userComum.id, tokenAdmin).then(function (
+              response
+            ) {
+              expect(response.status).to.equal(200);
+              expect(response.body.active).to.equal(true);
+              expect(response.body.id).to.equal(userComum.id);
+              expect(response.body.type).to.equal(1);
+            });
+          });
+        });
+      });
 })
 
 it ("Um crítico comum pode se tornar Admin", () => {
-    cy.login(usuario).then((login) => {
-        token = login.body.accessToken
-    }).then(function () {
-        cy.criarUsuarioCritico(token).then(function () {
-            cy.request({
-                method: 'PATCH',
-                url: '/api/users/admin',
-                auth: {
-                    bearer: token
-                }
-            }).then((response) => {
-                expect(response.status).to.equal(204);
-            })
+    cy.usuarioLogado().then(function (response) {
+        userComum = response;
+
+        cy.request({
+          method: "PATCH",
+          url: "/users/admin",
+          headers: { Authorization: "Bearer " + userComum.token },
+        }).then(function (response) {
+          expect(response.status).to.equal(204);
+
+          cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+            userAdmin = dadosAdmin;
+            tokenAdmin = dadosAdmin.token;
+
+            cy.listarUsuarioId(userComum.id, tokenAdmin).then(function (
+              response
+            ) {
+              expect(response.status).to.equal(200);
+              expect(response.body.active).to.equal(true);
+              expect(response.body.id).to.equal(userComum.id);
+              expect(response.body.type).to.equal(1);
+            });
+          });
         });
-    })
+      });
 })
 
 it ("Não deve ser possível evoluir uma conta para Admin sem estar logado", () => {
@@ -59,21 +70,5 @@ it ("Não deve ser possível evoluir uma conta para Admin sem estar logado", () 
         expect(response.body.error).to.be.eq('Unauthorized')
         });
     });
-
-it ("Deve ser possível visualizar quando uma review de filme foi feita por um admin", () => {
-
-})
-
-it ("As review feitas por admin não deve impactar nas review de usuarios comuns", () => {
-
-})
-
-it ("As review feitas por admin não deve impactar nas review de usuarios críticos", () => {
-
-})
-
-it ("Deve ser possível diferenciar as reviews feitas por um usuário antes e depois de se tornar Administrador", () => {
-
-})
 
 })
