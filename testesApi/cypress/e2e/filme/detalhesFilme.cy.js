@@ -92,8 +92,7 @@ describe('Consulta de detalhes de filmes', function () {
                 expect(response.body).to.deep.equal(this.filme)
             })
         });
-
-        // faz sentido esse teste?
+       
         it('Buscar um filme por id utilizando um id inexistente deve retornar vazio', function () {
 
             cy.request({
@@ -130,14 +129,9 @@ describe('Consulta de detalhes de filmes', function () {
                     expect(response.body.reviews[0].updatedAt).to.be.an('string')
                     expect(response.body.reviews[0].reviewType).not.equal(1)
                     expect(response.body.reviews[0].reviewType).not.equal(0)
-
-
-
-
-                })
-
-            })
-        })
+                });
+            });
+        });
 
         it('Ao buscar um filme por id com review de usuário do tipo crítico deve retornar a avaliação e os dados do usuário', function () {
             let userCritico
@@ -168,11 +162,11 @@ describe('Consulta de detalhes de filmes', function () {
                         expect(response.body.reviews[0].user.id).to.equal(userCritico.id)
                         expect(response.body.reviews[0].user.name).to.equal(userCritico.nome)
                         expect(response.body.reviews[0].user.type).to.equal(2)
-                    })
+                    });
                 });
                 cy.deletarUsuario(userCritico.id, userAdmin.token);
             });
-        })
+        });
 
         it('Ao buscar um filme por id com review de usuário do tipo comum deve retornar a avaliação e os dados do usuário', function () {
             let userComum
@@ -208,17 +202,14 @@ describe('Consulta de detalhes de filmes', function () {
                 });
                 cy.deletarUsuario(userComum.id, userAdmin.token);
             });
-        })
+        });
 
-        // posso validar só o array? precisa desse teste?
+        
         it('Ao buscar um filme por id todas as avaliações devem ser listadas', function () {
-
-            //let userComum = []
 
             for (let i = 0; i < 5; i++) {
                 cy.usuarioLogado().then(function (dadosComum) {
-                    //userComum.push(dadosComum.token)
-                    //cy.criarReview(idFilme, userComum[i])
+                    
                     cy.criarReview(idFilme, dadosComum.token)
                     cy.inativarConta(dadosComum.token)
                 })
@@ -231,8 +222,17 @@ describe('Consulta de detalhes de filmes', function () {
                 expect(response.status).to.equal(200);
                 expect(response.body.id).to.equal(idFilme)
                 expect(response.body.reviews).to.be.an('array').to.have.lengthOf(5)
-
-            })
+                response.body.reviews.forEach(function (review) {
+                    expect(review).to.have.property('id').to.be.a('number');
+                    expect(review).to.have.property('reviewText').to.be.a('string');
+                    expect(review).to.have.property('reviewType').to.be.a('number');
+                    expect(review).to.have.property('score').to.be.a('number');
+                    expect(review).to.have.property('updatedAt').to.be.a('string');
+                    expect(review.user).to.have.property('id').to.be.a('number');
+                    expect(review.user).to.have.property('name').to.be.a('string');
+                    expect(review.user).to.have.property('type').to.be.a('number');
+                });
+            });
         });
 
         it('Ao buscar um filme por id com 2 reviews de usuário do tipo crítico deve retornar as avaliações e os dados dos usuários', function () {
@@ -290,8 +290,8 @@ describe('Consulta de detalhes de filmes', function () {
                         });
                     });
                 });
-            })
-        })
+            });
+        });
 
         it('Ao buscar um filme por id com 2 reviews de usuário do tipo comum deve retornar as avaliações e os dados dos usuários', function () {
             let userComum1, userComum2
@@ -436,7 +436,6 @@ describe('Consulta de detalhes de filmes', function () {
                             expect(response.body.reviews).to.be.an('array')
                             expect(response.body.reviews[0].reviewText).to.equal(comentario1)
                             expect(response.body.reviews[0].id).to.be.an('number')
-                           //expect(response.body.reviews[0].reviewType).not.equal(0)
                             expect(response.body.reviews[0].reviewType).not.equal(1)
                             expect(response.body.reviews[0].score).to.equal(nota1)
                             expect(response.body.reviews[0].updatedAt).to.be.an('string')
@@ -447,7 +446,6 @@ describe('Consulta de detalhes de filmes', function () {
 
                             expect(response.body.reviews[1].reviewText).to.equal(comentario2)
                             expect(response.body.reviews[1].id).to.be.an('number')
-                            //expect(response.body.reviews[1].reviewType).not.equal(0)
                             expect(response.body.reviews[1].reviewType).not.equal(1)
                             expect(response.body.reviews[1].score).to.equal(nota2)
                             expect(response.body.reviews[1].updatedAt).to.be.an('string')
@@ -539,7 +537,6 @@ describe('Consulta de detalhes de filmes', function () {
                 });
             });
         });
-        // novo teste 
-
+        
     });
 });
