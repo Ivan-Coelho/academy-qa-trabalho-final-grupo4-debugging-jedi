@@ -344,13 +344,55 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add("login", (infoUsuario) => {
+Cypress.Commands.add("login", (usuario) => {
   cy.request({
     method: "POST",
     url: "/auth/login",
     body: {
-      email: infoUsuario.email,
-      password: infoUsuario.password
+      email: usuario.email,
+      password: usuario.password
     },
   })
 })
+
+Cypress.Commands.add("criarUsuarioResponse", function () {
+  let user = {
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: "123456",
+  };
+  cy.request({
+    method: "POST",
+    url: "/users",
+    body: user,
+  }).then(function (response) {
+    let criado ={
+      ...user,
+      ...response.body,
+      response : response,
+    };
+    return criado;
+  });
+});
+
+Cypress.Commands.add("deletarUsuarioResponse", (usuario) => {
+  let token;
+  const conteudo = {
+    email: usuario.email,
+    password: usuario.password,
+    id: usuario.id,
+  };
+
+  return cy.login(conteudo).then((response) => {
+    token = response.body.accessToken;
+    return cy.criarUsuarioAdmin(token).then(function () {
+      return cy.request({
+        method: "DELETE",
+        url: apiUrl + "/users/" + conteudo.id,
+        auth: {
+          bearer: token,
+        },
+      });
+    });
+  });
+});
