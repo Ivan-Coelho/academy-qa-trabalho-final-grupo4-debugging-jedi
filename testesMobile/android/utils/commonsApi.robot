@@ -1,6 +1,7 @@
 *** Settings ***
 Resource    ../base.robot
 Library    OperatingSystem
+Library    String
 
 *** Keywords ***
 
@@ -20,9 +21,9 @@ cadastrar usuario na API
     Iniciar API
     ${RESPOSTA}    POST On Session    alias=raromdb    url=/api/users     json=${BODY_CADASTRO}
     Set Test Variable    ${RESPONSE}    ${RESPOSTA.json()}    
-    ${EMAIL}    Set Variable    ${RESPONSE['email']}
-    Set Global Variable    ${EMAIL}
-
+    ${EMAIL_API}    Set Variable    ${RESPONSE['email']}
+    Set Global Variable    ${EMAIL_API}
+    Set Global Variable    ${NOME_API}    ${RESPONSE['name']}    
 Login usuario pela API
     [Arguments]    ${email}
     ${BODY_LOGIN}    Create Dictionary    email=${email}    password=123456        
@@ -51,4 +52,21 @@ Criar um filme
 Deletar um filme
     [Arguments]    ${token}    ${idFilme}
     Iniciar API COM TOKEN    ${token}
-    DELETE On Session   alias=raromdb    url=/api/movies/${idFilme}       
+    DELETE On Session   alias=raromdb    url=/api/movies/${idFilme}
+
+Deletar um usuario
+    [Arguments]    ${token}    ${idUsuario}
+    Iniciar API COM TOKEN    ${token}
+    DELETE On Session   alias=raromdb    url=/api/users/${idUsuario}
+
+Evoluir para Critico
+    [Arguments]    ${token}
+    Iniciar API COM TOKEN    ${token}
+    PATCH On Session     alias=raromdb   url=/api/users/apply
+    
+Cria uma review
+    [Arguments]    ${token}
+    ${score}    Convert To Number    3
+    Iniciar API COM TOKEN    ${token}
+    ${BODY_FILME}    Create Dictionary    movieId=${ID_FILME}    score=${score}    reviewText= Que filme maneiro zuumm zuummm
+

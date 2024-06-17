@@ -90,7 +90,7 @@ Dado que o usuario acessou a tela de Login
     Element Should Be Visible    ${CAMPO_LOGIN}
     Clicar no Elemento               ${CAMPO_LOGIN}
 
-E realiza o Login
+# E realiza o Login
 
     Espera o elemento e verifica o atributo ${BTN_LOGIN}   Login
     Wait Until Page Contains Element        ${INPUTEMAIL}

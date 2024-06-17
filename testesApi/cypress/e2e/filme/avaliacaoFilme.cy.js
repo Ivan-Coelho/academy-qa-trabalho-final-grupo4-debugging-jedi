@@ -224,14 +224,8 @@ describe('Avaliação de filme', function () {
             }).then(function (response) {
                 expect(response.status).to.equal(200);
                 expect(response.body.reviews).to.be.an('array').to.have.lengthOf(1)
-            })
-
-
+            });
         });
-
-
-
-
     });
 
     describe('Avaliações de filme de maneira válida', function () {
@@ -245,7 +239,7 @@ describe('Avaliação de filme', function () {
 
             cy.usuarioLogado().then(function (dadosComum) {
                 userComum = dadosComum
-            })
+            });
         });
 
         beforeEach(function () {
@@ -301,19 +295,8 @@ describe('Avaliação de filme', function () {
                 expect(response.reviews[0].user.type).to.equal(0)
 
 
-            })
+            });
 
-            // cy.fixture('filmes/bodyReview2.json').as('review')
-            // cy.request({
-            //     method: 'GET',
-            //     url: 'users/review/all',
-            //     headers: { Authorization: 'Bearer ' + userComum.token }
-            // }).then(function (response) {
-            //     this.review[0].id = response.body[0].id
-            //     this.review[0].movieId = idFilme
-            //     expect(response.status).to.equal(200)
-            //     expect(response.body).to.deep.equal(this.review)
-            // })
         });
         // Isso é um BUG??
         it('Deve ser possível um usuário fazer uma avaliação sem informar um comentário', function () {
@@ -457,8 +440,8 @@ describe('Avaliação de filme', function () {
                 this.review[0].id = response.body[0].id
                 this.review[0].movieId = idFilme
 
-                expect(response.status).to.equal(200)
-                expect(response.body).to.deep.equal(this.review)
+                expect(response.status).to.equal(200);
+                expect(response.body).to.deep.equal(this.review);
             })
         });
 
@@ -505,7 +488,63 @@ describe('Avaliação de filme', function () {
                 expect(response.audienceScore).to.equal(0)
             })
         });
-        // novo teste
+    });
+    describe('Avaliações anteriores a mudança de perfil não devem ter seu tipo alterado', function () {
+        let userAdmin
+        let idFilme
+        let userComum
 
+        before(function () {
+            cy.criarUsuarioAdmin().then(function (dadosAdmin) {
+                userAdmin = dadosAdmin
+            });
+        });
+
+        beforeEach(function () {
+            cy.cadastrarFilme(userAdmin.token).then(function (response) {
+                idFilme = response.body.id
+            });
+
+            cy.usuarioLogado().then(function(dadosComum){
+                userComum = dadosComum
+                cy.criarReview(idFilme, userComum.token)
+            });
+        });
+
+
+        afterEach(function () {            
+            cy.deletarFilme(idFilme, userAdmin.token)
+            cy.deletarUsuario(userComum.id, userAdmin.token)
+        });
+
+        after(function () {
+            cy.deletarUsuario(userAdmin.id, userAdmin.token)
+        });
+        
+        it('usuario comum ao evoluir para crítico', function () {
+            
+            cy.evoluirCritico(userComum.token);
+            cy.listarReview(userComum.token).then(function(response){
+                expect(response.body[0].reviewType).to.equal(0)
+            });
+            
+        });
+
+        it('usuario comum ao evoluir para administrador', function () {            
+            cy.evoluirAdministrador(userComum.token);
+            cy.listarReview(userComum.token).then(function(response){
+                expect(response.body[0].reviewType).to.not.equal(1)
+            });            
+        });
+
+        it('usuario administrador ao evoluir para crítico', function () {            
+            cy.criarReview(idFilme, userAdmin.token)
+            cy.evoluirCritico(userAdmin.token);
+            cy.listarReview(userComum.token).then(function(response){
+                expect(response.body[0].reviewType).to.equal(0)
+            });
+            
+            cy.evoluirAdministrador(userAdmin.token);
+        });
     });
 });

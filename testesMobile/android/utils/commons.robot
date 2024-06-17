@@ -1,9 +1,7 @@
 *** Settings ***
 
 Resource    ../base.robot
-Resource    ../page/loginPage.robot
-Library    AppiumLibrary
-Library    FakerLibrary
+
 
 *** Variables ***
 ${emailR}
@@ -21,12 +19,13 @@ Clica no elemento e insere texto
     Wait Until Element Is Visible    ${elemento}
     Click Element    ${elemento}
     Sleep    1
+    Clear Text    ${elemento}
     Input Text     ${elemento}    ${texto}
 
 Espera o elemento e verifica o atributo
     [Arguments]    ${elemento}    ${atributo}    ${valor_atributo}
     Wait Until Element Is Visible        ${elemento}    10
-    Element Attribute Should Match       ${elemento}    ${atributo}    ${valor_atributo}    regexp=true  
+   AppiumLibrary. Element Attribute Should Match       ${elemento}    ${atributo}    ${valor_atributo}    regexp=true  
 
  Duplo Clique no Elemento
     [Arguments]    ${locator}
@@ -62,7 +61,7 @@ Efetuar Login com Dados Registrados
     Clica no elemento e insere texto  ${INPUTEMAIL}   ${emailR}  
     Clica no elemento e insere texto    ${INPUTSENHA}   123456
     Click Element    ${BTN_LOGIN}
-    Sleep    5
+    Sleep    2
 Swipe até o elemento visível
     [Arguments]    ${element_locator}    ${timeout}=10s
     ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=${timeout}
@@ -70,7 +69,6 @@ Swipe até o elemento visível
         Swipe    500    1500    500    500
         ${status}    Run Keyword And Return Status    Element Should Be Visible    ${element_locator}    timeout=2s
     END
-
 Verifica se contem o text no content-desc
     [Arguments]    ${elemento}    ${text}
     Wait Until Element Is Visible    ${elemento}    5s
@@ -81,3 +79,21 @@ Espera se elemento está visivel
     [Arguments]    ${elemento}
     Wait Until Element Is Visible    ${elemento}    10
     Element Should Be Visible    ${elemento}
+
+Efetua Login do usuário
+    [Arguments]    ${email}
+    Wait Until Element Is Visible        ${HOME}    10
+Quando acessa a página de Login
+    # Wait Until Element Is Visible       ${CAMPO_LOGIN}          
+    Clica no elemento e insere texto    ${INPUTEMAIL}   ${email}  
+    Clica no elemento e insere texto    ${INPUTSENHA}   123456
+    Click Element    ${BTN_LOGIN}
+    Sleep    2
+
+Verifica texto
+    [Arguments]    ${elemento}    ${texto}
+    ${contenDesc}=     AppiumLibrary.Get Element Attribute    ${elemento}    content-desc    
+    Should Contain    ${contenDesc}    ${texto}
+
+tira foto
+    Capture Page Screenshot
