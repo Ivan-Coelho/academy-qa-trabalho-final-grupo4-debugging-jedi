@@ -34,7 +34,7 @@ ${IMPUT_TEXT_REVIEW}             xpath=//android.widget.EditText
 *** Keywords ***
 
 Dado que usuario comum acessa o site
-    Abrir App
+    Element Should Be Visible    ${LABEL_HOME}
 Quando acessa a página de detalhes de um filme
 
     Element Should Be Visible    ${LABEL_HOME}
@@ -59,7 +59,7 @@ Então o usuário conseguirá visualizar um totalizador das avaliações
 
 E que tem um filme previamente cadastrado
     cadastrar usuario na API
-    Login usuario pela API    ${EMAIL}
+    Login usuario pela API    ${EMAIL_API}
     Evoluir para administrador    ${TOKEN}
     Criar um filme    ${TOKEN}
 Quando acessa o filme especifico
