@@ -2,10 +2,6 @@
 
 Resource   ../base.robot
 
-Library    XML
-Library    AppiumLibrary
-# Library    FakerLibrary
-
 *** Variables ***
 ${HOME}			                 xpath=//android.view.View[@content-desc="Home"]
 ${BTN_MENU}		                 xpath=//android.widget.Button[@content-desc="Open navigation menu"] 

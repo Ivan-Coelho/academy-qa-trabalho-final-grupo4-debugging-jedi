@@ -1,43 +1,33 @@
-export default class RegistroPage{
-
-    linkPaginaLogin = ('[href="/login"]');
-    linkPaginaRegistro = ('[href="/register"]');
-    linkInicio = '.logo'
+export default class RegistroUsuarioPage{
 
     inputlNome = ('[placeholder="Nome"]');
     inputEmail = ('[placeholder="E-mail"]');    
     inputSenha = ('[placeholder="Senha"]');
     inputConfirmarSenha = ('[placeholder="Confirmar senha"]');
-
+    
     buttonCadastrar = ('.account-save-button');
-
-    mensagemErro = ('.input-error')
-    mensagemSucesso = ('.error-message');
-    mensagemSucessoCadastro = ('div.modal-body h3')
-
-    mensagemEmailjaCadastrado = ('.error-message');
     buttonOk = ('.modal-actions button');
-
-    typeNome(nome){
+    mensagemErro = ('span.input-error')
+    mensagemOcoreuErro = ('div.modal-body h3')
+    mensagemSucesso = ('div.modal-body')
+    
+    digitarNome(nome) {
         cy.get(this.inputlNome).type(nome);
     }
-
-    typeEmail(email){
+    
+    digitarEmail(email) {
         cy.get(this.inputEmail).type(email);
     }
-
-    typeSenha(senha){
+    
+    digitarSenha(senha) {
         cy.get(this.inputSenha).type(senha);
     }
-
-    typeConfSenha(confSenha){
-        cy.get(this.inputConfirmarSenha).type(confSenha);
+    
+    confirmarSenha(senha) {
+        cy.get(this.inputConfirmarSenha).type(senha);
     }
-
-    clickButtonCadastrar(){
-        cy.get(this.buttonCadastrar).click();    }
-
-
-
-
+    
+    clicarBotaoCadastrar() {
+        cy.get(this.buttonCadastrar).click();
+    }
 }
