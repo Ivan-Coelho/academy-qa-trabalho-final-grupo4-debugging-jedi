@@ -66,6 +66,7 @@ CT007 - Deve ser possível usuário avaliar um filme com comentário de até 500
     E acessa a tela de avaliaçao do filme
     E avalia um filme                             ${SCORE_5}             Star Wars é uma obra-prima cinematográfica que solidificou a saga como um fenômeno cultural. Lançado em 1980, o filme aprofunda a narrativa e os personagens, mostrando a luta desesperada da Aliança Rebelde contra o Império Galáctico. A revelação chocante de Darth Vader como pai de Luke Skywalker e o treinamento de Luke com Yoda são momentos icônicos. As cenas no planeta Hoth e na Cidade das Nuvens são visualmente deslumbrantes, e o desfecho sombrio deixa todos ansiosos pelo próximo capítulo. BOM
     Então o sistemar retorna uma mensagem           ${SUCESSO_REVIEW}    Sua review foi adicionada!
+    E será possível vizualizar a sua avaliação com 500 caracteres
 
 CT008 - Deve ser possível usuário atualizar a sua avaliação de um filme
     Existe um filme cadastrado

@@ -8,7 +8,7 @@ import {
 
   import { faker } from '@faker-js/faker';
 
-  import LoginPage from '../page/login.page';
+  import LoginPage from '../../pages/login.page'
 
   const paginaLogin = new LoginPage();
 

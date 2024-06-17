@@ -76,7 +76,6 @@ E será possível vizualizar a sua avaliação
     Press Keycode    4
     Press Keycode    4
     Wait Until Keyword Succeeds    5    1    Page Should Contain Text    Melhor filme do mundo    
-    
 
 E avalia um filme
     [Arguments]              ${nota}     ${comentario}    
@@ -94,6 +93,9 @@ E atualiza a review
     [Arguments]        ${nota}    ${comentario}
     E avalia um filme    ${nota}    ${comentario}
 
-
+E será possível vizualizar a sua avaliação com 500 caracteres
+    Press Keycode    4
+    Press Keycode    4
+    Wait Until Keyword Succeeds    5    1    Page Should Contain Text    Star Wars é uma obra-prima cinematográfica que solidificou a saga como um fenômeno cultural. Lançado em 1980, o filme aprofunda a narrativa e os personagens, mostrando a luta desesperada da Aliança Rebelde contra o Império Galáctico. A revelação chocante de Darth Vader como pai de Luke Skywalker e o treinamento de Luke com Yoda são momentos icônicos. As cenas no planeta Hoth e na Cidade das Nuvens são visualmente deslumbrantes, e o desfecho sombrio deixa todos ansiosos pelo próximo capítulo. BOM
 
 
